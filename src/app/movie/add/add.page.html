@@ -1,0 +1,122 @@
+<app-header [scrollTop]="scrollTop"></app-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="ionScroll($event)" [fullscreen]="true">
+  <div class="breadcrumb-banner-area pt-94 pb-85 bg-3 bg-opacity-dark-blue-90">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="breadcrumb-text">
+            <h2 class="text-center text-white uppercase mb-17">上映电影发布</h2>
+            <div class="breadcrumb-bar">
+              <ul class="breadcrumb text-center m-0">
+                <li class="text-white uppercase ml-15 mr-15"><a [routerLink]="['/home']">首页</a></li>
+                <li class="text-white uppercase ml-15 mr-15">上映电影发布</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="single-job-post-area pt-70 mb-120">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <form [formGroup]="form">
+            <div class="single-job-content">
+              <div class="area-title text-center">
+                <h2 class="pt-10 pb-10">上映电影发布</h2>
+              </div>
+              <div class="title uppercase pt-70 pb-38"><span>基本信息</span></div>
+              <div class="single-job-form">
+                <div class="single-info pb-14">
+                  <label class="uppercase pull-left m-0">电影名称</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="name" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info pb-14">
+                  <label class="uppercase pull-left m-0">内容类型</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="type" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info pb-14">
+                  <label class="uppercase pull-left m-0">售票区域地区</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="location" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info pb-14">
+                  <label class="uppercase pull-left m-0">预计价格</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="price" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info pb-14">
+                  <label class="uppercase pull-left m-0">上映时间</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="start_at" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info">
+                  <label class="uppercase pull-left m-0">导演</label>
+                  <div class="form-box fix">
+                    <textarea formControlName="director" class="fix textarea" cols="30" rows="10" placeholder=""></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="title uppercase mt-45 mb-38"><span>联系信息</span></div>
+              <div class="single-job-form">
+                <div class="single-info mb-14">
+                  <label class="uppercase pull-left m-0">企业名称</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="company" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info mb-14">
+                  <label class="uppercase pull-left m-0">企业地址</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="address" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info mb-14">
+                  <label class="uppercase pull-left m-0">联系人</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text" formControlName="contact_name" placeholder="">
+                  </div>
+                </div>
+                <div class="single-info mb-14">
+                  <label class="uppercase pull-left m-0">联系电话</label>
+                  <div class="form-box fix">
+                    <input required="required" type="text"formControlName="phone" placeholder="">
+                  </div>
+                </div>
+                <div class="ml-160 mt-38">
+                  <button (click)="submit()" class="button button-large-box" type="button" value="提交信息" style="color: #fff;">提交信息</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="auto">
+            <div class="footer-text">
+              <p>©&nbsp;2022&nbsp;广州璧和信息科技有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;&nbsp;<a href="http://beian.miit.gov.cn" target="_blank" id="beianhao">粤ICP备2021094871号-1</a></p>
+              <p>联系电话：18022387330&nbsp;&nbsp;&nbsp;电子邮箱：web@genson.cn（周一至周日，9:00-18:00）</p>
+              <p>联系地址：广州市天河区黄埔大道西76号2415室（部位：A）（仅限办公）&nbsp;&nbsp;&nbsp;客服及举报电话：18022387330</p>
+            </div>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

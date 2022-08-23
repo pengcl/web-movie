@@ -1,0 +1,13 @@
+<ion-header>
+  <app-member #memberComponent [lockMessage]="'购物车中有会员座'"></app-member>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <mat-sidenav-container class="container" [class.fullscreen]="isFullscreen">
+    <mat-sidenav [opened]="!isFullscreen" mode="side" class="start-side">
+      <app-ticket-plans [loading]="loading" class="ion-page"></app-ticket-plans>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-ticket-hall [userToken]="userToken" #hallComponent [didEnter]="didEnter" class="ion-page"></app-ticket-hall>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-content>
+  <a [routerLink]="['/home']" class="gohome">返回首页</a>
+  <div class="lowin lowin-blue">
+    <div class="lowin-brand">
+      广州璧和信息科技有限公司	</div>
+    <div class="lowin-wrapper">
+      <div class="lowin-box lowin-login">
+        <div class="lowin-box-inner">
+          <form [formGroup]="form">
+            <div class="lowin-group username">
+              <label>开卡影院</label>
+              <input formControlName="identifier" class="lowin-input" placeholder="输入您的用户名" required="">
+            </div>
+            <div class="lowin-group username">
+              <label>用户名</label>
+              <input formControlName="identifier" class="lowin-input" placeholder="输入您的用户名" required="">
+            </div>
+            <div class="lowin-group paswrd">
+              <label>密码</label>
+              <input type="password" formControlName="password" class="lowin-input" placeholder="输入您的登录密码" required="">
+            </div>
+            <div class="button">
+              <input (click)="login()" type="button" class="login-btn register-btn lowin-btn" value="登录">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<!--<mat-card>
+  <mat-card-header>
+    <mat-card-title>用户登录</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="form" class="auth-form">
+      <mat-form-field>
+        <mat-label>用户名</mat-label>
+        <input matInput placeholder="State" aria-label="State" formControlName="identifier">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>密码</mat-label>
+        <input type="password" formControlName="password" matInput placeholder="请输入手机号">
+      </mat-form-field>
+      <button (click)="login()" type="button" mat-raised-button color="primary">登录</button>
+    </form>
+  </mat-card-content>
+</mat-card>-->

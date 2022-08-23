@@ -1,0 +1,168 @@
+<ion-content>
+    <div id="wrap" class="main">
+        <app-header [name]="'首页'"></app-header>
+        <div id="container" class="home_movie">
+            <div class="subscribe_component">
+                <div class="component_wrap">
+                    <h3 class="component_title">
+                        <strong class="home_title">正在热映</strong><span class="cinemas"><span>当前影院：{{cinema ? cinema.cinemaName : '未指定'}}</span><a (click)="this.presentCinemasSelectorModal().then()" href="javascript:;">选择<ion-icon name="chevron-forward-outline"></ion-icon></a> </span>
+                        <a href="javascript:;" class="tit_airmore">更多 </a>
+                    </h3>
+                    <div class="video_list flicking-viewport">
+                        <ion-slides #slides class="flicking-camera" pager="true" [options]="slideOpts">
+                            <ion-slide *ngFor="let movie of movies" class="item">
+                                <a (click)="link(movie)" class="link">
+                                    <div class="image_wrap">
+                                        <img [src]="movie.movieHomeIcon" class="v-lazy-loaded">
+                                        <div class="bullet {{movie.isHot ? 'hot' : 'new'}}">
+                                            <span class="blind">EVENT</span>
+                                        </div>
+                                    </div>
+                                    <div class="info">
+                                        <strong class="title"> {{movie.movieName}} </strong>
+                                        <span class="score"><em>6.5</em></span>
+                                        <p class="price">
+                                            <em class="cost">{{movie.lowPrice ? (movie.lowPrice | rmb) : (19.9 | rmb)}}
+                                                起</em>
+                                        </p>
+                                    </div>
+                                </a>
+                            </ion-slide>
+                        </ion-slides>
+                    </div>
+                    <ul class="flicking_paging">
+                        <li (click)="slidePrev()" class="prev">
+                            <button type="button"><span class="blind">prev</span>
+                            </button>
+                        </li>
+                        <li (click)="slideNext()" class="next">
+                            <button type="button"><span class="blind">next</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content_wrap">
+                <div id="content">
+                    <div class="home_component main_lstwrap latest">
+                        <h3 class="rnd_h">
+                            <span class="title">即将上映</span>
+                            <a href="/v2/movie/products" class="btn_noti_more">更多 </a>
+                        </h3>
+                        <div class="inner lst_thum_wrap">
+                            <ul class="lst_thum">
+                                <li *ngFor="let movie of comings?.slice(0,5)">
+                                    <a [routerLink]="['/movie/coming',movie.movieId]" class="link">
+                                        <div class="image_wrap">
+                                            <img [src]="movie.imgUrl" width="174" class=""/>
+                                        </div>
+                                        <div class="info_list">
+                                            <strong class="title">{{movie.title}}</strong>
+                                            <dl class="price">
+                                                <div>
+                                                    <dd> {{movie.releaseDateStr}}</dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="lst_thum">
+                                <li *ngFor="let movie of comings?.slice(5,10)">
+                                    <a [routerLink]="['/movie/coming',movie.movieId]" class="link">
+                                        <div class="image_wrap">
+                                            <img [src]="movie.imgUrl" width="174" class=""/>
+                                        </div>
+                                        <div class="info_list">
+                                            <strong class="title">{{movie.title}}</strong>
+                                            <dl class="price">
+                                                <div>
+                                                    <dd> {{movie.releaseDateStr}}</dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="home_component main_lstwrap latest">
+                        <h3 class="rnd_h">
+                            <span class="title">即将下线</span>
+                            <a href="/v2/movie/products" class="btn_noti_more">更多 </a>
+                        </h3>
+                        <div class="inner lst_thum_wrap">
+                            <ul class="lst_thum">
+                                <li *ngFor="let movie of movies?.slice(10,15)">
+                                    <a [routerLink]="['/movie/item',movie.movieCode]"
+                                       [queryParams]="{cinema:movie.saleCinemas[0]}" class="link">
+                                        <div class="image_wrap">
+                                            <img [src]="movie.movieHomeIcon" width="147" class="v-lazy-loaded">
+                                            <span class="bullet {{movie.isHot ? 'hot' : 'new'}}"></span>
+                                        </div>
+                                        <strong>{{movie.movieName}} </strong>
+                                        <span class="score"><em>7.4</em></span>
+                                        <p class="price2 v2">
+                                            <em>票价</em><strong><span>{{movie.lowPrice ? (movie.lowPrice | rmb) : (19.9 | rmb)}}
+                                            起</span></strong></p></a>
+                                </li>
+                            </ul>
+                            <ul class="lst_thum">
+                                <li *ngFor="let movie of movies?.slice(15,20)">
+                                    <a [routerLink]="['/movie/item',movie.movieCode]"
+                                       [queryParams]="{cinema:movie.saleCinemas[0]}" class="link">
+                                        <div class="image_wrap">
+                                            <img [src]="movie.movieHomeIcon" width="147" class="v-lazy-loaded">
+                                            <span class="bullet {{movie.isHot ? 'hot' : 'new'}}"></span>
+                                        </div>
+                                        <strong>{{movie.movieName}} </strong>
+                                        <span class="score"><em>7.4</em></span>
+                                        <p class="price2 v2">
+                                            <em>票价</em><strong><span>{{movie.lowPrice ? (movie.lowPrice | rmb) : (19.9 | rmb)}}
+                                            起</span></strong></p></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="aside">
+                    <div class="home_component tvtop10">
+                        <h3 class="rnd_h">
+                            <span class="title">今日 TOP10</span>
+                            <a href="javascript:;" class="btn_noti_more">更多</a>
+                        </h3>
+                        <ul class="inner tvtop10_list _movie">
+                            <li *ngFor="let movie of tops;let i = index">
+                                <ng-container *ngIf="movie._type">
+                                    <a [routerLink]="['/movie/item',movie.movieCode]"
+                                       [queryParams]="{cinema:movie.saleCinemas[0]}" class="link">
+                                        <div class="image_wrap">
+                                            <img [src]="movie.movieHomeIcon" width="48" height="65" class="">
+                                        </div>
+                                        <strong>
+                                            <span class="rank_no">{{i + 1}}</span>
+                                            {{movie.movieName}}
+                                        </strong>
+                                        <em>票价 <span>{{movie.lowPrice ? (movie.lowPrice | rmb) : (19.9 | rmb)}}起</span></em></a>
+                                </ng-container>
+                                <ng-container *ngIf="!movie._type">
+                                    <a [routerLink]="['/movie/coming',movie.movieId]" class="link">
+                                        <div class="image_wrap">
+                                            <img [src]="movie.img" width="48" height="65" class="">
+                                        </div>
+                                        <strong>
+                                            <span class="rank_no">{{i + 1}}</span>
+                                            {{movie.movieName}}
+                                        </strong>
+                                        <em>首映 <span>{{movie.releaseDate}}</span></em></a>
+                                </ng-container>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</ion-content>

@@ -1,0 +1,62 @@
+<app-header [scrollTop]="scrollTop"></app-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="ionScroll($event)" [fullscreen]="true">
+  <div class="breadcrumb-banner-area pt-94 pb-85 bg-3 bg-opacity-dark-blue-90">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="breadcrumb-text">
+            <h2 class="text-center text-white uppercase mb-17">合作影院</h2>
+            <div class="breadcrumb-bar">
+              <ul class="breadcrumb text-center m-0">
+                <li class="text-white uppercase ml-15 mr-15"><a [routerLink]="['/home']">首页</a></li>
+                <li class="text-white uppercase ml-15 mr-15">合作影院</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="cinemas">
+      <div class="section-title text-center ">
+        <h2 class="uppercase">合作影院</h2>
+        <div class="separator mt-15 .mb-35">
+          <span><img src="/assets/1.png"></span>
+        </div>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let cinema of cinemas;let i = index" size="2">
+            <div [routerLink]="['/cinema/item', cinema.code]" class="cinema-box">
+              <div class="img-box">
+                <h2>{{cinema.name}}</h2>
+                <p>{{cinema.province}},{{cinema.city}}</p>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="auto">
+            <div class="footer-text">
+              <p>©&nbsp;2022&nbsp;广州璧和信息科技有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;&nbsp;<a href="http://beian.miit.gov.cn"
+                                                                                   target="_blank" id="beianhao">粤ICP备2021094871号-1</a>
+              </p>
+              <p>联系电话：18022387330&nbsp;&nbsp;&nbsp;电子邮箱：web@genson.cn（周一至周日，9:00-18:00）</p>
+              <p>联系地址：广州市天河区黄埔大道西76号2415室（部位：A）（仅限办公）&nbsp;&nbsp;&nbsp;客服及举报电话：18022387330</p>
+            </div>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

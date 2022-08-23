@@ -1,0 +1,24 @@
+.container {
+  height: 100%;
+  width: 100% !important;
+  padding: 0 !important;
+  .start-side {
+    width: 20%;
+  }
+  .end-side {
+    width: 10%;
+  }
+  ::ng-deep {
+    .mat-sidenav-content {
+      padding: 0 !important;
+      margin: 0 0 0 20%;
+    }
+  }
+  &.fullscreen {
+    ::ng-deep {
+      .mat-sidenav-content {
+        margin: 0;
+      }
+    }
+  }
+}

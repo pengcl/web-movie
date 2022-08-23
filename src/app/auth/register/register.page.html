@@ -1,0 +1,41 @@
+<ion-content>
+  <a [routerLink]="['/home']" class="gohome">返回首页</a>
+  <div class="lowin lowin-blue">
+    <div class="lowin-brand">
+      广州璧和信息科技有限公司	</div>
+    <div class="lowin-wrapper">
+      <div class="lowin-box lowin-register">
+        <div class="lowin-box-inner">
+          <form [formGroup]="form">
+            <p>注册成为会员</p>
+            <div class="lowin-group username" [class.error]="form.get('username').invalid && form.get('username').dirty">
+              <label>*用户名 <span *ngIf="form.get('username').invalid && form.get('username').dirty">用户名{{getErrorMessage('username')}}</span></label>
+              <input formControlName="username" class="lowin-input" placeholder="请输入用户名">
+            </div>
+            <div class="lowin-group paswrd" [class.error]="form.get('password').invalid && form.get('password').dirty">
+              <label>*密码 <span *ngIf="form.get('password').invalid && form.get('password').dirty">密码{{getErrorMessage('password')}}</span></label>
+              <input type="password" formControlName="password" class="lowin-input" placeholder="设置登录密码">
+            </div>
+            <div class="lowin-group rpaswrd" [class.error]="form.get('confirmPassword').invalid && form.get('confirmPassword').dirty">
+              <label>*确认密码 <span *ngIf="form.get('confirmPassword').invalid && form.get('confirmPassword').dirty">确认密码{{getErrorMessage('confirmPassword')}}</span></label>
+              <input type="password" formControlName="confirmPassword" class="lowin-input" placeholder="重复密码">
+            </div>
+            <div class="lowin-group email" [class.error]="form.get('email').invalid && form.get('email').dirty">
+              <label>*电子邮箱(用于接收注册通知) <span *ngIf="form.get('email').invalid && form.get('email').dirty">{{getErrorMessage('email')}}</span></label>
+              <input type="email" formControlName="email" class="lowin-input" placeholder="邮箱地址">
+            </div>
+            <div class="lowin-group verify" style="font-size: 12px;text-align: center;margin-top: 15px;">
+              <input type="checkbox" name="yonghuxieyi" style="vertical-align: middle;" required="">&nbsp;我接受<a (click)="openDialog('agreement')" href="javascript:;"><font>《广州璧和信息科技有限公司用户注册协议》</font></a>及<a (click)="openDialog('privacy')" href="javascript:;"><font>《广州璧和信息科技有限公司隐私政策》</font></a>
+            </div>
+            <div class="button">
+              <input (click)="register()" type="button" class="login-btn register-btn lowin-btn" id="button" value="注册">
+            </div>
+            <div class="text-foot">
+              已有账号? 去<a [routerLink]="['/auth/login']" class="login-link">登录</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

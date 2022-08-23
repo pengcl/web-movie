@@ -1,0 +1,11 @@
+<div class="code-content">
+    <ion-icon (click)="close()" name="close"></ion-icon>
+    <div class="title">微信扫码 极速购票</div>
+    <!--<div class="sub-title">请使用微信扫一扫功能扫描以下二维码</div>-->
+    <div class="img-box">
+        <img *ngIf="url" [src]="url">
+        <div *ngIf="!url" class="spinner-box">
+            <ion-spinner></ion-spinner>
+        </div>
+    </div>
+</div>

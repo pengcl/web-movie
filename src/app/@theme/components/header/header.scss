@@ -1,0 +1,566 @@
+ion-header {
+  ion-toolbar {
+    --min-height: 100px;
+    --padding-start: 30px;
+    --padding-end: 30px;
+    transition: all 300ms ease-in-out;
+  }
+
+  .city {
+    margin: 0 10px;
+    font-size: 14px;
+
+    span {
+      &:last-child {
+        :before {
+          content: ',';
+        }
+      }
+    }
+  }
+
+  ion-title {
+    img {
+      height: 38px;
+      display: inline-block;
+      margin-top: 3px;
+      cursor: pointer;
+    }
+  }
+
+  ion-spinner {
+    width: 20px;
+    height: 20px;
+  }
+
+  ion-button {
+    --ion-color-base: #2d3e50 !important;
+    font-size: 14px;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+  }
+
+  ion-button.auth {
+    background: #14b1bb !important;
+    --ion-color-base: #fff !important;
+    border-radius: 4px !important;
+    --padding-start: 15px;
+    --padding-end: 15px;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+  }
+
+  &.scroll {
+    ion-toolbar {
+      --min-height: 64px;
+    }
+  }
+}
+.header .my_wrap .my_info .item:nth-of-type(2):after, .header .my_wrap .my_info .item.is_active:nth-of-type(2):after, .header .my_wrap .my_info .item:nth-of-type(2):hover:after, .header .search_wrap .search_area .btn_search::before, .header .search_wrap .search_area .btn_delete, .gnb_wrap .link_series:after, .lnb_list .item.link_membership .link:after, .footer_wrap .naver_corp_link, .footer_wrap .webtoon_corp_link, .end_movie .btn_spread:after, .end_tv .btn_spread:after, .end_player_unavailable .title:before, .end_contents_info .title_area .bullet.subtitle, .end_contents_info .title_area .bullet.dubbing, .end_contents_info .title_area .info .score:before, .end_contents_info .purchase_button_area button.purchase_button .btn_cash:after, .end_contents_info .purchase_button_area button.download_button .download_text:before, .end_contents_info .button_list .item .comment:before, .end_contents_info .button_list .item .share:before, .end_contents_info .end_membership_use strong:before, .end_contents_info .end_membership_use.svod strong:before, .end_contents_info .end_membership_use.svod .btn_svod, .end_contents_info .info_list.type_price .view_more:after, .end_contents_info .info_list.type_notice .view_more:after, .end_contents_info .info_list.type_coupon .view_more:after, .end_contents_info .info_list.type_price .item:before, .end_contents_info .info_list.type_notice .item:before, .end_contents_info .info_list.type_coupon .item:before, .end_contents_info .info_list .info_description .link:after, .end_relation .bullet_subtitle, .end_relation .bullet_dubbing, .end_relation .bullet_adult, .end_relation .bullet_adult2, .video_flicking .image_wrap .bullet_adult, .video_flicking .image_wrap .bullet_subtitle, .video_flicking .image_wrap .bullet_dubbing, .video_flicking .image_wrap .bullet_event, .video_flicking .bullet_membership, .end_photo .photo_big .btn_big_close, .end_photo .photo_big .flicking_paging .prev button, .end_photo .photo_big .flicking_paging .next button, .type_others .link::after, .type_additional .link::after, .end_episodes .button_wrap .sale_price span:after, .end_episodes .button_wrap .sale_price del:after, .end_episodes .button_wrap .select:before, .end_episodes.type_select .select_all::before, .end_episodes.type_select .select_all.on::before, .list_episodes .img_wrap.playing::before, .list_episodes .btn_buy:after, .list_episodes .btn_buy.complete:before, .list_episodes .btn_buy.view:before, .list_episodes.type_select label::before, .list_episodes.type_select .episode_chk:checked + label::before, .list_episodes.type_select .episode_chk:disabled + label::before, .icon_cash, .icon_cash_2, .icon_cash_3, .icon_chk, .icon_chk_nor, .icon_chk_2, .icon_left_arrow, .icon_left_arrow_2, .icon_right_arrow, .icon_right_arrow_2, .end_tv .end_contents_info .title_area .bullet.adult, .end_tv .video_flicking .image_wrap .bullet_adult, .btn_end_top, .mcode_cont .mcode_list .item .title .bullet.dubbing, .mcode_cont .mcode_list .item .title .bullet.subtitle, .mcode_cont .mcode_list .item .btn_buy .cash, .mcode_cont .mcode_list .item .btn_buy .bullet.event, .subscribe_promotion .promotion_link:before, .button_inner:after, .flicking_paging .prev button, .flicking_paging .next button, .bigbanner_indicator li button.image, .bigbanner_indicator li button.video, .subscribe_component .component_title .view_more, .subscribe_component .btn_airs, .subscribe_component.type_personal .btn_airs:after, .video_list .bullet_subtitle, .video_list .bullet_dubbing, .video_list .bullet_event, .video_list .title.rank_1:before, .video_list .title.rank_2:before, .video_list .title.rank_3:before, .video_list .title.rank_4:before, .video_list .title.rank_5:before, .video_list .title.rank_6:before, .video_list .title.rank_7:before, .video_list .title.rank_8:before, .video_list .title.rank_9:before, .video_list .title.rank_10:before, .video_list .title.rank_11:before, .video_list .title.rank_12:before, .video_list .title.rank_13:before, .video_list .title.rank_14:before, .video_list .title.rank_15:before, .video_list .title.rank_16:before, .video_list .title.rank_17:before, .video_list .title.rank_18:before, .video_list .title.rank_19:before, .video_list .title.rank_20:before, .video_list .title.rank_21:before, .video_list .title.rank_22:before, .video_list .title.rank_23:before, .genre_list .item:before, .genre_list .link:after, .membership_home .subscribe_component.type_recent .title .btn_delete, .membership_home .subscribe_component.type_recent .btn_play, .membership_home .subscribe_component.type_star .rating:before, .membership_home .loader, .mv_tv_ico.lst_sbt, .mv_tv_ico.lst_dub, .ad_ico_s, .ad_ico_19, .ico_age.n19, .ico.ico_event, .ico.ico_hot, .ico.ico_new1, .ico.ico_nvod, .ico.ico_free1, .ico.ico_pc, .ico.ico_mobile, .ico.ico_strm, .ico.ico_onlyfree, .ico.ico_term, .util_mygroup_v3 .present_badge, .util_mygroup_v3 .tx_adim, .membership_text .title::after, .membership_text .btn_membership_start::after, .membership_text .free_text::after, .info_flicking .flicking_paging .prev button, .info_flicking .flicking_paging .next button, .popup_pchprd.type_layer .popup_header .btn_close, .payment_list .item.on .btn_toggle::after, .payment_list .btn_toggle::after, .coupon_list .coupon_title::before, .popup_agree .custom_chkbox:checked + .label_checkbox::before, .popup_agree .label_checkbox::before, .popup_buy_tv .popup_title .bullet_adult, .popup_buy_tv .popup_title .bullet_adult_2, .popup_buy_tv .content .right::before, .popup_buy_list .btn_buy .cash, .main .subscribe_component .component_wrap .component_title .title_free, .main .subscribe_component .info .score:before, .main .subscribe_component .price .cash, .main .subscribe_component .bullet.event, .main .subscribe_component .bullet.hot, .main .subscribe_component .bullet.new, .main .subscribe_component .bullet.free, .main .subscribe_component .bullet.adult, .main .subscribe_component .bullet.adult_19, .main .subscribe_component .bullet.subtitle, .main .subscribe_component .bullet.dubbing, .main .home_component .bullet.event, .main .home_component .bullet.hot, .main .home_component .bullet.new, .main .home_component .bullet.free, .main .home_component .bullet.adult, .main .home_component .bullet.adult_19, .main .home_component .bullet.subtitle, .main .home_component .bullet.dubbing, .main .home_component.main_lstwrap li .score:before, .main .home_component.main_lstwrap .lst_thum_wrap li a .price2 strong .cash, .main .home_component.main_lstwrap .lst_thum_wrap li a .price2 del .cash, .main .home_component.tvtop10 .tvtop10_list li em:after, .main .home_component.tvtop10 .tvtop10_list li .bullet.adult, .main .home_component.tvtop10 .tvtop10_list li .bullet.adult_19, .main .home_component.tvtop10 .tvtop10_list li .bullet.subtitle, .main .home_component.tvtop10 .tvtop10_list li .bullet.dubbing, .main .main_lstwrap.recommend_airs .flicking_paging .prev button:after, .main .main_lstwrap.recommend_airs .flicking_paging .next button:after, .main .genre_list .item:before, .main .genre_list .link:after, .main .ho_com_w .sec_event h2 span.eve_ord a.ord_btn_prev, .main .ho_com_w .sec_ess h2 span.eve_ord a.ord_btn_prev, .main .ho_com_w .sec_event h2 span.eve_ord a.ord_btn_prev.dis, .main .ho_com_w .sec_ess h2 span.eve_ord a.ord_btn_prev.dis, .main .ho_com_w .sec_event h2 span.eve_ord a.ord_btn_next, .main .ho_com_w .sec_ess h2 span.eve_ord a.ord_btn_next, .main .ho_com_w .sec_event h2 span.eve_ord a.ord_btn_next.dis, .main .ho_com_w .sec_ess h2 span.eve_ord a.ord_btn_next.dis, .ts #container.comic_evt .snb + #content .comic_evt_lst .evt_card .thmb .dday, .content_list .content_list_cont .btn_more:before, .content_list .content_list_detail .item .image_wrap .bullet.event, .content_list .content_list_detail .item .image_wrap .bullet.hot, .content_list .content_list_detail .item .image_wrap .bullet.new, .content_list .content_list_detail .item .image_wrap .bullet.free, .content_list .content_list_detail .item .image_wrap .bullet.dubbing, .content_list .content_list_detail .item .image_wrap .bullet.subtitle, .content_list .content_list_detail_poster .image_wrap .bullet.event, .content_list .content_list_detail_poster .image_wrap .bullet.hot, .content_list .content_list_detail_poster .image_wrap .bullet.new, .content_list .content_list_detail_poster .image_wrap .bullet.free, .content_list .content_list_detail_poster .image_wrap .bullet.subtitle, .content_list .content_list_detail_poster .image_wrap .bullet.dubbing, .content_list .content_list_detail_poster .price div dd .icon_cash, .content_list .content_list_detail_poster .price.free:before, .content_list .btn_info, .content_list .info_box .btn_close, .content_list .ico_star:before, .content_list .price div dd .icon_cash, .content_list .price div dd.sale .icon_cash, .sort_list .sort_select button.arrow:after, .sort_list .sort_select button.arrow.on:after, .sort_list .sort_select button.arrow2:after, .sort_list .sort_select button.arrow2.on:after, .sort_list .sort_select .sort_list_pop .select .icon_cash, .sort_list .sort_select .sort_list_pop .select.on .icon_cash, .sort_list .sort_select .sort_list_pop .select:hover .icon_cash, .sort_list .sort_select .sort_list_pop.type_check .check_label::before, .bullet.sonly:after, .bullet.sonly_l::after, .util .section_split_info .area_content_box .area_card.type_membership:before, .coupon_lst.v2 .coupon_bx .desc_lst li strong:after {
+  background-image: url(https://ssl.pstatic.net/static/serieson/sp/sp_serieson_89a5ae94.png);
+  background-size: 769px 745px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.header {
+  font-family: Roboto,"Helvetica Neue",Helvetica,Arial,"Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,NotosansKR,"Malgun Gothic",Dotum,sans-serif;
+  position: relative;
+  z-index: 500;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+.header input, .header textarea, .header select, .header button, .header table {
+  font-family: Roboto,"Helvetica Neue",Helvetica,Arial,"Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,NotosansKR,"Malgun Gothic",Dotum,sans-serif;
+}
+.header hr {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: #eee;
+}
+.header .my_wrap {
+  position: absolute;
+  top: 0;
+  right: 285px;
+  height: 47px;
+}
+.header .my_wrap .my_info::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+.header .my_wrap .my_info .item {
+  position: relative;
+  float: left;
+  font-size: 14px;
+  color: #333;
+  letter-spacing: -0.32px;
+}
+.header .my_wrap .my_info .item.is_active .link, .header .my_wrap .my_info .item.is_active .btn_category {
+  color: #04ce66;
+}
+.header .my_wrap .my_info .item .link, .header .my_wrap .my_info .item .btn_category {
+  display: block;
+  padding: 0 10px;
+  line-height: 51px;
+}
+.header .my_wrap .my_info .item:nth-of-type(2):after {
+  background-position: -758px -739px;
+  background-repeat: no-repeat;
+  width: 6px;
+  height: 4px;
+  content: '';
+  position: absolute;
+  top: 23px;
+  right: 0;
+}
+.header .my_wrap .my_info .item:nth-of-type(2):before {
+  content: '';
+  position: absolute;
+  top: 19px;
+  left: 0;
+  width: 1px;
+  height: 12px;
+  background: #dbdbdb;
+}
+.header .my_wrap .my_info .item:nth-of-type(2):hover .btn_category {
+  color: #04ce66;
+}
+.header .my_wrap .my_info .item:nth-of-type(2).is_active:after, .header .my_wrap .my_info .item:nth-of-type(2):hover:after {
+  background-position: -735px -497px;
+  background-repeat: no-repeat;
+  width: 6px;
+  height: 4px;
+}
+.header .my_wrap .my_info .item .btn_category {
+  position: relative;
+  font-size: 14px;
+  color: #333;
+  letter-spacing: -0.32px;
+}
+.header .category_wrap {
+  display: none;
+  position: absolute;
+  top: 47px;
+  right: 0;
+  width: 673px;
+  height: 194px;
+  border: 1px solid #c7c7c7;
+  border-radius: 4px;
+  background: #fafafa;
+}
+.header .category_wrap::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+.header .category_wrap.is_active {
+  display: block;
+}
+.header .category_wrap .category_type {
+  float: left;
+  width: 74px;
+  height: 100%;
+  border-right: 1px solid #ededed;
+}
+.header .category_wrap .category_type .item {
+  width: 74px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+.header .category_wrap .category_type .item:first-of-type {
+  border-top: 0;
+}
+.header .category_wrap .category_type .item.on {
+  border-color: #ededed;
+  border-right: 1px solid #fff;
+  border-top-left-radius: 4px;
+  background: #fff;
+}
+.header .category_wrap .category_type .item.on .btn_category_type {
+  color: #04ce66;
+}
+.header .category_wrap .category_type .item .btn_category_type {
+  display: block;
+  width: 75px;
+  padding-left: 17px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #222;
+  text-align: left;
+  line-height: 45px;
+  letter-spacing: -0.38px;
+}
+.header .category_wrap .category_list {
+  position: relative;
+  float: left;
+  width: 597px;
+  height: 194px;
+  background: #fff;
+}
+.header .category_wrap .category_list .item {
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+.header .category_wrap .category_list .category_list_sub {
+  position: relative;
+  width: 589px;
+  padding: 10px 0;
+}
+.header .category_wrap .category_list .category_list_sub::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+.header .category_wrap .category_list .category_list_sub:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 578px;
+  border-bottom: 1px solid #f3f3f3;
+}
+.header .category_wrap .category_list .category_list_sub:last-of-type {
+  border-bottom: none;
+}
+.header .category_wrap .category_list .category_list_sub:last-of-type:before {
+  border-bottom: none;
+}
+.header .category_wrap .category_list .category_list_sub .sub_item {
+  float: left;
+  width: 98px;
+  line-height: 27px;
+}
+.header .category_wrap .category_list .link {
+  display: block;
+  height: 100%;
+  padding-left: 8px;
+  font-size: 14px;
+  letter-spacing: -0.8px;
+  color: #777;
+}
+.header .category_wrap .category_list .link:hover, .header .category_wrap .category_list .link.on {
+  color: #000;
+}
+.header .search_wrap {
+  position: absolute;
+  top: 0;
+  right: 1px;
+  width: 270px;
+  height: 33px;
+  line-height: 33px;
+  box-sizing: border-box;
+}
+.header .search_wrap .search_area {
+  position: relative;
+  display: block;
+  height: 33px;
+  margin-top: 7px;
+  background: #fff;
+  border-radius: 4px;
+}
+.header .search_wrap .search_area .search_input {
+  -moz-appearance: none;
+  /* Firefox */
+  -webkit-appearance: none;
+  /* Safari and Chrome */
+  appearance: none;
+  width: 270px;
+  padding: 8px 51px 8px 12px;
+  border: 1px solid #e1e1e1;
+  background: transparent;
+  font-size: 13px;
+  line-height: 16px;
+  color: #111;
+  letter-spacing: -0.2px;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+.header .search_wrap .search_area .search_input:focus {
+  outline: 1px solid #c7c7c7;
+}
+.header .search_wrap .search_area .search_input::-moz-placeholder {
+  font-size: 13px;
+  line-height: 16px;
+  color: #adadad;
+  letter-spacing: -0.2px;
+}
+.header .search_wrap .search_area .search_input:-ms-input-placeholder {
+  font-size: 13px;
+  line-height: 16px;
+  color: #adadad;
+  letter-spacing: -0.2px;
+}
+.header .search_wrap .search_area .search_input::placeholder {
+  font-size: 13px;
+  line-height: 16px;
+  color: #adadad;
+  letter-spacing: -0.2px;
+}
+.header .search_wrap .search_area .search_input::-ms-clear {
+  display: none;
+}
+.header .search_wrap .search_area .btn_search {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  padding: 5px;
+}
+.header .search_wrap .search_area .btn_search::before {
+  background-position: -750px -232px;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  content: '';
+}
+.header .search_wrap .search_area .btn_delete {
+  background-position: -735px 0px;
+  background-repeat: no-repeat;
+  width: 13px;
+  height: 35px;
+  position: absolute;
+  right: 36px;
+}
+.header .search_result {
+  display: none;
+  position: absolute;
+  top: 47px;
+  right: -1px;
+  width: 270px;
+  border: 1px solid #c7c7c7;
+  background: #fff;
+}
+.header .search_result.is_active {
+  display: block;
+}
+.header .search_result .result_list .item:hover {
+  background: #f5f5f5;
+}
+.header .search_result .result_list .link {
+  display: block;
+  padding: 0 11px;
+  line-height: 34px;
+  font-size: 13px;
+  letter-spacing: -0.33px;
+  color: #000;
+}
+.header .search_result .result_list .link em {
+  color: #04ce66;
+}
+
+.gnb_wrap {
+  width: 1104px;
+  margin: 0 auto;
+  position: relative;
+  position: inherit;
+  height: 63px;
+}
+.gnb_wrap .gnb_right {
+  position: absolute;
+  top: 19px;
+  right: -8px;
+  width: auto;
+}
+.gnb_wrap #gnb {
+  float: left;
+  margin-top: -3px;
+}
+.gnb_wrap .link_series {
+  position: relative;
+  top: 2px;
+  float: left;
+  margin-right: 17px;
+  padding-right: 12px;
+  font-size: 14px;
+  color: #555;
+  letter-spacing: -0.5px;
+}
+.gnb_wrap .link_series:after {
+  background-position: -735px -419px;
+  background-repeat: no-repeat;
+  width: 6px;
+  height: 10px;
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+.logo_naver {
+  width: 150px;
+  float: left;
+  margin-top: 12px;
+  background-image: none !important;
+}
+.logo_serieson {
+  width: 83px;
+  height: 22px;
+  float: left;
+  margin: 19px 0 0 10px;
+}
+
+.lnb_wrap {
+  width: 1104px;
+  margin: 0 auto;
+  position: relative;
+  height: 48px;
+}
+.lnb_list {
+  margin-left: -4px;
+}
+.lnb_list::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+.lnb_list .item {
+  float: left;
+  padding: 0 19px;
+  color: #222;
+  line-height: 52px;
+}
+.lnb_list .item:first-of-type {
+  padding-left: 0;
+}
+.lnb_list .item.link_membership {
+  position: relative;
+  padding-left: 21px;
+  line-height: 44px;
+}
+.lnb_list .item.link_membership .link {
+  padding-left: 39px;
+}
+.lnb_list .item.link_membership .link:after {
+  background-position: -580px -382px;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 15px;
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 25px;
+}
+.lnb_list .item.on {
+  color: #04ce66;
+}
+.lnb_list .item.on .link {
+  border-bottom: 3px solid #04ce66;
+}
+.lnb_list .link {
+  display: block;
+  height: 47px;
+  padding: 0 4px;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+  box-sizing: content-box;
+}
+
+a.gnb_my,
+.gnb_icon,
+#gnb .gnb_my_interface,
+#gnb .gnb_ico_num .gnb_ico_new,
+#gnb .gnb_ico_num .gnb_ico_new .gnb_count,
+.gnb_lst .ico_arrow,
+a.gnb_my .filter_mask,
+.gnb_my_lyr,
+.gnb_my_li .gnb_my_content .gnb_mask,
+.gnb_my_li .gnb_my_content .gnb_change,
+.gnb_my_li .gnb_my_content .gnb_edit_lst li,
+.gnb_my_li .gnb_my_content .gnb_pay_check em,
+#gnb .gnb_my_li .gnb_my_community a.gnb_pay span,
+.gnb_notice_li .gnb_notice_lyr,
+.gnb_notice_li .svc_list .gnb_ico_mail,
+.gnb_notice_li .svc_list .gnb_btn_remove span,
+.gnb_notice_li .svc_list .gnb_btn_remove i,
+.gnb_notice_li .gnb_error .gnb_ico_error,
+.gnb_ly_alert .gnb_btn_close i,
+.gnb_first_visit,
+.gnb_search_box,
+.gnb_search_box .gnb_del_txt,
+.gnb_svc_more .gnb_svc_lstwrp li.gnb_event em.ic_gnb_new,
+.gnb_svc_more .svc_btnwrp button {
+  background-image: url("https://ssl.pstatic.net/static/nstore/series/sp_gnb_v15_2.png") !important;
+}
+.gnb_my_li {
+  margin-right: 11px !important;
+}
+.gnb_my_namebox {
+  padding: 2px 12px 0 0 !important;
+  background-position: 99% 50% !important;
+}
+.gnb_service_li {
+  margin-right: 0 !important;
+}
+.gnb_dark_type2 .gnb_my_li .gnb_my .gnb_name,
+.gnb_dark_type2 .gnb_login_li .gnb_btn_login .gnb_txt {
+  color: #555 !important;
+}
+.gnb_dark_type2 .mail_li a.gnb_mail:hover .gnb_icon {
+  background-position: -238px -142px !important;
+}
+.gnb_dark .gnb_notice_li a.gnb_notice .gnb_icon,
+.gnb_dark_type2 .gnb_notice_li a.gnb_notice .gnb_icon {
+  width: 18px !important;
+}
+.gnb_dark .mail_li a.gnb_mail .gnb_icon,
+.gnb_dark_type2 .mail_li a.gnb_mail .gnb_icon {
+  height: 15px !important;
+}
+.gnb_dark .gnb_service_li .gnb_service .gnb_icon,
+.gnb_dark_type2 .gnb_service_li .gnb_service .gnb_icon {
+  width: 19px !important;
+  height: 19px !important;
+}
+.gnb_my_namebox {
+  background-image: url("https://ssl.pstatic.net/static/common/gnb/2014/ico_arrow_wh_v2.gif") !important;
+}
+
+.gnb_bdr {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 46px;
+  height: 20px;
+  border: 1px solid #000;
+  opacity: 0.12;
+  filter: alpha(opacity=12);
+}
+
+.gnb_login_li {
+  height: 23px;
+  padding: 5px 7px 0 0;
+}
+
+.gnb_btn_login {
+  position: relative;
+}
+
+.gnb_btn_login, .gnb_bg, .gnb_bdr {
+  display: inline-block;
+  width: 46px;
+  height: 20px;
+  font-size: 12px;
+  box-sizing: content-box;
+}
+
+.gnb_bg {
+  background-color: #fff;
+  opacity: 0.05;
+  filter: alpha(opacity=5);
+}
+
+.gnb_txt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45px;
+  height: 20px;
+  line-height: 20px;
+  color: #666;
+  text-align: center;
+}

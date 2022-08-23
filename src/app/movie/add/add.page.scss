@@ -1,0 +1,24 @@
+ion-footer {
+  font-size: 14px;
+
+  ion-toolbar {
+    --background: #14b1bb;
+
+    .footer-text {
+      font-size: 12px;
+      line-height: 24px;
+      padding: 20px 0;
+      color: #fff;
+      text-align: center;
+
+      p {
+        margin: 0;
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

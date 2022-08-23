@@ -1,0 +1,29 @@
+{
+  "/omsOpenService-api": {
+    "target": "http://omsopen.bihetech.com:15028/omsOpenService-api",
+    "secure": false,
+    "pathRewrite": {
+      "^/omsOpenService-api/": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/mtime": {
+    "target": "http://front-gateway.mtime.com",
+    "secure": false,
+    "pathRewrite": {
+      "^/mtime/": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/hook": {
+    "target": "http://127.0.0.1:3000",
+    "secure": false,
+    "pathRewrite": {
+      "^/hook/": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

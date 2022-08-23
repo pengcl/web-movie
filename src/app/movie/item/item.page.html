@@ -1,0 +1,155 @@
+<ion-content [scrollEvents]="true" (ionScroll)="ionScroll($event)" [fullscreen]="true">
+    <div id="wrap" class="main">
+        <app-header [name]="'上映电影'" [scrollTop]="scrollTop"></app-header>
+        <div class="end">
+            <div id="content" class="end_movie">
+                <div class="end_player">
+                    <div class="end_player_content">
+                        <div class="end_player_content__poster"
+                             [ngStyle]="{'background-image': 'url(' + movie?.movieHomeIcon + ')'}">
+                            <div class="end_player_content__filter"></div>
+                        </div>
+                        <div class="SeriesOnWebPlayer_wrapper__3F7PL"
+                             [ngStyle]="{'background-image': 'url(' + movie?.movieHomeIcon + ')'}">
+                            <div class="Header_wrapper__35NP9">
+                                <h2 class="Header_title__YtTHq enter-done">{{movie?.movieName}}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="end_contents_info">
+                    <div class="title_container">
+                        <div class="title_area">
+                            <div class="title">
+                                <strong>{{movie?.movieName}}</strong>
+                            </div>
+                            <div class="info">
+                                <span class="score">7.45</span>
+                                <span>首映：{{movie?.publicDate}}</span><span>{{movie?.movieDuring}}分钟</span>
+                                <span>{{movie?.movieVersion}}</span>
+                            </div>
+                        </div>
+                        <div class="purchase_button_area">
+                            <button [routerLink]="['/ticket/index']"
+                                    [queryParams]="{cinema:cinema?.code,movie:movie?.movieCode,plan:currentPlan?.planShowId,date:currentPlan?.showDate}"
+                                    type="button" class="purchase_button"> 购票
+                                <span class="btn_cash"> {{movie?.lowPrice | rmb}}</span>起
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="content_info_list">
+                        <li class="info_list type_infomation use_membership">
+                            <div *ngIf="movie?.director" class="item">
+                                <strong class="info_tit">导演</strong>
+                                <div class="info_description">
+                                    <a href="javascript:;" class="link_search">
+                                        <span>{{movie?.director}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf="movie?.actor" class="item">
+                                <strong class="info_tit">演员</strong>
+                                <div class="info_description actors">
+                                    <a href="javascript:;" class="link_search">
+                                        {{movie?.actor}}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <strong class="info_tit">简介</strong>
+                                <p class="info_description introduce">暂无简介</p>
+                            </div>
+                        </li>
+                        <li class="info_list type_price">
+                            <div class="subscribe_component">
+                                <div class="component_wrap">
+                                    <h3 class="component_title"><strong class="home_title">上映院线</strong><a
+                                            href="javascript:;" class="tit_airmore">更多 </a>
+                                    </h3>
+                                    <div class="video_list flicking-viewport">
+                                        <ion-slides #slides class="flicking-camera" pager="true" [options]="slideOpts">
+                                            <ion-slide *ngFor="let item of cinemas" class="item"
+                                                       style="padding-left: 0">
+                                                <a [routerLink]="['/movie/item',movie.movieCode]"
+                                                   [queryParams]="{cinema:item.code}" class="link"
+                                                   [class.curr]="cinema.code === item.code">
+                                                    <div class="image_wrap">
+                                                        <img src="/assets/cinema_bg.jpg" class="v-lazy-loaded">
+                                                    </div>
+                                                    <div class="info">
+                                                        <strong class="title"> {{item.name}} </strong>
+                                                        <p class="price">
+                                                            <em class="cost">{{item.province}},{{item.city}}</em>
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </ion-slide>
+                                        </ion-slides>
+                                    </div>
+                                    <ul class="flicking_paging">
+                                        <li (click)="slidePrev()" class="prev">
+                                            <button type="button"><span class="blind">prev</span>
+                                            </button>
+                                        </li>
+                                        <li (click)="slideNext()" class="next">
+                                            <button type="button"><span class="blind">next</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--<div *ngIf="cinemas" class="cinemas">
+                                <ion-slides #slides [options]="slideOpts">
+                                    <ion-slide (click)="selected('cinema',item)" style="width: 100px;" *ngFor="let item of cinemas">
+                                        <div [class.curr]="item.code === cinema?.code" class="cinema-box">
+                                            <div class="img-box">
+                                                <h2>{{item.name}}</h2>
+                                                <p>{{item.province}},{{item.city}}</p>
+                                            </div>
+                                        </div>
+                                    </ion-slide>
+                                </ion-slides>
+                            </div>-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="movie-detail content_list">
+            <div class="subscribe_component">
+                <div class="component_wrap">
+                    <div><h3 class="component_title"> 其它电影 ({{movies?.length}}) </h3></div>
+
+                    <div class="content_list_cont">
+                        <ul class="content_list_detail_poster">
+                            <li *ngFor="let movie of movies?.slice(0,(page + 1) * 12)" class="item" style="width: 174px !important;">
+                                <a [routerLink]="['/movie/item',movie.movieCode]"
+                                   [queryParams]="{cinema:cinema?.code}" class="link">
+                                    <div class="image_wrap" style="height: 238px !important;">
+                                        <img [src]="movie.movieHomeIcon" width="174" class=""/>
+                                        <div class="bullet new"><span class="blind">NEW</span></div>
+                                    </div>
+                                    <div class="info_list">
+                                        <strong class="title">{{movie.movieName}}</strong>
+                                        <div class="star_area">
+                                            <span class="ico_star">7.7</span></div>
+                                        <dl class="price">
+                                            <div>
+                                                <dt>票价</dt>
+                                                <dd> {{movie.lowPrice ? (movie.lowPrice | rmb) : (19.9 | rmb)}}起</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <a (click)="more()" class="btn_more" style="cursor: pointer;">更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</ion-content>

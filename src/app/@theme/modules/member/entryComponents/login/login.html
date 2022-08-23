@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>会员登录</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid style="margin-top: 50px">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col size="7">
+        <form [formGroup]="form" class="form-box">
+          <mat-form-field [floatLabel]="true" appearance="outline" class="full-width">
+            <mat-label>开卡影院：</mat-label>
+            <input [formControlName]="'cinema'" matInput [required]="true">
+          </mat-form-field>
+          <mat-form-field [floatLabel]="true" appearance="outline" class="full-width">
+            <mat-label>会员卡号/手机号：</mat-label>
+            <input (keyup.enter)="confirm()" [formControlName]="'conditions'" matInput [required]="true">
+          </mat-form-field>
+        </form>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

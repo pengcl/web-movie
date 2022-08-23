@@ -1,0 +1,85 @@
+<ion-content>
+    <div id="wrap" class="main">
+        <app-header [name]="'上映电影'"></app-header>
+        <div class="content_list">
+            <div class="subscribe_component">
+                <div class="category_list_cont">
+                    <ul class="category_list_tab">
+                        <li [class.on]="tab === '正在热映'" class="tab_item on">
+                            <a (click)="changeTab('正在热映')" href="javascript:;"
+                               class="link router-link-active">正在热映 </a></li>
+                        <li [class.on]="tab === '即将上映'" class="tab_item">
+                            <a (click)="changeTab('即将上映')" href="javascript:;" class="link router-link-active">即将上映 </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="component_wrap">
+                    <div>
+                        <h3 class="component_title"> {{tab}} ({{tab === '正在热映' ? movies?.length : comings?.length}})</h3>
+                        <ul *ngIf="tab === ''" class="sort_list">
+                            <li class="sort_select">
+                                <a href="javascript:;" class="">
+                                    <button type="button" class="on"> 上映日期</button>
+                                </a>
+                            </li>
+                            <li class="sort_select">
+                                <a href="javascript:;" class="">
+                                    <button type="button" class=""> 票价</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div *ngIf="tab === '正在热映'" class="content_list_cont">
+                        <ul class="content_list_detail_poster">
+                            <li *ngFor="let movie of movies?.slice(0,(page['movie'] + 1) * 24)" class="item">
+                                <a [routerLink]="['/movie/item',movie.movieCode]"
+                                   [queryParams]="{cinema:movie.saleCinemas[0]}" class="link">
+                                    <div class="image_wrap">
+                                        <img [src]="movie.movieHomeIcon" width="174" class=""/>
+                                    </div>
+                                    <div class="info_list">
+                                        <strong class="title">{{movie.movieName}}</strong>
+                                        <div class="star_area">
+                                            <span class="ico_star">7.7</span></div>
+                                        <dl class="price">
+                                            <div>
+                                                <dt>票价</dt>
+                                                <dd> {{movie.lowPrice ? (movie.lowPrice | rmb) : (19.9 | rmb)}}起</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <a (click)="more('movie')" class="btn_more" style="cursor: pointer;">更多</a>
+                    </div>
+
+                    <div *ngIf="tab === '即将上映'" class="content_list_cont">
+                        <ul class="content_list_detail_poster">
+                            <li *ngFor="let movie of comings?.slice(0,(page['coming'] + 1) * 24)" class="item">
+                                <a [routerLink]="['/movie/coming',movie.movieId]" class="link">
+                                    <div class="image_wrap">
+                                        <img [src]="movie.imgUrl" width="174" class=""/>
+                                    </div>
+                                    <div class="info_list">
+                                        <strong class="title">{{movie.title}}</strong>
+                                        <dl class="price">
+                                            <div>
+                                                <dd>首映：</dd>
+                                                <dd> {{movie.releaseDateStr}}</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <a (click)="more('coming')" class="btn_more" style="cursor: pointer;">更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</ion-content>

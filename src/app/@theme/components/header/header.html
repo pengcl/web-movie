@@ -1,0 +1,84 @@
+<ion-header [class.scroll]="scrollTop > 0">
+    <div class="header">
+        <div class="gnb_wrap">
+            <h1 class="logo_area">
+                <a href="javascript:;" class="logo_naver">
+                    <img src="/assets/logo.png">
+                </a>
+            </h1>
+            <!--<div class="gnb_right">
+                <a *ngIf="user" href="javascript:;" class="link_series">{{tip}}</a>
+                <a *ngIf="!user" [routerLink]="['/auth/register']" class="link_series">注册</a>
+                <div id="gnb" class="gnb_dark_type2">
+                    <ul class="gnb_lst" id="gnb_lst" style="display: block;">
+                        <li class="gnb_login_li" style="display: inline-block;">
+                            <a class="gnb_btn_login" (click)="logout()">
+                                <span class="gnb_bg"></span>
+                                <span class="gnb_bdr"></span>
+                                <span class="gnb_txt">{{user ? '退出' : '登录'}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+        </div>
+        <hr>
+        <div class="lnb_wrap">
+            <ul class="lnb_list">
+                <li class="item" [class.on]="name === '首页'">
+                    <a href="/index" class="link router-link-exact-active router-link-active">首页</a>
+                </li>
+                <li class="item" [class.on]="name === '上映电影'"><a href="/movie/list" class="link">上映电影</a>
+                </li>
+                <!--<li class="item"><a href="javascript:;" class="link">合作影院</a></li>-->
+                <li class="item" [class.on]="name === '联系我们'">
+                    <a href="/contact" class="link">联系我们</a>
+                </li>
+            </ul>
+            <div class="search_wrap">
+                <div class="search_area">
+                    <label class="blind">搜索</label>
+                    <input [(ngModel)]="searchKey" type="text" placeholder="搜索电影." class="search_input">
+                    <button (click)="search()" type="button" class="btn_search"><span class="blind">搜索</span></button>
+                </div>
+                <div class="search_result">
+                    <ul class="result_list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="primary">
+          <img [routerLink]="['/home']" style=""
+               src="http://pub-template-manage.oss-cn-shenzhen.aliyuncs.com/uploads/order/20211020/19962414fbff2dfd3867ec7c6e1dfece.png">
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button [routerLink]="['/home']" color="primary">
+          首页
+        </ion-button>
+        <ion-button [routerLink]="['/movie/list']" color="primary">
+          上映电影
+        </ion-button>
+        <ion-button [routerLink]="['/cinema/list']" color="primary">
+          合作影院
+        </ion-button>
+        <ion-button [routerLink]="['/movie/add']" color="primary">
+          发布电影
+        </ion-button>
+        <ion-button [routerLink]="['/contact']" color="primary">
+          联系我们
+        </ion-button>
+        <ion-button *ngIf="!user" shape="round" class="login auth" [routerLink]="['/auth/login']" color="primary">
+          登录
+        </ion-button>
+        <ion-button *ngIf="!user" shape="round" class="register auth" [routerLink]="['/auth/register']" color="primary">
+          注册
+        </ion-button>
+        <ion-button *ngIf="user" shape="round" class="register auth" (click)="logout()" color="primary">
+          退出登录
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>-->
+</ion-header>

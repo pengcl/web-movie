@@ -1,0 +1,377 @@
+ion-header {
+  ion-toolbar {
+    --min-height: 100px;
+    --padding-start: 30px;
+    --padding-end: 30px;
+    transition: all 300ms ease-in-out;
+  }
+
+  .city {
+    margin: 0 10px;
+    font-size: 14px;
+
+    span {
+      &:last-child {
+        :before {
+          content: ',';
+        }
+      }
+    }
+  }
+
+  ion-title {
+    img {
+      height: 38px;
+      display: inline-block;
+      margin-top: 3px;
+      cursor: pointer;
+    }
+  }
+
+  ion-spinner {
+    width: 20px;
+    height: 20px;
+  }
+
+  ion-button {
+    --ion-color-base: #2d3e50 !important;
+    font-size: 14px;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+  }
+
+  ion-button.auth {
+    background: #14b1bb !important;
+    --ion-color-base: #fff !important;
+    border-radius: 4px !important;
+    --padding-start: 15px;
+    --padding-end: 15px;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+  }
+
+  &.scroll {
+    ion-toolbar {
+      --min-height: 64px;
+    }
+  }
+}
+
+.movies {
+  width: 1200px;
+
+  .movie-item {
+    width: 170px;
+    margin: 25px auto;
+
+    .img-box {
+      height: 256px;
+      margin: 0 auto;
+      position: relative;
+      cursor: pointer;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .rate {
+        width: 32px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #fff;
+        position: absolute;
+        background: #78ab22;
+        right: 0;
+        bottom: 0;
+        font-weight: bold;
+      }
+
+      .hot {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        background: url(http://s0.mtime.cn/dist/film/1627892608139/static/images/2d6f6dc5.allicon24.png) 0 -215px no-repeat;
+      }
+
+      .new {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        background: url(http://s0.mtime.cn/dist/film/1627892608139/static/images/2d6f6dc5.allicon24.png) 0 -171px no-repeat;
+      }
+    }
+
+    .txt-box {
+      ion-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+
+        ion-label {
+          text-align: left;
+
+          h2 {
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: left;
+          }
+        }
+
+        ion-note {
+          color: red;
+          font-size: 14px;
+        }
+      }
+
+      p {
+        text-align: center;
+        margin: 0 0 20px;
+      }
+    }
+  }
+}
+
+.cinemas {
+  width: 100%;
+  background: #ededed;
+  position: relative;
+
+  &:after {
+    left: 0;
+    bottom: 0;
+    background-position: left 0 top -2px;
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==);
+    background-repeat: repeat-x;
+    content: "";
+    transform: rotate(-180deg);
+  }
+
+  ion-slides {
+    width: 1200px;
+    padding: 50px 0;
+
+    .cinema-box {
+      display: flex;
+      align-items: center;
+      width: 85px;
+      height: 128px;
+      overflow: hidden;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+      border: 2px solid transparent;
+      cursor: pointer;
+
+      &.curr {
+        background: #fff;
+        color: #3880ff;
+        border: 2px solid #3880ff;
+      }
+
+      .img-box {
+
+        h2 {
+          font-size: 10px;
+          margin: 0 3px;
+        }
+
+        p {
+          font-size: 9px;
+          margin: 10px 3px 0;
+        }
+      }
+    }
+  }
+}
+.section-title {
+  text-align: center;
+  margin: 10px 0 15px;
+}
+.section-title h1 {
+  margin: 0 0 15px 0;
+  line-height: 30px;
+}
+
+.section-title h2 {
+  color: #696969;
+  line-height: 1.5;
+}
+
+.section-title p {
+  margin-bottom: 0px;
+  font-size: 16px;
+}
+
+.section-title .title-line {
+  padding: 10px 0
+}
+
+.section-title .title-line:before {
+  background: #4FC1F0;
+  content: "";
+  display: block;
+  height: 2px;
+  margin: 0 auto;
+  width: 220px;
+}
+
+.section-title .title-line:after {
+  background: #4FC1F0;
+  content: "";
+  display: block;
+  height: 6px;
+  position: relative;
+  top: -6px;
+  margin: 0 auto;
+  width: 60px;
+}
+
+.separator {
+  bottom: 0;
+  clear: both;
+  display: inline-block;
+  height: 3px;
+  position: relative;
+  width: 264px;
+  background: #14b1bb;
+}
+
+.separator:before {
+  background: #ffffff none repeat scroll 0 0;
+  content: "";
+  height: 30px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: 46px;
+}
+
+.separator span {
+  border-radius: 50%;
+  bottom: -15px;
+  height: 30px;
+  left: 0;
+  line-height: 29px;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: 30px;
+  background: #14b1bb;
+  text-align: center;
+
+  img {
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+ion-footer {
+  font-size: 14px;
+
+  ion-toolbar {
+    --background: #14b1bb;
+
+    .footer-text {
+      font-size: 12px;
+      line-height: 24px;
+      padding: 20px 0;
+      color: #fff;
+      text-align: center;
+
+      p {
+        margin: 0;
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+.cinemas {
+  width: 100%;
+  position: relative;
+
+  &:after {
+    left: 0;
+    bottom: 0;
+    background-position: left 0 top -2px;
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==);
+    background-repeat: repeat-x;
+    content: "";
+    transform: rotate(-180deg);
+  }
+
+  .cinema-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 268px;
+    overflow: hidden;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border: 2px solid transparent;
+    cursor: pointer;
+
+    &.curr {
+      background: #fff;
+      color: #3880ff;
+      border: 2px solid #3880ff;
+    }
+
+    .img-box {
+      text-align: center;
+
+      h2 {
+        font-size: 18px;
+        margin: 0 3px;
+      }
+
+      p {
+        font-size: 14px;
+        margin: 10px 3px 0;
+      }
+    }
+  }
+}
+
+ion-footer {
+  font-size: 14px;
+
+  ion-toolbar {
+    --background: #14b1bb;
+
+    .footer-text {
+      font-size: 12px;
+      line-height: 24px;
+      padding: 20px 0;
+      color: #fff;
+      text-align: center;
+
+      p {
+        margin: 0;
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
