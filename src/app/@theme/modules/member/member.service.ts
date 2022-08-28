@@ -112,7 +112,7 @@ export class MemberService {
     /*data.posShopCartResDTOList.forEach(item => {
       item.uidComp = this.appSvc.currentCinema.uidComp;
     });*/
-    return this.requestSvc.send('/orderService-api/posShopCart/addMemberInfo2shopCart', data);
+    return this.http.post('/hook/apiService/addMemberInfo2shopCart', {data});
   }
 
   count(data: MemberCountInputDto): Observable<any> {

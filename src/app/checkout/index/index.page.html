@@ -1,7 +1,4 @@
-<ion-header class="page-header">
-  <ion-toolbar>
-    <ion-title>结算</ion-title>
-  </ion-toolbar>
+<ion-header>
   <app-member *ngIf="businessType ==='SALE'" [cart]="detail" #memberComponent [showVip]="true"  [locked]="locked" [lockMessage]="lockMessage" (change)="memberChange($event)"></app-member>
 </ion-header>
 <ion-content [fullscreen]="true">

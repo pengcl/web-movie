@@ -71,4 +71,59 @@ httpSvc.getPosPlanTotalInfo = async (req) => {
   const url = '/posResuorceService-api/pos/getPosPlanTotalInfo';
   return await post(url, req);
 }
+
+httpSvc.createCartRes = async (req) => {
+  const url = '/orderService-api/posShopCart/v2/createCartRes';
+  return await post(url, req);
+}
+httpSvc.refreshPosSeats = async (req) => {
+  const url = '/posResuorceService-api/pos/refreshPosSeats';
+  return await post(url, req);
+}
+
+httpSvc.deleteRes = async (req) => {
+  const url = '/orderService-api/posShopCart/v2/deleteRes';
+  return await post(url, req);
+}
+
+httpSvc.batchDeleteRes = async (req) => {
+  const url = '/orderService-api/posShopCart/v2/batchDeleteRes';
+  return await post(url, req);
+}
+
+httpSvc.submitShopCart = async (req) => {
+  const url = '/orderService-api/posShopCart/v2/submitShopCart';
+  return await post(url, req);
+}
+
+httpSvc.getPosPayModeIsSupply = async (req) => {
+  const url = '/payService-api/pospaymode/getPosPayModeIsSupply';
+  return await post(url, req);
+}
+
+httpSvc.queryShopCartDetail = async (req) => {
+  const url = '/orderService-api/shoppingCardManagement/queryShopCartDetail';
+  return await post(url, req);
+}
+
+httpSvc.queryShoppingCartCampaign = async (req) => {
+  const url = '/orderService-api/shoppingCardManagement/pos/queryShoppingCartCampaign';
+  return await post(url, req);
+}
+
+httpSvc.reductionShopCart = async (req) => {
+  const url = '/orderService-api/posShopCart/reductionShopCart';
+  return await post(url, req);
+}
+
+httpSvc.addMemberInfo2shopCart = async (req) => {
+  const url = '/orderService-api/posShopCart/addMemberInfo2shopCart';
+  return await post(url, req);
+}
+
+httpSvc.savePosBill = async (req) => {
+  const url = '/orderService-api/billManagement/pos/savePosBill';
+  return await post(url, req);
+}
+
 module.exports = httpSvc;

@@ -1,12 +1,11 @@
 import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {ThemeModule} from '../../../@theme/theme.module';
+import {ThemeModule} from '../../@theme/theme.module';
 import {CheckoutIndexPage} from './index.page';
 import {CheckoutActivitiesPage} from '../components/activities/activities.page';
 import {CheckoutCartPage} from '../components/cart/cart.page';
 import {CheckoutCheckPage} from '../components/check/check.page';
-import {CheckoutCheck2Page} from '../components/check2/check.page';
 import {CheckoutCashComponent} from '../entryComponents/cash/cash.component';
 import {CheckoutMemberCardPayComponent} from '../entryComponents/memberCard/pay/memberCardPay.component';
 import {CheckoutMemberCardRechargeComponent} from '../entryComponents/memberCard/recharge/recharge.component';
@@ -25,7 +24,6 @@ import {CheckoutUseMemberCouponComponent} from '../entryComponents/useMemberCoup
     CheckoutIndexPage,
     CheckoutCartPage,
     CheckoutCheckPage,
-    CheckoutCheck2Page,
     CheckoutActivitiesPage,
     CheckoutCashComponent,
     CheckoutMemberCardPayComponent,

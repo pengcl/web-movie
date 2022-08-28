@@ -2,11 +2,10 @@
   .container {
     height: calc(100% - 64px);
     position: relative;
-    margin: 0 50px !important;
-    width: auto !important;
-    box-sizing: border-box;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    margin: 0 70px;
+    width: unset !important;
+    padding-left: unset !important;
+    padding-right: unset !important;
 
     ul.seats {
       margin: 0;
@@ -90,11 +89,11 @@
     }
 
     &.floors-left {
-      left: -65px;
+      left: -50px;
     }
 
     &.floors-right {
-      right: -65px;
+      right: -50px;
     }
   }
 }

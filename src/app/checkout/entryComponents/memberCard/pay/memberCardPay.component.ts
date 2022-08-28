@@ -1,21 +1,20 @@
 import {Component} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {NavParams, ModalController} from '@ionic/angular';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {ToastService} from '../../../../../@theme/modules/toast';
-import {PasswordService} from '../../../../../@theme/modules/password';
-import {AppService} from '../../../../../app.service';
+import {ToastService} from '../../../../@theme/modules/toast';
+import {PasswordService} from '../../../../@theme/modules/password';
+import {SnackbarService} from '../../../../@core/utils/snackbar.service';
+import {AppService} from '../../../../app.service';
 import {CheckoutService} from '../../../checkout.service';
 import {CheckoutMemberCardRechargeComponent} from '../recharge/recharge.component';
 import {CheckoutMemberCardCardComponent} from '../card/card.component';
-import {CheckAuth} from '../../../../../@core/utils/check-auth';
-import {ResetPasswordComponent} from '../../../../../@theme/entryComponents/reset/reset.component';
+import {ResetPasswordComponent} from '../../../../@theme/entryComponents/reset/reset.component';
 
 @Component({
   selector: 'app-checkout-memberCardPay',
   templateUrl: './memberCardPay.component.html',
-  styleUrls: ['../../../../../../theme/ion-modal.scss', './memberCardPay.component.scss'],
-  providers: [DatePipe, NzMessageService]
+  styleUrls: ['../../../../../theme/ion-modal.scss', './memberCardPay.component.scss'],
+  providers: [DatePipe]
 })
 export class CheckoutMemberCardPayComponent {
   modalParams;
@@ -35,10 +34,9 @@ export class CheckoutMemberCardPayComponent {
   constructor(private navParams: NavParams,
               private modalController: ModalController,
               private toastSvc: ToastService,
-              private message: NzMessageService,
               private passwordSvc: PasswordService,
+              private snackbarSvc: SnackbarService,
               private appSvc: AppService,
-              private checkAuth: CheckAuth,
               private checkoutSvc: CheckoutService
   ) {
     const modalParams = this.navParams.data.params;
@@ -69,45 +67,45 @@ export class CheckoutMemberCardPayComponent {
     }
     this.loading.confirm = true;
     if (!this.appSvc.isMixPay && this.priceWillIncome > this.payAmount) {
-      this.message.warning('不允许混合支付，请一次支付完成！', {nzDuration: 3000});
+      this.snackbarSvc.show('不允许混合支付，请一次支付完成！', 3000);
       return false;
     }
     const hasCardPaid = this.modalParams.payDetails.filter(item => item.payModeCode === 'MemberCard').length > 0;
     if (hasCardPaid && !this.appSvc.isSvcMixPay) {
-      this.message.error('不允许多张会员卡支付，请更换其它支付方式!');
+      this.snackbarSvc.show('不允许多张会员卡支付，请更换其它支付方式!', 3000);
       return false;
     }
     const memberCard = this.cardSelected;
     const payAmount = this.payAmount;
     if (payAmount === '') {
-      this.message.warning('支付金额不能为空');
+      this.snackbarSvc.show('支付金额不能为空', 3000);
       return;
     } else {
       if (isNaN(Number(payAmount))) {
-        this.message.warning('支付金额需大于等于0');
+        this.snackbarSvc.show('支付金额需大于等于0', 3000);
         return;
       } else {
         if (memberCard.reCardStatus !== 0) {
-          this.message.warning('会员卡处于失效状态，不能支付');
+          this.snackbarSvc.show('会员卡处于失效状态，不能支付', 3000);
           return;
         }
         if (memberCard.overdue === 1) {
-          this.message.warning('会员卡已过期，不能支付');
+          this.snackbarSvc.show('会员卡已过期，不能支付', 3000);
           return;
         }
         const payMoney = Number(payAmount);
         if (payMoney > this.priceWillIncome) {
-          this.message.warning('支付金额不能大于订单金额');
+          this.snackbarSvc.show('支付金额不能大于订单金额', 3000);
           return;
         }
         if (payMoney > 0) {
           if (memberCard.cardLevelType === 0) {
             if (memberCard.totalCash <= 0) {
-              this.message.warning('会员卡余额不足，请及时充值');
+              this.snackbarSvc.show('会员卡余额不足，请及时充值', 3000);
               return;
             }
           } else {
-            this.message.warning('订单金额大于0，请使用储值卡支付');
+            this.snackbarSvc.show('订单金额大于0，请使用储值卡支付', 3000);
             return;
           }
         }
@@ -151,7 +149,7 @@ export class CheckoutMemberCardPayComponent {
           data.saveBillResult = res;
           this.modalController.dismiss(data).then();
         } else {
-          this.message.error(res.status.msg2Client);
+          this.snackbarSvc.show(res.status.msg2Client, 3000);
         }
       });
     });
@@ -170,7 +168,7 @@ export class CheckoutMemberCardPayComponent {
     this.loading.change = true;
     const hasCardPaid = this.modalParams.payDetails.filter(item => item.payModeCode === 'MemberCard').length > 0;
     if (hasCardPaid && !this.appSvc.isSvcMixPay) {
-      this.message.error('不允许多张会员卡支付，请更换其它支付方式!');
+      this.snackbarSvc.show('不允许多张会员卡支付，请更换其它支付方式!', 3000);
       return false;
     }
     this.changeCardPresentModal().then(() => {
@@ -205,15 +203,15 @@ export class CheckoutMemberCardPayComponent {
     this.loading.recharge = true;
     const memberCard = this.cardSelected;
     if (memberCard.reCardStatus !== 0) {
-      this.message.warning('会员卡处于失效状态，不能充值');
+      this.snackbarSvc.show('会员卡处于失效状态，不能充值', 3000);
       return;
     }
     if (memberCard.overdue === 1) {
-      this.message.warning('会员卡已过期，不能充值');
+      this.snackbarSvc.show('会员卡已过期，不能充值', 3000);
       return;
     }
     if (memberCard.cardLevelType !== 0) {
-      this.message.warning('不是储蓄卡，不能充值');
+      this.snackbarSvc.show('不是储蓄卡，不能充值', 3000);
       return;
     }
     this.rechargePresentModal().then(() => {
@@ -278,7 +276,7 @@ export class CheckoutMemberCardPayComponent {
           }
         }
       } else {
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client, 3000);
       }
     });
   }
@@ -293,10 +291,8 @@ export class CheckoutMemberCardPayComponent {
       authFuctionType: '2',
       uidAuthFuction: this.memberDetail.uid
     };
-    this.checkAuth.auth(params, null, () => {
-      this.presentResetModal().then(() => {
-        this.loading.password = false;
-      });
+    this.presentResetModal().then(() => {
+      this.loading.password = false;
     });
   }
 

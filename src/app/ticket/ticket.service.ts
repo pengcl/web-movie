@@ -69,7 +69,8 @@ export class TicketService {
   }*/
 
   plan(data: FilmInputDto): Observable<any> { // 影片
-    return this.requestSvc.send('/posResuorceService-api/pos/getPosPlanTotalInfo', data);
+    data.terminalCode = this.authSvc.currentTerminalCode;
+    return this.http.post('/hook/apiService/getPosPlanTotalInfo', {data});
   }
 
   regionList(data: { uid: string }): Observable<any> {// 座位区域

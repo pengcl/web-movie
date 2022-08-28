@@ -230,11 +230,13 @@ export class TicketHallSeatsComponent implements OnInit, AfterViewInit, OnChange
       let floors = [];
       let seats = [];
       if (info) {
-        seats = info.seatDTOList;
-        floors = [];
+        seats = info.seatList;
+        this.regions = info.regionList;
+        floors = formatFloors(formatFloors(JSON.parse(info.floorStr)).reverse()).reverse();
       }
       this.floors = floors;
-      this.getRegions(seats);
+      this.ticketSvc.updateRegionsStatus(this.regions);
+      this.rendSeats(seats);
     }
     if (changes.didEnter && changes.didEnter.currentValue) {
       this.refresh();

@@ -1,19 +1,17 @@
-import {Component, ViewChild, AfterViewInit, ElementRef, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
 import {DatePipe} from '@angular/common';
-import {ToastService} from '../../../../../@theme/modules/toast';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzModalService} from 'ng-zorro-antd/modal';
+import {ToastService} from '../../../../@theme/modules/toast';
+import {SnackbarService} from '../../../../@core/utils/snackbar.service';
 import {NavParams, ModalController} from '@ionic/angular';
-import {VipService} from '../../../../vip/vip.service';
 import {CheckoutService} from '../../../checkout.service';
-import {VoucherPrinter} from '../../../../../@core/utils/voucher-printer';
-import {ActivityDetailComponent} from '../../../../../@theme/entryComponents/activityDetail/activityDetail.component';
+import {VipService} from '../../../../vip.service';
+import {ActivityDetailComponent} from '../../../../@theme/entryComponents/activityDetail/activityDetail.component';
 
 @Component({
   selector: 'app-checkout-memberCard-recharge',
   templateUrl: './recharge.component.html',
-  styleUrls: ['../../../../../../theme/ion-modal.scss', './recharge.component.scss'],
-  providers: [DatePipe, NzMessageService, NzModalService]
+  styleUrls: ['../../../../../theme/ion-modal.scss', './recharge.component.scss'],
+  providers: [DatePipe]
 })
 export class CheckoutMemberCardRechargeComponent {
   memberDetail;
@@ -37,16 +35,12 @@ export class CheckoutMemberCardRechargeComponent {
   @ViewChild('payAuthCodeInput') private payAuthCodeInput: ElementRef;
   @ViewChild('bankCardCodeInput') private bankCardCodeInput: ElementRef;
 
-  constructor(
-    private navParams: NavParams,
-    private modalController: ModalController,
-    private nzmodal: NzModalService,
-    private message: NzMessageService,
-    private toastSvc: ToastService,
-    private vipService: VipService,
-    private checkoutSvc: CheckoutService,
-    private voucherPrinter: VoucherPrinter
-  ) {
+  constructor(private navParams: NavParams,
+              private modalController: ModalController,
+              private toastSvc: ToastService,
+              private vipService: VipService,
+              private snackbarSvc:SnackbarService,
+              private checkoutSvc: CheckoutService) {
     const modalParams = this.navParams.data.params;
     this.rechargePayTypeList = modalParams.rechargePayTypeList;
     const memberDetail = modalParams.memberDetail;
@@ -88,7 +82,7 @@ export class CheckoutMemberCardRechargeComponent {
         }
       } else {
         console.log('获取活动失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
       this.memberDetail = memberDetail;
       this.calRechargeData(this.memberDetail);
@@ -324,7 +318,7 @@ export class CheckoutMemberCardRechargeComponent {
     let uidCampaign = '';
     let campaignName = '';
     if (this.activity) {
-      if (this.activity.uid.indexOf('no') === -1){
+      if (this.activity.uid.indexOf('no') === -1) {
         uidCampaign = this.activity.uid;
         campaignName = this.activity.campaignName;
       }
@@ -335,23 +329,23 @@ export class CheckoutMemberCardRechargeComponent {
         const downLimited = this.cardSelected.downLimited;
         const upLimited = this.cardSelected.upLimited;
         if (rechargeAmount < downLimited) {
-          this.message.warning('充值金额不能小于' + downLimited);
+          this.snackbarSvc.show('充值金额不能小于' + downLimited);
           return;
         } else if (upLimited > 0 && rechargeAmount > upLimited) {
-          this.message.warning('充值金额不能大于' + upLimited);
+          this.snackbarSvc.show('充值金额不能大于' + upLimited);
           return;
         } else if (rechargeAmount <= 0) {
-          this.message.warning('请输入大于0的充值金额');
+          this.snackbarSvc.show('请输入大于0的充值金额');
           return;
         }
       } else {
-        this.message.warning('请选择充值金额');
+        this.snackbarSvc.show('请选择充值金额');
         return;
       }
     }
     const payModeCode = this.payType;
     if (!payModeCode) {
-      this.message.warning('请选择支付方式');
+      this.snackbarSvc.show('请选择支付方式');
       return;
     }
     const payment: any = {};
@@ -366,7 +360,7 @@ export class CheckoutMemberCardRechargeComponent {
       || payModeCode === 'wx_ali_pay' || payModeCode === 'FuiouPay') {
       const payAuthCode = this.payAuthCode;
       if (!payAuthCode) {
-        this.message.warning('付款码不能为空');
+        this.snackbarSvc.show('付款码不能为空');
         return;
       }
       // 微信付款码规则：18位纯数字，以10、11、12、13、14、15开头
@@ -375,24 +369,24 @@ export class CheckoutMemberCardRechargeComponent {
       const alipay_regex = new RegExp('^(25|26|27|28|29|30)\\d{14,22}$');
       if (payModeCode === 'WeixinPay') {
         if (weixin_regex.test(payAuthCode) === false) {
-          this.message.warning('微信付款码错误，请检查');
+          this.snackbarSvc.show('微信付款码错误，请检查');
           return;
         }
       } else if (payModeCode === 'AliPay') {
         if (alipay_regex.test(payAuthCode) === false) {
-          this.message.warning('支付宝付款码错误，请检查');
+          this.snackbarSvc.show('支付宝付款码错误，请检查');
           return;
         }
       } else if (payModeCode === 'wx_ali_pay') {
         if (alipay_regex.test(payAuthCode) === false && weixin_regex.test(payAuthCode) === false) {
-          this.message.warning('微信或支付宝付款码错误，请检查');
+          this.snackbarSvc.show('微信或支付宝付款码错误，请检查');
           return;
         }
       }
       payment.payAuthCode = payAuthCode;
     } else if (payModeCode === 'NormalRecharge' || payModeCode === 'NormalCinemaPay' || payModeCode === 'NormalSPay') {
       if (!this.payAuthCode) {
-        this.message.warning('付款码不能为空');
+        this.snackbarSvc.show('付款码不能为空');
         return;
       }
       payment.payAuthCode = this.payAuthCode;
@@ -421,36 +415,15 @@ export class CheckoutMemberCardRechargeComponent {
         console.log('成功', res.data);
         const payResult = res.data;
         this.printMemberBussinessTicket(payResult);
-        this.message.success('充值成功');
+        this.snackbarSvc.show('充值成功');
         this.modalController.dismiss(payResult).then();
       } else {
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
     });
   }
 
   printMemberBussinessTicket(billRes) {
-    console.log('打印会员业务小票');
-    const tasks = [];
-    const paramData: any = {};
-    paramData.uidBill = billRes.uidPosBill;
-    paramData.uidComp = billRes.uidComp;
-    paramData.typeCode = 'T00202'; // 充值
-    paramData.dicCode = 'printCharCert';
-    tasks.push(paramData);
-    if (tasks.length > 0) {
-      this.voucherPrinter.printTask(tasks, (printResult) => {
-        // console.log('打印结果:', printResult);
-        if (printResult.status === '0') {
-          // 通知后台已经打印过影票
-        } else if (printResult.status === '-1') {
-          console.log('后台设置不需打印');
-        } else {
-          const msg = '打印失败：' + printResult.msg;
-          console.log(msg);
-        }
-      });
-    }
   }
 
   dismiss() {

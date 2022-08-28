@@ -1,16 +1,16 @@
 import {Component, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {SnackbarService} from '../../../@core/utils/snackbar.service';
 import {NavParams, ModalController} from '@ionic/angular';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {ToastService} from '../../../../@theme/modules/toast';
-import {AppService} from '../../../../app.service';
+import {ToastService} from '../../../@theme/modules/toast';
+import {AppService} from '../../../app.service';
 import {CheckoutService} from '../../checkout.service';
 
 @Component({
   selector: 'app-checkout-cash',
   templateUrl: './cash.component.html',
-  styleUrls: ['../../../../../theme/ion-modal.scss', './cash.component.scss'],
-  providers: [DatePipe, NzMessageService]
+  styleUrls: ['../../../../theme/ion-modal.scss', './cash.component.scss'],
+  providers: [DatePipe]
 })
 export class CheckoutCashComponent implements AfterViewInit {
   modalParams;
@@ -30,8 +30,8 @@ export class CheckoutCashComponent implements AfterViewInit {
   constructor(private navParams: NavParams,
               private modalController: ModalController,
               private toastSvc: ToastService,
-              private message: NzMessageService,
               private appSvc: AppService,
+              private snackbarSvc: SnackbarService,
               private checkoutSvc: CheckoutService
   ) {
     const modalParams = this.navParams.data.params;
@@ -88,22 +88,22 @@ export class CheckoutCashComponent implements AfterViewInit {
 
   // 确认下单
   confirm() {
-    if(this.loading){
+    if (this.loading) {
       return false;
     }
     this.loading = true;
     if (!this.appSvc.isMixPay && this.priceWillIncome > this.payAmount) {
-      this.message.warning('不允许混合支付，请一次支付完成！', {nzDuration: 3000});
+      this.snackbarSvc.show('不允许混合支付，请一次支付完成！', 3000);
       return false;
     }
     let returnAmount = 0;
     const payAmount = this.payAmount;
     if (payAmount === '') {
-      this.message.warning('支付金额不能为空');
+      this.snackbarSvc.show('支付金额不能为空', 3000);
       return;
     } else {
       if (isNaN(Number(payAmount))) {
-        this.message.warning('支付金额需大于等于0');
+        this.snackbarSvc.show('支付金额需大于等于0', 3000);
         return;
       } else {
         const payMoney = Number(payAmount);
@@ -111,7 +111,7 @@ export class CheckoutCashComponent implements AfterViewInit {
           if (this.modalParams.modeCode === 'Cash') {
             returnAmount = payMoney - this.priceWillIncome;
           } else {
-            this.message.warning('支付金额不能大于订单金额');
+            this.snackbarSvc.show('支付金额不能大于订单金额', 3000);
             return;
           }
         }
@@ -130,7 +130,7 @@ export class CheckoutCashComponent implements AfterViewInit {
     } else if (payModeCode === 'AliPay' || payModeCode === 'WeixinPay' || payModeCode === 'KuaiqianPay'
       || payModeCode === 'wx_ali_pay' || payModeCode === 'FuiouPay') {
       if (!this.payAuthCode) {
-        this.message.warning('付款码不能为空');
+        this.snackbarSvc.show('付款码不能为空', 3000);
         return;
       }
       // 微信付款码规则：18位纯数字，以10、11、12、13、14、15开头
@@ -139,24 +139,24 @@ export class CheckoutCashComponent implements AfterViewInit {
       const alipay_regex = new RegExp('^(25|26|27|28|29|30)\\d{14,22}$');
       if (payModeCode === 'WeixinPay') {
         if (weixin_regex.test(this.payAuthCode) === false) {
-          this.message.warning('微信付款码错误，请检查');
+          this.snackbarSvc.show('微信付款码错误，请检查', 3000);
           return;
         }
       } else if (payModeCode === 'AliPay') {
         if (alipay_regex.test(this.payAuthCode) === false) {
-          this.message.warning('支付宝付款码错误，请检查');
+          this.snackbarSvc.show('支付宝付款码错误，请检查', 3000);
           return;
         }
       } else if (payModeCode === 'wx_ali_pay') {
         if (alipay_regex.test(this.payAuthCode) === false && weixin_regex.test(this.payAuthCode) === false) {
-          this.message.warning('微信或支付宝付款码错误，请检查');
+          this.snackbarSvc.show('微信或支付宝付款码错误，请检查', 3000);
           return;
         }
       }
       payment.payAuthCode = this.payAuthCode;
     } else if (payModeCode === 'NormalRecharge' || payModeCode === 'NormalCinemaPay' || payModeCode === 'NormalSPay') {
       if (!this.payAuthCode) {
-        this.message.warning('付款码不能为空');
+        this.snackbarSvc.show('付款码不能为空', 3000);
         return;
       }
       payment.payAuthCode = this.payAuthCode;
@@ -187,7 +187,7 @@ export class CheckoutCashComponent implements AfterViewInit {
         this.modalController.dismiss(data).then();
       } else {
         console.log('支付失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show('res.status.msg2Client', 3000);
       }
     });
   }

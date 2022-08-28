@@ -236,7 +236,7 @@ export class ShoppingCartService {
     }
     // 旧接口
     // return this.requestSvc.send('/orderService-api/posShopCart/detail', data);
-    return this.requestSvc.send('/orderService-api/shoppingCardManagement/queryShopCartDetail', data);
+    return this.http.post('/hook/apiService/queryShopCartDetail', {data});
   }
 
   create(): Observable<any> {
@@ -252,7 +252,7 @@ export class ShoppingCartService {
     data.cinemaCode = this.appSvc.currentCinema.cinemaCode;
     data.terminalCode = this.authSvc.currentTerminalCode;
     data.uidComp = this.appSvc.currentCinema.uidComp;
-    return this.requestSvc.send('/orderService-api/posShopCart/v2/createCartRes', data);
+    return this.http.post('/hook/apiService/createCartRes', {data});
   }
 
   load(data: any): Observable<any> {
@@ -280,7 +280,7 @@ export class ShoppingCartService {
   }
 
   del(data: DelItemInputDto): Observable<any> {
-    return this.requestSvc.send('/orderService-api/posShopCart/v2/deleteRes', data);
+    return this.http.post('/hook/apiService/deleteRes', {data});
   }
 
   delV1(data: DelItemInputDto): Observable<any> {
@@ -308,12 +308,12 @@ export class ShoppingCartService {
       uid: this.currentCart,
       uidComp: this.appSvc.currentCinema.uidComp
     };
-    return this.requestSvc.send('/orderService-api/posShopCart/reductionShopCart', data);
+    return this.http.post('/hook/apiService/reductionShopCart', {data});
   }
 
   batchDel(data: DelItemsInputDto): Observable<any> {
     data.uidShopCart = this.currentCart;
-    return this.requestSvc.send('/orderService-api/posShopCart/v2/batchDeleteRes', data);
+    return this.http.post('/hook/apiService/batchDeleteRes', {data});
   }
 
   batchDelV1(data: DelItemsInputDto): Observable<any> {
@@ -322,7 +322,7 @@ export class ShoppingCartService {
   }
 
   submit(data: SubmitItemsInputDto): Observable<any> {
-    return this.requestSvc.send('/orderService-api/posShopCart/v2/submitShopCart', data);
+    return this.http.post('/hook/apiService/submitShopCart', {data});
   }
 
   createCart(): Observable<any> {

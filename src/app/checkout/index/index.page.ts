@@ -1,27 +1,24 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { ToastService } from '../../../@theme/modules/toast';
-import { AppService } from '../../../app.service';
-import { CheckoutService } from '../checkout.service';
-import { LocationStrategy } from '@angular/common';
-import { ShoppingCartService } from '../../shopping-cart/shopping-cart.service';
-import { MemberService } from '../../../@theme/modules/member/member.service';
-import { TicketService } from '../../ticket/ticket.service';
-import { SubService } from '../../sub/sub.service';
+import {Component, ViewChild, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ModalController} from '@ionic/angular';
+import {ToastService} from '../../@theme/modules/toast';
+import {AppService} from '../../app.service';
+import {CheckoutService} from '../checkout.service';
+import {LocationStrategy} from '@angular/common';
+import {ShoppingCartService} from '../../shopping-cart.service';
+import {MemberService} from '../../@theme/modules/member/member.service';
+import {TicketService} from '../../ticket/ticket.service';
 
-import { MemberComponent } from '../../../@theme/modules/member/member.component';
-import { IsOptionalPipe } from '../../../@theme/pipes/pipes.pipe';
-import { getPaid } from '../extands';
-import { getSelectedFromShoppingCart } from '../../ticket/index/components/hall/components/seats/seats.extend';
+import {MemberComponent} from '../../@theme/modules/member/member.component';
+import {IsOptionalPipe} from '../../@theme/pipes/pipes.pipe';
+import {getPaid} from '../extands';
+import {getSelectedFromShoppingCart} from '../../ticket/index/components/hall/components/seats/seats.extend';
 
 @Component({
   selector: 'app-checkout-index',
   templateUrl: './index.page.html',
   styleUrls: ['./index.page.scss'],
-  providers: [NzMessageService, NzModalService, IsOptionalPipe]
+  providers: [IsOptionalPipe]
 })
 export class CheckoutIndexPage implements OnInit {
   uidShopCart;
@@ -39,14 +36,11 @@ export class CheckoutIndexPage implements OnInit {
               private isOptionalPipe: IsOptionalPipe,
               private route: ActivatedRoute,
               private location: LocationStrategy,
-              private message: NzMessageService,
               private toastSvc: ToastService,
-              private nzmodal: NzModalService,
               private memberSvc: MemberService,
               private appSvc: AppService,
               private shoppingCartSvc: ShoppingCartService,
               private ticketSvc: TicketService,
-              private subSvc: SubService,
               private checkoutSvc: CheckoutService) {
   }
 
@@ -107,7 +101,7 @@ export class CheckoutIndexPage implements OnInit {
     // this.shoppingCartSvc.details().subscribe(res => {
     this.checkoutSvc.queryShopCartDetail(params).subscribe(res => {
       // console.log('购物车详情-->', res.data);
-      if (res.data){
+      if (res.data) {
         this.ticketSvc.updateReleaseTime(new Date(res.data.cartValidTime).getTime());
         this.detail = res.data;
         this.member = this.memberSvc.currentMember;

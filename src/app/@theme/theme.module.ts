@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {PasswordModule} from './modules/password';
 
 const MATERIAL_PART = [
   MatSidenavModule
@@ -40,7 +41,8 @@ const MATERIAL_PART = [
     MatTableModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    PasswordModule
   ],
   exports: [
     CommonModule,
@@ -59,7 +61,8 @@ const MATERIAL_PART = [
     ...COMPONENTS,
     ...ENTRY_COMPONENTS,
     ...PIPES,
-    ...MATERIAL_PART
+    ...MATERIAL_PART,
+    PasswordModule
   ],
   declarations: [...COMPONENTS, ...ENTRY_COMPONENTS, ...PIPES, ...DIRECTIVES],
   entryComponents: [],

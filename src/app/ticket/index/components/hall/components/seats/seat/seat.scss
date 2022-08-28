@@ -29,17 +29,17 @@
       position: absolute;
       z-index: 1;
       width: 100%;
-      color: #333;
+      color: #000;
       left: 0;
       top: 0;
       line-height: 44px;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: bold;
     }
 
     svg {
-      width: 1em;
-      height: 1em;
+      width: 1.05em;
+      height: 1.05em;
       vertical-align: -0.15em;
       fill: currentColor;
       overflow: hidden;
@@ -64,15 +64,15 @@
           }
 
           &:nth-child(2) {
-            fill: #828180;
+            fill: #000;
           }
 
           &:nth-child(3) {
-            fill: #E3E4E5;
+            fill: #d3d3d3;
           }
 
           &:nth-child(4) {
-            fill: #828180;
+            fill: #000;
           }
         }
       }
@@ -187,6 +187,7 @@
         }
       }
     }
+
     &.reserved {
       // cursor: not-allowed;
       color: #fff;
@@ -210,32 +211,8 @@
           }
         }
       }
-    }
-    &.selected {
-      // cursor: not-allowed;
-      color: #fff;
 
-      svg {
-        path {
-          &:first-child {
-            fill: #4CC7C1;
-          }
-
-          &:nth-child(2) {
-            fill: #1F8782;
-          }
-
-          &:nth-child(3) {
-            fill: #4CC7C1;
-          }
-
-          &:nth-child(4) {
-            fill: #1F8782;
-          }
-        }
-      }
-
-      &.owned,&.selected {
+      &.owned {
         cursor: pointer;
 
         svg {
@@ -245,7 +222,7 @@
             }
 
             &:nth-child(2) {
-              fill: #1F8782;
+              fill: #012523;
             }
 
             &:nth-child(3) {
@@ -253,7 +230,7 @@
             }
 
             &:nth-child(4) {
-              fill: #1F8782;
+              fill: #012523;
             }
           }
         }
@@ -274,7 +251,7 @@
           }
 
           &:nth-child(2) {
-            fill: #BF000F;
+            fill: #520107;
           }
 
           &:nth-child(3) {
@@ -282,7 +259,7 @@
           }
 
           &:nth-child(4) {
-            fill: #BF000F;
+            fill: #520107;
           }
         }
       }
@@ -308,7 +285,7 @@
           }
 
           &:nth-child(2) {
-            fill: #FF8102;
+            fill: #492501;
           }
 
           &:nth-child(3) {
@@ -316,11 +293,11 @@
           }
 
           &:nth-child(4) {
-            fill: #FF8102;
+            fill: #492501;
           }
         }
       }
-      &.owned,&.selected {
+      &.owned {
         cursor: pointer;
 
         svg {

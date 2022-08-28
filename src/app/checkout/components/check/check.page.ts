@@ -68,7 +68,7 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
         this.checkQrCodeInfo();
         this.checkoutSvc.getPayType({isPaySupply: 0}).subscribe(res => {
             // console.log('返回支付方式', res.data);
-            this.payTypes = res.data;
+            this.payTypes = res.data.filter(payType => payType.modeName === '会员卡' || payType.modeName === '会员积分');
         });
         this.shoppingCartInfoSubscribe = this.checkoutSvc.getShoppingCartDetail().subscribe(res => {
             if (res) {
@@ -316,13 +316,13 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
 
     // 支付确认订单
     paySelect(payType) {
-        console.log('payType');
         if (this.loading) {
             return false;
         }
         this.loading = true;
         // console.log('选择支付', payType);
         // 没有需要结算的商品
+        console.log(this.disabled);
         if (this.disabled) {
             this.loading = false;
             this.snackbarSvc.show('当前会员卡积分不足，请取消可能消耗积分的活动！');
@@ -330,6 +330,7 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
             return false;
         }
         const memberSeatCount = countMemberSeat(this.ticketSvc.currentSelected);
+        console.log(memberSeatCount);
         if (memberSeatCount) {
             const card = this.memberSvc.currentMember.card;
             const dayLimit = Number(getEntityValue(card.cardParamEntityList, 'dayLimit')); // 当日限购数量
@@ -363,6 +364,7 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
               });
             });*/
         } else {
+            console.log('payPresentModal');
             this.payPresentModal(payType).then(() => {
                 this.loading = false;
             });
@@ -384,8 +386,9 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
         params.priceWillIncome = this.shopCardDetail.priceWillIncome;
         params.takeGoodsType = this.takeGoodsType ? '1' : '0';
         let component;
-        console.log(mode);
+        console.log(1);
         if (mode === 'MemberCard') {
+            console.log(2);
             if (this.memberDetail === null || this.memberDetail === undefined) {
                 this.askForMember.next(true);
                 this.memberAsked = {type: 'pay', data: payType};
@@ -393,10 +396,12 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
             }
             params.memberDetail = this.memberDetail;
             params.rechargePayTypeList = this.getRechargePayTypeList(this.payTypes);
+            console.log('rechargePayTypeList');
             params.hasPay = this.hasPay();
             params.payDetails = this.payDetails;
             component = CheckoutMemberCardPayComponent;
         } else if (mode === 'MemberPoints') {
+            console.log(3);
             if (this.memberDetail === null || this.memberDetail === undefined) {
                 this.askForMember.next(true);
                 this.memberAsked = {type: 'pay', data: payType};

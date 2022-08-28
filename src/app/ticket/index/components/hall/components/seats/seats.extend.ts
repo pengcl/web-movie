@@ -54,6 +54,9 @@ export const getMost = (seats): any => {// 获取画布极限的四个位置
 
 export const getCounts = (seats) => {
   const counts = JSON.parse(JSON.stringify(COUNTS));
+  if (!seats) {
+    return counts;
+  }
   seats.forEach(seat => {
     if (seat.status === 0) {// 可售 checked
       counts[0].value = counts[0].value + 1;
@@ -110,6 +113,7 @@ export const getScale = (thisContainer, most) => {
   if (!thisContainer) {
     return scale;
   }
+  console.log(thisContainer.nativeElement.offsetWidth);
   if (!thisContainer.nativeElement.offsetWidth) {
     return scale;
   } else {

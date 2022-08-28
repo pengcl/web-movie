@@ -1,13 +1,13 @@
-import { Component, ViewChild, AfterViewInit, ElementRef  } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NavParams, ModalController } from '@ionic/angular';
-import { CheckoutService } from '../../checkout.service';
-import { ShoppingCartService } from '../../../shopping-cart/shopping-cart.service';
-import { ToastService } from '../../../../@theme/modules/toast';
-import { getPage, currentPageData } from '../../../../@theme/modules/pagination/pagination.component';
-import { PageDto } from '../../../../@theme/modules/pagination/pagination.dto';
+import {Component, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {FormGroup, FormControl} from '@angular/forms';
+import {NavParams, ModalController} from '@ionic/angular';
+import {CheckoutService} from '../../checkout.service';
+import {ShoppingCartService} from '../../../shopping-cart.service';
+import {ToastService} from '../../../@theme/modules/toast';
+import {SnackbarService} from '../../../@core/utils/snackbar.service';
+import {getPage} from '../../../@theme/modules/pagination/pagination.component';
+import {PageDto} from '../../../@theme/modules/pagination/pagination.dto';
 
 interface DataItem {
   typeName: string;
@@ -21,8 +21,8 @@ interface DataItem {
 @Component({
   selector: 'app-checkout-useCoupon',
   templateUrl: './useCoupon.component.html',
-  styleUrls: ['../../../../../theme/ion-modal.scss', './useCoupon.component.scss'],
-  providers: [DatePipe, NzMessageService]
+  styleUrls: ['../../../../theme/ion-modal.scss', './useCoupon.component.scss'],
+  providers: [DatePipe]
 })
 export class CheckoutUseCouponComponent implements AfterViewInit {
   shopCardDetail;
@@ -42,14 +42,14 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
     pageSize: 5,
     totalSize: 0
   };
-  @ViewChild('couponNoInput', { static: false }) private couponNoInput: ElementRef;
+  @ViewChild('couponNoInput', {static: false}) private couponNoInput: ElementRef;
 
   constructor(private navParams: NavParams,
               private modalController: ModalController,
               private toastSvc: ToastService,
               private checkoutSvc: CheckoutService,
-              private shoppingCartSvc: ShoppingCartService,
-              private message: NzMessageService,
+              private snackbarSvc: SnackbarService,
+              private shoppingCartSvc: ShoppingCartService
   ) {
     const params = this.navParams.data.params;
     this.shopCardDetail = params.shopCardDetail;
@@ -78,7 +78,7 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
   addCoupon() {
     const couponNo = this.form.value.couponNo;
     if (couponNo === '') {
-      this.message.warning('请输入票券编码');
+      this.snackbarSvc.show('请输入票券编码');
       return;
     }
     const params: any = {};
@@ -107,7 +107,7 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
         this.form.get('couponNo').setValue('');
       } else {
         console.log('失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
     });
   }
@@ -134,10 +134,11 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
         this.updateShopcartDetailPrice(ticketRs);
       } else {
         console.log('失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
     });
   }
+
   // 使用票券后更新价格
   updateShopcartDetailPrice(ticketRs) {
     const shopCardDetail = this.shopCardDetail;
@@ -148,6 +149,7 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
     shopCardDetail.priceWillIncome = ticketRs.priceWillIncome;
     this.shopCardDetail = shopCardDetail;
   }
+
   // 票券类型
   getTypeName(type) {
     let name;
@@ -166,11 +168,12 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
     }
     return name;
   }
+
   // 确定下单
   confirm() {
     if (this.couponList && this.couponList.length > 0) {
       const shopCardDetail = this.shopCardDetail;
-      if (shopCardDetail.priceWillIncome === 0){
+      if (shopCardDetail.priceWillIncome === 0) {
         const payment: any = {};
         payment.payModeCode = 'Cash';
         payment.payAmount = 0;
@@ -199,26 +202,27 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
             this.modalController.dismiss(data).then();
           } else {
             console.log('支付失败');
-            this.message.error(res.status.msg2Client);
+            this.snackbarSvc.show(res.status.msg2Client);
           }
         });
-      }else{
+      } else {
         const data: any = {
-          billStatus: 'paying',
+          billStatus: 'paying'
         };
         console.log('关闭团购券页面');
         this.modalController.dismiss(data).then();
       }
     } else {
-      this.message.warning('请添加票券');
+      this.snackbarSvc.show('请添加票券');
       return;
 
     }
   }
+
   // 取消
   dismiss() {
     if (this.couponList && this.couponList.length > 0) {
-      this.message.warning('已添加票券，请删除后再取消');
+      this.snackbarSvc.show('已添加票券，请删除后再取消');
       return;
     }
     this.modalController.dismiss().then();
@@ -248,7 +252,7 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
   }
 
   refreshCheckedStatus(): void {
-    const listOfEnabledData = this.listOfCurrentPageData.filter(({ disabled }) => !disabled);
+    const listOfEnabledData = this.listOfCurrentPageData.filter(({disabled}) => !disabled);
     this.checked = listOfEnabledData.every((item) => this.selected[item.ticketCode]);
     this.indeterminate = listOfEnabledData.some((item) => this.selected[item.ticketCode]) && !this.checked;
   }
@@ -259,7 +263,7 @@ export class CheckoutUseCouponComponent implements AfterViewInit {
   }
 
   onAllChecked(checked: boolean): void {
-    this.listOfCurrentPageData.filter(({ disabled }) => !disabled).forEach((item) => this.updateCheckedSet(item, checked));
+    this.listOfCurrentPageData.filter(({disabled}) => !disabled).forEach((item) => this.updateCheckedSet(item, checked));
     this.refreshCheckedStatus();
   }
 }

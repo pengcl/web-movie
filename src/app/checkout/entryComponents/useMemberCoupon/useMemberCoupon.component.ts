@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {DatePipe} from '@angular/common';
-import {NzMessageService} from 'ng-zorro-antd/message';
 import {NavParams, ModalController} from '@ionic/angular';
 import {CheckoutService} from '../../checkout.service';
-import {ShoppingCartService} from '../../../shopping-cart/shopping-cart.service';
-import {ToastService} from '../../../../@theme/modules/toast';
-import {PasswordService} from '../../../../@theme/modules/password';
-import {getPage, currentPageData} from '../../../../@theme/modules/pagination/pagination.component';
+import {ShoppingCartService} from '../../../shopping-cart.service';
+import {ToastService} from '../../../@theme/modules/toast';
+import {PasswordService} from '../../../@theme/modules/password';
+import {SnackbarService} from '../../../@core/utils/snackbar.service';
+import {getPage, currentPageData} from '../../../@theme/modules/pagination/pagination.component';
 
 interface DataItem {
   used: number;
@@ -22,8 +22,8 @@ interface DataItem {
 @Component({
   selector: 'app-checkout-useMemberCoupon',
   templateUrl: './useMemberCoupon.component.html',
-  styleUrls: ['../../../../../theme/ion-modal.scss', './useMemberCoupon.component.scss'],
-  providers: [DatePipe, NzMessageService]
+  styleUrls: ['../../../../theme/ion-modal.scss', './useMemberCoupon.component.scss'],
+  providers: [DatePipe]
 })
 export class CheckoutUseMemberCouponComponent {
   shopCardDetail;
@@ -44,8 +44,8 @@ export class CheckoutUseMemberCouponComponent {
               private modalController: ModalController,
               private toastSvc: ToastService,
               private checkoutSvc: CheckoutService,
+              private snackbarSvc: SnackbarService,
               private shoppingCartSvc: ShoppingCartService,
-              private message: NzMessageService,
               private passwordSvc: PasswordService) {
     const params = this.navParams.data.params;
     this.shopCardDetail = params.shopCardDetail;
@@ -81,7 +81,7 @@ export class CheckoutUseMemberCouponComponent {
           if (couponList && couponList.length > 0) {
             couponList.forEach(item => {
               item.used = this.shopCardDetail.shopCartTicketDTOList
-              .filter(ticket => ticket.ticketCode === item.ticketCode).length > 0 ? 1 : 0;
+                .filter(ticket => ticket.ticketCode === item.ticketCode).length > 0 ? 1 : 0;
               item.categoryName = this.getCategoryName(item.category);
               item.typeName = this.getTypeName(item.type);
               item.ticketStatusName = this.getTicketStatusName(item.ticketStatus);
@@ -93,7 +93,7 @@ export class CheckoutUseMemberCouponComponent {
         }
       } else {
         console.log('失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
     });
   }
@@ -176,8 +176,8 @@ export class CheckoutUseMemberCouponComponent {
   addCoupon(targetCoupon) {
     console.log('添加', targetCoupon);
     const shopCardDetail = this.shopCardDetail;
-    if (shopCardDetail === undefined || shopCardDetail.uidMember === null || shopCardDetail.uidMember === ''){
-      this.message.warning('请登录会员');
+    if (shopCardDetail === undefined || shopCardDetail.uidMember === null || shopCardDetail.uidMember === '') {
+      this.snackbarSvc.show('请登录会员');
       return;
     }
     const params: any = {};
@@ -206,7 +206,7 @@ export class CheckoutUseMemberCouponComponent {
         // console.log('couponList-->', this.couponList);
       } else {
         console.log('失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
     });
   }
@@ -232,7 +232,7 @@ export class CheckoutUseMemberCouponComponent {
         this.updateShopcartDetailPrice(ticketRs);
       } else {
         console.log('失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
     });
   }
@@ -251,7 +251,7 @@ export class CheckoutUseMemberCouponComponent {
   // 确定下单
   confirm() {
     if (this.getSelectUseCoupons().length === 0) {
-      this.message.warning('请选择票券');
+      this.snackbarSvc.show('请选择票券');
       return;
     }
     const shopCardDetail = this.shopCardDetail;
@@ -291,7 +291,7 @@ export class CheckoutUseMemberCouponComponent {
             this.modalController.dismiss(data).then();
           } else {
             console.log('支付失败');
-            this.message.error(res.status.msg2Client);
+            this.snackbarSvc.show(res.status.msg2Client);
           }
         });
       } else {
@@ -307,7 +307,7 @@ export class CheckoutUseMemberCouponComponent {
   // 取消
   dismiss() {
     if (this.getSelectUseCoupons().length > 0) {
-      this.message.warning('已添加票券，请删除后再取消');
+      this.snackbarSvc.show('已添加票券，请删除后再取消');
       return;
     }
     this.modalController.dismiss().then();
@@ -318,7 +318,7 @@ export class CheckoutUseMemberCouponComponent {
     let selectList = [];
     const couponList = this.couponList;
     if (couponList && couponList.length > 0) {
-      selectList = couponList.filter(function(item, index) {
+      selectList = couponList.filter(function (item, index) {
         return item.used === 1;
       });
     }
