@@ -9,11 +9,11 @@
       <ion-col></ion-col>
       <ion-col size="7">
         <form [formGroup]="form" class="form-box">
-          <mat-form-field [floatLabel]="true" appearance="outline" class="full-width">
+          <mat-form-field [floatLabel]="'always'" appearance="outline" class="full-width">
             <mat-label>开卡影院：</mat-label>
             <input [formControlName]="'cinema'" matInput [required]="true">
           </mat-form-field>
-          <mat-form-field [floatLabel]="true" appearance="outline" class="full-width">
+          <mat-form-field [floatLabel]="'always'" appearance="outline" class="full-width">
             <mat-label>会员卡号/手机号：</mat-label>
             <input (keyup.enter)="confirm()" [formControlName]="'conditions'" matInput [required]="true">
           </mat-form-field>

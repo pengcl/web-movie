@@ -6,7 +6,6 @@ import {PasswordService} from '../../../../@theme/modules/password';
 import {SnackbarService} from '../../../../@core/utils/snackbar.service';
 import {AppService} from '../../../../app.service';
 import {CheckoutService} from '../../../checkout.service';
-import {CheckoutMemberCardRechargeComponent} from '../recharge/recharge.component';
 import {CheckoutMemberCardCardComponent} from '../card/card.component';
 import {ResetPasswordComponent} from '../../../../@theme/entryComponents/reset/reset.component';
 
@@ -221,24 +220,6 @@ export class CheckoutMemberCardPayComponent {
 
   // 充值
   async rechargePresentModal() {
-    const params: any = {};
-    params.memberDetail = this.memberDetail;
-    params.rechargePayTypeList = this.rechargePayTypeList;
-    // console.log('params参数', params);
-    const component = CheckoutMemberCardRechargeComponent;
-    const modal = await this.modalController.create({
-      showBackdrop: true,
-      backdropDismiss: false,
-      component,
-      componentProps: {params},
-      cssClass: 'full-modal'
-    });
-    await modal.present();
-    const {data} = await modal.onDidDismiss(); // 获取关闭传回的值
-    if (data) {
-      console.log('充值结果返回查询');
-      this.memberQuery();
-    }
   }
 
   memberQuery() {

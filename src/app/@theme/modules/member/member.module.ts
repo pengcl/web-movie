@@ -8,9 +8,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MemberCardComponent} from './entryComponents/card/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {ThemeModule} from '../../theme.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, IonicModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, RouterModule, IonicModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, ThemeModule],
   declarations: [MemberComponent, MemberLoginComponent, MemberCardComponent],
   exports: [MemberComponent, MemberLoginComponent, MemberCardComponent],
   entryComponents: [MemberLoginComponent, MemberCardComponent],

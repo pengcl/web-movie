@@ -2,11 +2,7 @@ import {Component, OnInit, OnDestroy, EventEmitter, Input, Output} from '@angula
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalController} from '@ionic/angular';
 import {LocationStrategy} from '@angular/common';
-import {CheckoutCashComponent} from '../../entryComponents/cash/cash.component';
 import {CheckoutMemberCardPayComponent} from '../../entryComponents/memberCard/pay/memberCardPay.component';
-import {CheckoutUseCouponComponent} from '../../entryComponents/useCoupon/useCoupon.component';
-import {CheckoutUseGroupCouponComponent} from '../../entryComponents/useGroupCoupon/useGroupCoupon.component';
-import {CheckoutUseMemberCouponComponent} from '../../entryComponents/useMemberCoupon/useMemberCoupon.component';
 import {MemberService} from "../../../@theme/modules/member/member.service";
 import {ShoppingCartService} from "../../../shopping-cart.service";
 import {CheckoutService} from '../../checkout.service';
@@ -252,66 +248,10 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
             this.snackbarSvc.show('订单已支付，不允许再添加票券');
             return;
         }
-        this.couponPresentModal(couponType).then();
+        // this.couponPresentModal(couponType).then();
     }
 
     // 使用票券弹窗
-    async couponPresentModal(couponType) {
-        const params: any = {};
-        params.shopCardDetail = this.shopCardDetail;
-        let component;
-        if (couponType === 'coupon') {
-            component = CheckoutUseCouponComponent;
-        } else if (couponType === 'groupCoupon') {
-            component = CheckoutUseGroupCouponComponent;
-        } else if (couponType === 'memberCoupon') {
-            if (this.memberDetail === null || this.memberDetail === undefined) {
-                this.snackbarSvc.show('请先登录会员');
-                this.askForMember.next(true);
-                this.memberAsked = {type: 'coupon', data: couponType};
-                return;
-            }
-            params.memberMobile = this.memberDetail.memberMobile;
-            component = CheckoutUseMemberCouponComponent;
-        } else {
-            return;
-        }
-        // console.log('票券弹窗参数', params);
-        const modal = await this.modalController.create({
-            showBackdrop: true,
-            backdropDismiss: false,
-            component,
-            componentProps: {params},
-            cssClass: 'full-modal'
-        });
-        await modal.present();
-        const {data} = await modal.onDidDismiss(); // 获取关闭传回的值
-        if (data) {
-            // console.log('接收票券支付返回参数', data);
-            if (data.billStatus === 'compelete') {
-                // console.log('订单完成');
-                const saveBillResult = data.saveBillResult;
-                if (saveBillResult.status.status === 0) {
-                    const payRes = saveBillResult.data;
-                    if (payRes.needPay === 0) {
-                        this.snackbarSvc.show('订单完成，正在打印', {nzDuration: 3000});
-                        this.billCompelete(payRes.uidPosBill);
-                    } else if (payRes.needPay === 1) {
-                        const notifier = 'pay(cart,act_payment,check)';
-                        this.refreshShoppingCardEvent.emit(notifier);
-                    }
-                } else if (saveBillResult.status.status === 29000) {
-                    // 重复下单，返回订单已完成状态
-                    const payRes = saveBillResult.data;
-                    this.billCompelete(payRes.uidPosBill);
-                }
-            } else {
-                // console.log('票券支付中');
-                const notifier = 'couponUse(cart,act_payment,check)';
-                this.refreshShoppingCardEvent.emit(notifier);
-            }
-        }
-    }
 
 
     // 支付确认订单
@@ -407,9 +347,9 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
                 this.memberAsked = {type: 'pay', data: payType};
                 return;
             }
-            component = CheckoutCashComponent;
+            // component = CheckoutCashComponent;
         } else {
-            component = CheckoutCashComponent;
+            // component = CheckoutCashComponent;
         }
         // console.log('选择支付方式参数', params);
         const modal = await this.modalController.create({
