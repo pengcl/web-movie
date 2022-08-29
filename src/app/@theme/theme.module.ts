@@ -64,7 +64,6 @@ const NZ_PART = [
     IonicModule,
     ToastModule,
     MaskModule,
-    MemberModule,
     DialogModule,
     PaginationModule,
     ScrollbarThemeModule,
@@ -74,7 +73,8 @@ const NZ_PART = [
     MatCheckboxModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    PasswordModule
+    PasswordModule,
+    MemberModule
   ],
   exports: [
     CommonModule,
@@ -85,7 +85,6 @@ const NZ_PART = [
     ToastModule,
     MaskModule,
     DialogModule,
-    MemberModule,
     PaginationModule,
     IonicModule,
     ScrollbarThemeModule,
@@ -95,7 +94,8 @@ const NZ_PART = [
     ...PIPES,
     ...MATERIAL_PART,
     ...NZ_PART,
-    PasswordModule
+    PasswordModule,
+    MemberModule
   ],
   declarations: [...COMPONENTS, ...ENTRY_COMPONENTS, ...PIPES, ...DIRECTIVES],
   entryComponents: [],
