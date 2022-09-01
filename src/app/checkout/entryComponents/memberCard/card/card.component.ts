@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-checkout-memberCard-card',
   templateUrl: 'card.Component.html',
-  styleUrls: ['../../../../../../theme/ion-modal.scss','./card.component.scss'],
+  styleUrls: ['../../../../../theme/ion-modal.scss','./card.component.scss'],
   providers: [DatePipe]
 })
 export class CheckoutMemberCardCardComponent {

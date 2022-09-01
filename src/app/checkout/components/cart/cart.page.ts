@@ -1,9 +1,8 @@
 import {Component, OnInit, OnDestroy, ViewChild, AfterViewInit, Output, EventEmitter, Input} from '@angular/core';
 import {CheckoutService} from '../../checkout.service';
-import {SubService} from '../../../sub/sub.service';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {groupSame} from '../../../shopping-cart/shopping-cart.utils';
-import {ToastService} from '../../../../@theme/modules/toast';
+import {groupSame} from '../../../shopping-cart.utils';
+import {ToastService} from '../../../@theme/modules/toast';
+import {SnackbarService} from '../../../@core/utils/snackbar.service';
 import {AuthService} from '../../../auth/auth.service';
 
 @Component({
@@ -58,9 +57,8 @@ export class CheckoutCartPage implements OnInit, OnDestroy, AfterViewInit {
   };
 
   constructor(private checkoutSvc: CheckoutService,
-              private subSvc: SubService,
+              private snackbarSvc: SnackbarService,
               private toastSvc: ToastService,
-              private message: NzMessageService,
               public authSvc: AuthService) {
   }
 
@@ -188,14 +186,13 @@ export class CheckoutCartPage implements OnInit, OnDestroy, AfterViewInit {
       this.toastSvc.hide();
       if (res.status.status === 0) {// 成功
       } else {
-        this.message.error('取餐设置失败，原因：' + res.status.msg2Client);
+        this.snackbarSvc.show('取餐设置失败，原因：' + res.status.msg2Client);
       }
     });
   }
 
   ngOnInit() {
     this.shoppingCartInfoSubscribe = this.checkoutSvc.getShoppingCartDetail().subscribe(res => {
-      this.subSvc.updateSub('shoppingCart', res);
       if (res) {
         if (res.notifier && res.notifier.indexOf('cart') !== -1) {
           // console.log('cart-刷新购物车数据');

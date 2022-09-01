@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class StorageService {
-  type = environment.production ? 'memory' : 'localStorage'; // 存储类型，由环境变量决定；
+  type = environment.production ? 'localStorage' : 'localStorage'; // 存储类型，由环境变量决定；
   memory: any = {};
   keys = ['aliasList', 'remember', 'name', 'password'];
   public localStorage: any;

@@ -7,21 +7,23 @@ import {
   EventEmitter,
   OnDestroy
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { TicketHallSeatsComponent } from './components/seats/seats.component';
-import { ToastService } from '../../../../@theme/modules/toast';
-import { NgZone } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalController} from '@ionic/angular';
+import {TicketHallSeatsComponent} from './components/seats/seats.component';
+import {ToastService} from '../../../../@theme/modules/toast';
+import {NgZone} from '@angular/core';
 
-import { ShoppingCartService, AddItemsInputDto, SubmitItemsInputDto } from '../../../../shopping-cart.service';
-import { AppService } from '../../../../app.service';
-import { AuthService } from '../../../../auth/auth.service';
-import { TicketService } from '../../../ticket.service';
-import { IsOptionalPipe } from '../../../../pipes.pipe';
-import { timer } from 'rxjs';
-import { CodeComponent } from '../../../../@theme/entryComponents/code/code';
-import { MatDialog } from '@angular/material/dialog';
-import { checkRedirect } from '../../../../@core/utils/extend';
+import {ShoppingCartService, AddItemsInputDto, SubmitItemsInputDto} from '../../../../shopping-cart.service';
+import {AppService} from '../../../../app.service';
+import {AuthService} from '../../../../auth/auth.service';
+import {TicketService} from '../../../ticket.service';
+import {IsOptionalPipe} from '../../../../pipes.pipe';
+import {timer} from 'rxjs';
+import {CodeComponent} from '../../../../@theme/entryComponents/code/code';
+import {MatDialog} from '@angular/material/dialog';
+import {checkRedirect, objectToArray, setTicketType} from '../../../../@core/utils/extend';
+
+import {MemberService} from '../../../../@theme/modules/member/member.service';
 
 @Component({
   selector: 'app-ticket-hall',
@@ -60,28 +62,40 @@ export class TicketHallComponent implements OnDestroy {
               private toastSvc: ToastService,
               private dialog: MatDialog,
               private shoppingCartSvc: ShoppingCartService,
-              private ticketSvc: TicketService) {
+              private ticketSvc: TicketService,
+              private memberSvc: MemberService) {
+    this.subscribe.getMemberStatus = this.memberSvc.getMemberStatus().subscribe(res => {
+      this.member = res;
+      const selected = setTicketType(this.ticketSvc.currentSelected, this.ticketSvc.currentInfo, this.member, this.isOptionalPipe);
+      this.ticketSvc.updateSelectedStatus(selected);
+    });
     this.subscribe.getPlanStatus = ticketSvc.getPlanStatus().subscribe(res => {
       this.plan = res;
-      if (this.plan) {
-        this.getSeats();
-      }
     });
     this.subscribe.getInfoStatus = ticketSvc.getInfoStatus().subscribe(res => {
       this.info = res;
       if (this.info) {
         const seats = [];
-        this.info.seatDTOList.forEach(seat => {
+        this.info.seatList.forEach(seat => {
           if ((seat.resSeatReserve === 1 || seat.resSeatReserve === 2) && seat.isOwned) {
             seats.push(seat);
           }
         });
+        this.ticketTypes = res ? res.ticketTypeList : [];
+        this.getTicketType();
         this.ticketSvc.addSelected(seats);
       }
     });
   }
 
-  getSeats() {
+  typeChange(ticketType) {
+    const isOptional = this.isOptionalPipe.transform(ticketType, this.member);
+    if (isOptional) {// 判断是否可选
+      this.ticketSvc.updateTicketTypeStatus(ticketType);
+    }
+  }
+
+  /*getSeats() {
     const params = {
       planShowId: this.plan.planShowId,
       userToken: this.userToken
@@ -89,8 +103,25 @@ export class TicketHallComponent implements OnDestroy {
     this.ticketSvc.getSeats(params).subscribe(res => {
       this.ticketSvc.updateInfoStatus(res.data);
     });
+  }*/
+  getTicketType() {
+    let ticketType;
+    if (this.ticketTypes && this.ticketTypes.length > 0) {
+      const ticketTypes = [];
+      this.ticketTypes.forEach(item => {
+        const isOptional = this.isOptionalPipe.transform(item, this.member);
+        if (isOptional) {
+          ticketTypes.push(item);
+        }
+      });
+      // uidTicketType
+      ticketType = ticketTypes.filter(item => item.ticketTypeName === '标准票')[0];
+      if (this.member) {
+        ticketType = ticketTypes.filter(item => item.uidMemCardLevels)[0] || ticketType;
+      }
+      this.typeChange(ticketType);
+    }
   }
-
   expand() {
     this.isFullscreen = !this.isFullscreen;
     this.appSvc.updateFullscreenStatus(this.isFullscreen);
@@ -141,15 +172,8 @@ export class TicketHallComponent implements OnDestroy {
   }
 
   get selectedLength() {
-    const seats = [];
-    if (this.info) {
-      this.info.seatDTOList.forEach(seat => {
-        if (seat.selected) {
-          seats.push(seat);
-        }
-      });
-    }
-    return seats.length;
+    const selectedArray = objectToArray(this.selected);
+    return selectedArray.length;
   }
 
   setLoadingStatus(seats, status) {
@@ -158,16 +182,36 @@ export class TicketHallComponent implements OnDestroy {
     });
   }
 
+  createAddItemInputDto(seats): AddItemsInputDto {
+    return this.shoppingCartSvc.creatShoppingCartInputDto(seats);
+  }
+
   add(seats) {// 锁座
-    this.setLoadingStatus(seats, true);
-    timer(1000).subscribe(() => {
-      seats.forEach(seat => {
-        seat.loading = false;
-        seat.selected = !seat.selected;
-        this.selected[seat.uid] = seat;
+    const ticketType = this.ticketSvc.currentTicketType;
+    if (ticketType) { // 当有选择票券时才执行
+      const dto = this.createAddItemInputDto(seats);
+      // this.toastSvc.loading('加载中...', 0);
+      this.appSvc.updateLoadingStatus(true);
+      this.setLoadingStatus(seats, true);
+      this.shoppingCartSvc.add(dto).subscribe(res => {
+        this.setLoadingStatus(seats, false);
+        this.appSvc.updateLoadingStatus(false);
+        if (res.status.status !== 0) {
+          seats.forEach(seat => {
+            this.selected[seat.uid] = false;
+          });
+          this.ticketHallSeatsComponent.refresh();
+        } else {
+          seats.forEach(seat => {
+            seat.resSeatReserve = 1;
+            seat.isOwned = 1;
+          });
+          this.ticketSvc.updateReleaseTime(new Date(res.data.cartReleaseTime).getTime());
+        }
+        this.ticketSvc.updateSelectedStatus(this.selected);
+        // this.ticketHallSeatsComponent.refresh();
       });
-    });
-    console.log(this.selected);
+    }
   }
 
   delete(seats) {// 解除销座
@@ -206,11 +250,26 @@ export class TicketHallComponent implements OnDestroy {
   }
 
   deletes() {// 解除销座
-    if (this.info) {
-      this.info.seatDTOList.forEach(seat => {
-        seat.selected = false;
-      });
+    if (this.appSvc.currentLoading) {
+      return false;
     }
+    const seatCodeList = [];
+    for (const key in this.selected) {
+      if (this.selected[key]) {
+        seatCodeList.push(this.selected[key].resSeatCode);
+      }
+    }
+    this.toastSvc.loading('加载中...', 0);
+    this.shoppingCartSvc.unlocks().subscribe(res => {
+      if (res.status && res.status.status === 0) {
+        this.selected = {};
+        // this.createBlankShoppingCart();
+      }
+      this.ticketSvc.updateSelectedStatus(this.selected);
+      this.ticketHallSeatsComponent.refresh();
+      this.cdr.markForCheck();
+      this.cdr.detectChanges();
+    });
   }
 
   openDialog(data): void {
@@ -236,14 +295,15 @@ export class TicketHallComponent implements OnDestroy {
         seats.push(this.selected[uid]);
       }
     }
+    console.log(seats);
     if (seats.length > 0) {
-      this.zone.run(() => {
-        this.router.navigate(['/checkout/index'], {
-          queryParams: {
-            uidShopCart: this.shoppingCartSvc.currentCart,
-            businessType: 'SALE'
-          }
-        }).then();
+      this.router.navigate(['/checkout/index'], {
+        queryParams: {
+          uidShopCart: this.shoppingCartSvc.currentCart,
+          businessType: 'SALE'
+        }
+      }).then(()=>{
+        console.log('go');
       });
     } else {
       return false;

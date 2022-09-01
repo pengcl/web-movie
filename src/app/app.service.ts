@@ -92,6 +92,12 @@ export class AppService {
     return this.settingStatus.asObservable();
   }
 
+  get isMixPay() {// 前台同一笔订单是否允许混合支付
+    const mixPay = this.currentCinema.teminalList ?
+      this.currentCinema.teminalList.filter(item => item.dicCode === 'teminalMixPay')[0] : null;
+    return mixPay ? mixPay.dicValue === '1' : false;
+  }
+
   getRenderStatus(): Observable<boolean> {
     return this.renderStatus.asObservable();
   }

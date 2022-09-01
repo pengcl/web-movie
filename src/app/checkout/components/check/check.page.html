@@ -19,28 +19,6 @@
                 <ion-note>已收：<span>{{shopCardDetail?.priceAlreadyIncome | rmb}}</span></ion-note>
             </ion-item>
         </ng-container>
-
-        <ng-container *ngIf="businessType ==='SALE'">
-            <ion-grid class="coupons">
-                <ion-row>
-                    <ion-col>
-                        <div class="coupon-box" (click)="userCoupon('coupon')">
-                            有码券
-                        </div>
-                    </ion-col>
-                    <ion-col>
-                        <div class="coupon-box" (click)="userCoupon('groupCoupon')">
-                            无码券
-                        </div>
-                    </ion-col>
-                    <ion-col>
-                        <div class="coupon-box" (click)="userCoupon('memberCoupon')">
-                            会员电子券
-                        </div>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ng-container>
         <!--订单支付金额-->
         <ng-container>
             <ion-list class="status" *ngIf="shopCardDetail">

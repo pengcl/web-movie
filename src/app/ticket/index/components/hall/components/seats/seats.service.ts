@@ -3,6 +3,7 @@ import {RequestService} from '../../../../../../@core/utils/request.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {ShoppingCartService} from '../../../../../../shopping-cart.service';
+import {HttpClient} from '@angular/common/http';
 
 declare interface RefreshSeatsInputDto {
   terminalCode: string;
@@ -16,11 +17,12 @@ declare interface RefreshSeatsInputDto {
 export class SeatsService {
   private refreshing = false;
   private refreshingStatus = new BehaviorSubject<any>(this.currentRefreshing);
-  constructor(private requestSvc: RequestService, private shoppingCartSvc: ShoppingCartService) {
+
+  constructor(private requestSvc: RequestService, private http: HttpClient, private shoppingCartSvc: ShoppingCartService) {
   }
 
   refresh(data: RefreshSeatsInputDto): Observable<any> { // 影片列表
-    return this.requestSvc.send('/posResuorceService-api/pos/refreshPosSeats', data);
+    return this.http.post('/hook/apiService/refreshPosSeats', {data});
   }
 
   delay(): Observable<any> { // 延时锁座

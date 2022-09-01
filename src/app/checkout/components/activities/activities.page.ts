@@ -1,14 +1,13 @@
 import {Component, OnInit, OnDestroy, EventEmitter, Output} from '@angular/core';
-import {ToastService} from '../../../../@theme/modules/toast';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import {ToastService} from '../../../@theme/modules/toast';
 import {CheckoutService} from '../../checkout.service';
-import {SubService} from '../../../sub/sub.service';
+import {SnackbarService} from '../../../@core/utils/snackbar.service';
 
 @Component({
   selector: 'app-checkout-activities',
   templateUrl: './activities.page.html',
   styleUrls: ['./activities.page.scss'],
-  providers: [NzMessageService]
+  providers: []
 })
 export class CheckoutActivitiesPage implements OnInit, OnDestroy {
   @Output() refreshShoppingCardEvent: EventEmitter<any> = new EventEmitter();
@@ -18,15 +17,10 @@ export class CheckoutActivitiesPage implements OnInit, OnDestroy {
   payDetails;
   activities;
   shoppingCartInfoSubscribe;
-  actPriceService = 0;
-  actPriceSupply = 0;
 
-  constructor(
-    private toastSvc: ToastService,
-    private message: NzMessageService,
-    private subSvc: SubService,
-    private checkoutSvc: CheckoutService
-  ) {
+  constructor(private toastSvc: ToastService,
+    private snackbarSvc: SnackbarService,
+    private checkoutSvc: CheckoutService) {
   }
 
   ngOnInit() {
@@ -57,7 +51,6 @@ export class CheckoutActivitiesPage implements OnInit, OnDestroy {
         }
       } else {
         this.activities = null;
-        this.subSvc.updateSub('activities', this.activities);
       }
     });
 
@@ -84,7 +77,6 @@ export class CheckoutActivitiesPage implements OnInit, OnDestroy {
           // console.log('没有活动');
           this.activities = null;
         }
-        this.subSvc.updateSub('activities', this.activities);
       });
     }
     // todo
@@ -183,7 +175,7 @@ export class CheckoutActivitiesPage implements OnInit, OnDestroy {
     // console.log('接收选择或取消活动事件，调用活动变更接口', activity);
     const selected = activity.selected; // 活动选中状态
     if (this.hasPay()) {
-      this.message.warning('如需选择或取消活动，请先删除已支付记录');
+      this.snackbarSvc.show('如需选择或取消活动，请先删除已支付记录');
       return;
     }
     const params: any = {};
@@ -204,12 +196,11 @@ export class CheckoutActivitiesPage implements OnInit, OnDestroy {
             }
           }
         }
-        this.subSvc.updateSub('activities', this.activities);
         const notifier = 'promotion(cart,check)';
         this.refreshShoppingCardEvent.emit(notifier);
       } else {
         // console.log('参与活动失败');
-        this.message.error(res.status.msg2Client);
+        this.snackbarSvc.show(res.status.msg2Client);
       }
     });
   }

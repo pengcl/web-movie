@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar class="plan-info">
     <ion-title *ngIf="plan">
-      <span class="title">{{info?.moviePlanShow.movieName}}</span>
-      <span>{{plan?.startShowTime}}至{{plan?.endShowTime}}</span>
-      <span>{{plan?.hallName}}</span><!--<span>{{plan?.planMovieDuration}}分钟</span>-->
+      <span class="title">{{plan?.posMovieNameShort}}</span>
+      <span>{{plan?.posStartTime | repairDate | date : 'yyyy-MM-dd HH:mm'}}至{{plan?.posEndTime | repairDate | date : 'HH:mm'}}</span>
+      <span>{{plan?.hallName}}</span><span>{{plan?.planMovieDuration}}分钟</span>
     </ion-title>
     <ion-title *ngIf="!plan">当前没有放映计划</ion-title>
   </ion-toolbar>

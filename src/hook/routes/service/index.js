@@ -6,7 +6,6 @@ const jsonParser = bodyParser.json();
 
 router.route('/login').post(jsonParser, function (req, res, next) {
   httpSvc.login(req.body).then(result => {
-    console.log(result);
     res.send(result.body);
   })
 });
@@ -57,4 +56,82 @@ router.route('/getPosPlanTotalInfo').post(jsonParser, function (req, res, next) 
     res.send(result.body);
   })
 });
+
+router.route('/createCartRes').post(jsonParser, function (req, res, next) {
+  console.log('createCartRes');
+  httpSvc.createCartRes(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/refreshPosSeats').post(jsonParser, function (req, res, next) {
+  console.log('refreshPosSeats');
+  httpSvc.refreshPosSeats(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/deleteRes').post(jsonParser, function (req, res, next) {
+  console.log('deleteRes');
+  httpSvc.deleteRes(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/batchDeleteRes').post(jsonParser, function (req, res, next) {
+  console.log('batchDeleteRes');
+  httpSvc.batchDeleteRes(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/submitShopCart').post(jsonParser, function (req, res, next) {
+  console.log('submitShopCart');
+  httpSvc.submitShopCart(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/getPosPayModeIsSupply').post(jsonParser, function (req, res, next) {
+  console.log('getPosPayModeIsSupply');
+  httpSvc.getPosPayModeIsSupply(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/queryShopCartDetail').post(jsonParser, function (req, res, next) {
+  console.log('queryShopCartDetail');
+  httpSvc.queryShopCartDetail(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/queryShoppingCartCampaign').post(jsonParser, function (req, res, next) {
+  console.log('queryShoppingCartCampaign');
+  httpSvc.queryShoppingCartCampaign(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/reductionShopCart').post(jsonParser, function (req, res, next) {
+  console.log('reductionShopCart');
+  httpSvc.reductionShopCart(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/addMemberInfo2shopCart').post(jsonParser, function (req, res, next) {
+  console.log('addMemberInfo2shopCart');
+  httpSvc.addMemberInfo2shopCart(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
+router.route('/savePosBill').post(jsonParser, function (req, res, next) {
+  console.log('savePosBill');
+  httpSvc.savePosBill(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
 module.exports = router;

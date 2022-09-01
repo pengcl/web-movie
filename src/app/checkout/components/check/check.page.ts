@@ -2,11 +2,7 @@ import {Component, OnInit, OnDestroy, EventEmitter, Input, Output} from '@angula
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalController} from '@ionic/angular';
 import {LocationStrategy} from '@angular/common';
-import {CheckoutCashComponent} from '../../entryComponents/cash/cash.component';
 import {CheckoutMemberCardPayComponent} from '../../entryComponents/memberCard/pay/memberCardPay.component';
-import {CheckoutUseCouponComponent} from '../../entryComponents/useCoupon/useCoupon.component';
-import {CheckoutUseGroupCouponComponent} from '../../entryComponents/useGroupCoupon/useGroupCoupon.component';
-import {CheckoutUseMemberCouponComponent} from '../../entryComponents/useMemberCoupon/useMemberCoupon.component';
 import {MemberService} from "../../../@theme/modules/member/member.service";
 import {ShoppingCartService} from "../../../shopping-cart.service";
 import {CheckoutService} from '../../checkout.service';
@@ -68,7 +64,7 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
         this.checkQrCodeInfo();
         this.checkoutSvc.getPayType({isPaySupply: 0}).subscribe(res => {
             // console.log('返回支付方式', res.data);
-            this.payTypes = res.data;
+            this.payTypes = res.data.filter(payType => payType.modeName === '会员卡' || payType.modeName === '会员积分');
         });
         this.shoppingCartInfoSubscribe = this.checkoutSvc.getShoppingCartDetail().subscribe(res => {
             if (res) {
@@ -252,77 +248,21 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
             this.snackbarSvc.show('订单已支付，不允许再添加票券');
             return;
         }
-        this.couponPresentModal(couponType).then();
+        // this.couponPresentModal(couponType).then();
     }
 
     // 使用票券弹窗
-    async couponPresentModal(couponType) {
-        const params: any = {};
-        params.shopCardDetail = this.shopCardDetail;
-        let component;
-        if (couponType === 'coupon') {
-            component = CheckoutUseCouponComponent;
-        } else if (couponType === 'groupCoupon') {
-            component = CheckoutUseGroupCouponComponent;
-        } else if (couponType === 'memberCoupon') {
-            if (this.memberDetail === null || this.memberDetail === undefined) {
-                this.snackbarSvc.show('请先登录会员');
-                this.askForMember.next(true);
-                this.memberAsked = {type: 'coupon', data: couponType};
-                return;
-            }
-            params.memberMobile = this.memberDetail.memberMobile;
-            component = CheckoutUseMemberCouponComponent;
-        } else {
-            return;
-        }
-        // console.log('票券弹窗参数', params);
-        const modal = await this.modalController.create({
-            showBackdrop: true,
-            backdropDismiss: false,
-            component,
-            componentProps: {params},
-            cssClass: 'full-modal'
-        });
-        await modal.present();
-        const {data} = await modal.onDidDismiss(); // 获取关闭传回的值
-        if (data) {
-            // console.log('接收票券支付返回参数', data);
-            if (data.billStatus === 'compelete') {
-                // console.log('订单完成');
-                const saveBillResult = data.saveBillResult;
-                if (saveBillResult.status.status === 0) {
-                    const payRes = saveBillResult.data;
-                    if (payRes.needPay === 0) {
-                        this.snackbarSvc.show('订单完成，正在打印', {nzDuration: 3000});
-                        this.billCompelete(payRes.uidPosBill);
-                    } else if (payRes.needPay === 1) {
-                        const notifier = 'pay(cart,act_payment,check)';
-                        this.refreshShoppingCardEvent.emit(notifier);
-                    }
-                } else if (saveBillResult.status.status === 29000) {
-                    // 重复下单，返回订单已完成状态
-                    const payRes = saveBillResult.data;
-                    this.billCompelete(payRes.uidPosBill);
-                }
-            } else {
-                // console.log('票券支付中');
-                const notifier = 'couponUse(cart,act_payment,check)';
-                this.refreshShoppingCardEvent.emit(notifier);
-            }
-        }
-    }
 
 
     // 支付确认订单
     paySelect(payType) {
-        console.log('payType');
         if (this.loading) {
             return false;
         }
         this.loading = true;
         // console.log('选择支付', payType);
         // 没有需要结算的商品
+        console.log(this.disabled);
         if (this.disabled) {
             this.loading = false;
             this.snackbarSvc.show('当前会员卡积分不足，请取消可能消耗积分的活动！');
@@ -330,6 +270,7 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
             return false;
         }
         const memberSeatCount = countMemberSeat(this.ticketSvc.currentSelected);
+        console.log(memberSeatCount);
         if (memberSeatCount) {
             const card = this.memberSvc.currentMember.card;
             const dayLimit = Number(getEntityValue(card.cardParamEntityList, 'dayLimit')); // 当日限购数量
@@ -363,6 +304,7 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
               });
             });*/
         } else {
+            console.log('payPresentModal');
             this.payPresentModal(payType).then(() => {
                 this.loading = false;
             });
@@ -384,8 +326,9 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
         params.priceWillIncome = this.shopCardDetail.priceWillIncome;
         params.takeGoodsType = this.takeGoodsType ? '1' : '0';
         let component;
-        console.log(mode);
+        console.log(1);
         if (mode === 'MemberCard') {
+            console.log(2);
             if (this.memberDetail === null || this.memberDetail === undefined) {
                 this.askForMember.next(true);
                 this.memberAsked = {type: 'pay', data: payType};
@@ -393,18 +336,20 @@ export class CheckoutCheckPage implements OnInit, OnDestroy {
             }
             params.memberDetail = this.memberDetail;
             params.rechargePayTypeList = this.getRechargePayTypeList(this.payTypes);
+            console.log('rechargePayTypeList');
             params.hasPay = this.hasPay();
             params.payDetails = this.payDetails;
             component = CheckoutMemberCardPayComponent;
         } else if (mode === 'MemberPoints') {
+            console.log(3);
             if (this.memberDetail === null || this.memberDetail === undefined) {
                 this.askForMember.next(true);
                 this.memberAsked = {type: 'pay', data: payType};
                 return;
             }
-            component = CheckoutCashComponent;
+            // component = CheckoutCashComponent;
         } else {
-            component = CheckoutCashComponent;
+            // component = CheckoutCashComponent;
         }
         // console.log('选择支付方式参数', params);
         const modal = await this.modalController.create({

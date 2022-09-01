@@ -2,11 +2,12 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
+import {SnackbarService} from '../../../@core/utils/snackbar.service';
 import {ToastService} from '../toast';
-import {CreateMemberCardInputDto, MemberService} from './member.service';
+import {MemberService} from './member.service';
 import {MemberLoginComponent} from './entryComponents/login/login';
 import {MemberCardComponent} from './entryComponents/card/card';
-// import {ShoppingCartService} from '../../../pages/shopping-cart/shopping-cart.service';
+import {ShoppingCartService} from '../../../shopping-cart.service';
 
 @Component({
   selector: 'app-member',
@@ -34,7 +35,9 @@ export class MemberComponent {
   constructor(private modalController: ModalController,
               private router: Router,
               private toastSvc: ToastService,
-              private memberSvc: MemberService) {
+              private snackbarSvc: SnackbarService,
+              private memberSvc: MemberService,
+              private shoppingCartSvc: ShoppingCartService) {
     memberSvc.getMemberStatus().subscribe(res => {
       this.member = res;
     });
@@ -74,9 +77,9 @@ export class MemberComponent {
     const {data} = await modal.onDidDismiss(); // 获取关闭传回的值
     if (data) {
       data.memberReCardDTOs = data.memberReCardDTOs
-      .filter(card => {
-        return !(card.cardValidDate != null && card.cardValidDate !== '' && card.cardValidDate < (new Date()).getTime());
-      });
+        .filter(card => {
+          return !(card.cardValidDate != null && card.cardValidDate !== '' && card.cardValidDate < (new Date()).getTime());
+        });
       if (data.memberReCardDTOs.length > 1) { // 当有多张会员卡
         this.presentCardModal(data).then();
       } else {
@@ -92,11 +95,11 @@ export class MemberComponent {
           this.change.emit(res);
         });
       } else {
-        /*this.shoppingCartSvc.reduction().subscribe(() => {
+        this.shoppingCartSvc.reduction().subscribe(() => {
           this.memberSvc.addMember(member, card, isSingle).subscribe(res => {
             this.change.emit(res);
           });
-        });*/
+        });
       }
     } else {
       this.memberSvc.setMember(member, card, isSingle).subscribe(res => {
@@ -107,11 +110,11 @@ export class MemberComponent {
 
   changeCard() {
     if (this.locked) {
-      // this.message.error(this.lockMessage + '，无法更换会员卡', {nzDuration: 5000});
+      this.snackbarSvc.show(this.lockMessage + '，无法更换会员卡', 5000);
       return false;
     }
     if (this.member.memberReCardDTOs.length === 1) {
-      // this.message.info('该会员只有一张会员卡！');
+      this.snackbarSvc.show('该会员只有一张会员卡！');
       return false;
     }
     this.presentCardModal(this.member).then();
@@ -124,7 +127,7 @@ export class MemberComponent {
   logout() {
     console.log('logout');
     if (this.locked) {
-      // this.message.error(this.lockMessage + '，无法注销会员', {nzDuration: 5000});
+      this.snackbarSvc.show(this.lockMessage + '，无法注销会员', 5000);
       return false;
     }
     if (this.member && !this.locked) {
@@ -142,9 +145,9 @@ export class MemberComponent {
       this.memberSvc.login(this.form.value).subscribe(res => {
         this.toastSvc.hide();
         res.data.memberReCardDTOs = res.data.memberReCardDTOs
-        .filter(card => {
-          return !(card.cardValidDate != null && card.cardValidDate !== '' && card.cardValidDate < (new Date()).getTime());
-        });
+          .filter(card => {
+            return !(card.cardValidDate != null && card.cardValidDate !== '' && card.cardValidDate < (new Date()).getTime());
+          });
         if (res.data.memberReCardDTOs.length <= 1) {
           this.setMember(res.data, res.data.memberReCardDTOs[0]);
         } else {
