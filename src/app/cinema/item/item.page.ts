@@ -24,6 +24,7 @@ export class CinemaItemPage implements OnInit {
               private dataSvc: DataService,
               private toastSvc: ToastService) {
     this.dataSvc.plans().subscribe(res => {
+      console.log(res);
       this.movies = res.data.filter(movie => movie.saleCinemas.indexOf(this.cinema.code) !== -1);
     });
   }
