@@ -126,4 +126,9 @@ httpSvc.savePosBill = async (req) => {
   return await post(url, req);
 }
 
+httpSvc.cancelNotCompleteBill = async (req) => {
+  const url = '/orderService-api/shoppingCardManagement/cancelNotCompleteBill';
+  return await post(url, req);
+}
+
 module.exports = httpSvc;

@@ -172,7 +172,7 @@ export class CheckoutService {
   // 结算页面点击取消操作
   cancelNotCompleteBill(data: any): Observable<any> {
     data.cinemaCode = this.appSvc.currentCinema.cinemaCode;
-    return this.requestSvc.send('/orderService-api/shoppingCardManagement/cancelNotCompleteBill', data);
+    return this.http.post('/hook/apiService/cancelNotCompleteBill', {data});
   }
 
   // 删除已支付记录

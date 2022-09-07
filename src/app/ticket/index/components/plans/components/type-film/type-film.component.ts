@@ -93,12 +93,12 @@ export class TicketPlansTypeFilmComponent implements OnInit, OnDestroy, AfterVie
       this.films = groupPlans(plans, 'film');
       this.page.group = getPage(this.films, this.page.group.pageSize);
       this.filmPlans = this.getPlans();
-      const uid = this.route.snapshot.queryParams.plan;
+      const movie = this.route.snapshot.queryParams.movie;
       let currentPlan;
       let targetPlan;
-      if (uid) {
+      if (movie) {
         targetPlan = plans.filter(item => {
-          return item.uidPlan === uid;
+          return item.posMovieCode === movie;
         })[0];
       }
       currentPlan = targetPlan || this.ticketSvc.currentPlan || plans[0];

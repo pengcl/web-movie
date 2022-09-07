@@ -134,4 +134,11 @@ router.route('/savePosBill').post(jsonParser, function (req, res, next) {
   })
 });
 
+router.route('/cancelNotCompleteBill').post(jsonParser, function (req, res, next) {
+  console.log('cancelNotCompleteBill');
+  httpSvc.cancelNotCompleteBill(req.body).then(result => {
+    res.send(result.body);
+  })
+});
+
 module.exports = router;

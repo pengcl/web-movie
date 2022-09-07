@@ -77,6 +77,11 @@
                                                    [class.curr]="cinema.code === item.code">
                                                     <div class="image_wrap">
                                                         <img src="/assets/cinema_bg.jpg" class="v-lazy-loaded">
+                                                        <div class="txt-content">
+                                                            <h3 class="name">{{item.name}}</h3>
+                                                            <p>影院地址：{{item.address}}</p>
+                                                            <p>影院电话：{{item.phone}}</p>
+                                                        </div>
                                                     </div>
                                                     <div class="info">
                                                         <strong class="title"> {{item.name}} </strong>

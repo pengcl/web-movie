@@ -24,7 +24,7 @@ import {CinemaService} from '../../cinema/cinema.service';
 export class TicketIndexPage implements OnInit, OnDestroy {
   isFullscreen = false;
   show = false;
-  date = new Date();
+  date = this.route.snapshot.queryParams.date || new Date();
   loading = false;
   didEnter = false;
   @ViewChild('hallComponent', {static: false}) private hallComponent: TicketHallComponent;
@@ -67,6 +67,7 @@ export class TicketIndexPage implements OnInit, OnDestroy {
 
   getPlans() {
     this.loading = true;
+    console.log('getPlans');
     this.ticketSvc.plans({
       cinemaCode: this.appSvc.currentCinema.cinemaCode,
       uidComp: this.appSvc.currentCinema.uidComp,
@@ -128,7 +129,6 @@ export class TicketIndexPage implements OnInit, OnDestroy {
 
   ionViewDidEnter() {
     this.didEnter = true;
-    this.ticketSvc.updateDateStatus(this.route.snapshot.queryParams.date);
     const cinemaCode = this.route.snapshot.queryParams.cinema;
     this.cinemaSvc.find({code:cinemaCode}).subscribe(res=>{
       this.login(res[0]);

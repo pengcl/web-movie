@@ -16,6 +16,11 @@
       </div>
     </ion-toolbar>
   </ion-header>
+  <div *ngIf="cinema" class="cinema-info">
+    <h3>{{cinema.name}}</h3>
+    <p>地址：{{cinema.address}}</p>
+    <p>电话：{{cinema.phone}}</p>
+  </div>
   <app-ticket-hall-seats #seats (select)="select($event)"
                          (countsChange)="countsChange($event)"
                          [plan]="plan"
