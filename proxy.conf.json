@@ -1,6 +1,6 @@
 {
   "/omsOpenService-api": {
-    "target": "http://omsopen.bihetech.com:15028/omsOpenService-api",
+    "target": "http://10.0.0.114:8121/omsOpenService-api",
     "secure": false,
     "pathRewrite": {
       "^/omsOpenService-api/": ""

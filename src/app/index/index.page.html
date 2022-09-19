@@ -5,7 +5,10 @@
             <div class="subscribe_component">
                 <div class="component_wrap">
                     <h3 class="component_title">
-                        <strong class="home_title">正在热映</strong><span class="cinemas"><span>当前影院：{{cinema ? cinema.cinemaName : '未指定'}}</span><a (click)="this.presentCinemasSelectorModal().then()" href="javascript:;">选择<ion-icon name="chevron-forward-outline"></ion-icon></a> </span>
+                        <strong class="home_title">正在热映</strong><span
+                            class="cinemas"><span>当前影院：{{cinema ? cinema.cinemaName : '未指定'}}</span><a
+                            [matMenuTriggerFor]="matProvinces" href="javascript:;">选择<ion-icon
+                            name="chevron-forward-outline"></ion-icon></a> </span>
                         <a href="javascript:;" class="tit_airmore">更多 </a>
                     </h3>
                     <div class="video_list flicking-viewport">
@@ -166,3 +169,17 @@
     </div>
     <app-footer></app-footer>
 </ion-content>
+<!-- This template displays the overlay content and is connected to the button -->
+
+<mat-menu #matProvinces="matMenu" (closed)="menuClosed($event)">
+    <button *ngFor="let item of provinces" (mouseover)="menuItemOver('province',item)" mat-menu-item
+            [matMenuTriggerFor]="matCities">{{item}}</button>
+</mat-menu>
+
+<mat-menu #matCities="matMenu">
+    <button *ngFor="let item of filterCities" (mouseover)="menuItemOver('city',item)" mat-menu-item [matMenuTriggerFor]="matCinemas">{{item.city}}</button>
+</mat-menu>
+
+<mat-menu #matCinemas="matMenu">
+    <button *ngFor="let item of filterCinemas" (click)="menuItemOver('cinema',item)" mat-menu-item>{{item.name}}</button>
+</mat-menu>

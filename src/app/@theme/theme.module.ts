@@ -18,6 +18,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
+import {OverlayModule } from '@angular/cdk/overlay';
 import {PasswordModule} from './modules/password';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzInputModule} from 'ng-zorro-antd/input';
@@ -35,7 +37,9 @@ import {NzModalModule} from 'ng-zorro-antd/modal';
 
 
 const MATERIAL_PART = [
-  MatSidenavModule
+  MatSidenavModule,
+  OverlayModule,
+  MatMenuModule
 ];
 
 const NZ_PART = [
@@ -51,7 +55,7 @@ const NZ_PART = [
   NzPaginationModule,
   NzToolTipModule,
   NzInputNumberModule,
-  NzModalModule,
+  NzModalModule
 ];
 
 @NgModule({

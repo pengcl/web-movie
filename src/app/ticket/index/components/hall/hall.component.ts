@@ -7,23 +7,24 @@ import {
   EventEmitter,
   OnDestroy
 } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ModalController} from '@ionic/angular';
-import {TicketHallSeatsComponent} from './components/seats/seats.component';
-import {ToastService} from '../../../../@theme/modules/toast';
-import {NgZone} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { TicketHallSeatsComponent } from './components/seats/seats.component';
+import { ToastService } from '../../../../@theme/modules/toast';
+import { NgZone } from '@angular/core';
 
-import {ShoppingCartService, AddItemsInputDto, SubmitItemsInputDto} from '../../../../shopping-cart.service';
-import {AppService} from '../../../../app.service';
-import {AuthService} from '../../../../auth/auth.service';
-import {TicketService} from '../../../ticket.service';
-import {IsOptionalPipe} from '../../../../pipes.pipe';
-import {timer} from 'rxjs';
-import {CodeComponent} from '../../../../@theme/entryComponents/code/code';
-import {MatDialog} from '@angular/material/dialog';
-import {checkRedirect, objectToArray, setTicketType} from '../../../../@core/utils/extend';
+import { ShoppingCartService, AddItemsInputDto, SubmitItemsInputDto } from '../../../../shopping-cart.service';
+import { AppService } from '../../../../app.service';
+import { AuthService } from '../../../../auth/auth.service';
+import { TicketService } from '../../../ticket.service';
+import { IsOptionalPipe } from '../../../../pipes.pipe';
+import { timer } from 'rxjs';
+import { CodeComponent } from '../../../../@theme/entryComponents/code/code';
+import { MatDialog } from '@angular/material/dialog';
+import { checkRedirect, objectToArray, setTicketType } from '../../../../@core/utils/extend';
+import { CinemaService } from '../../../../cinema/cinema.service';
 
-import {MemberService} from '../../../../@theme/modules/member/member.service';
+import { MemberService } from '../../../../@theme/modules/member/member.service';
 
 @Component({
   selector: 'app-ticket-hall',
@@ -50,6 +51,7 @@ export class TicketHallComponent implements OnDestroy {
   currentRotate = false;
   @Output() rotate = new EventEmitter();
   subscribe: any = {};
+  cinema;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -63,6 +65,7 @@ export class TicketHallComponent implements OnDestroy {
               private dialog: MatDialog,
               private shoppingCartSvc: ShoppingCartService,
               private ticketSvc: TicketService,
+              private cinemaSvc: CinemaService,
               private memberSvc: MemberService) {
     this.subscribe.getMemberStatus = this.memberSvc.getMemberStatus().subscribe(res => {
       this.member = res;
@@ -84,7 +87,15 @@ export class TicketHallComponent implements OnDestroy {
         this.ticketTypes = res ? res.ticketTypeList : [];
         this.getTicketType();
         this.ticketSvc.addSelected(seats);
+        this.getCinema();
       }
+    });
+  }
+
+  getCinema() {
+    this.cinemaSvc.find({code: this.appSvc.currentCinema.cinemaCode}).subscribe(res => {
+      console.log(res);
+      this.cinema = res[0];
     });
   }
 
@@ -122,6 +133,7 @@ export class TicketHallComponent implements OnDestroy {
       this.typeChange(ticketType);
     }
   }
+
   expand() {
     this.isFullscreen = !this.isFullscreen;
     this.appSvc.updateFullscreenStatus(this.isFullscreen);
@@ -302,7 +314,7 @@ export class TicketHallComponent implements OnDestroy {
           uidShopCart: this.shoppingCartSvc.currentCart,
           businessType: 'SALE'
         }
-      }).then(()=>{
+      }).then(() => {
         console.log('go');
       });
     } else {

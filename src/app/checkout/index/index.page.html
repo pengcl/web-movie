@@ -7,7 +7,7 @@
       <ion-col>
         <app-checkout-cart (askForHideActivities)="changeHideActivities($event)" [businessType] ="businessType" [(takeGoodsType)]="takeGoodsType" *ngIf="detail" class="ion-page"></app-checkout-cart>
       </ion-col>
-      <ion-col size="auto" *ngIf="businessType ==='SALE' && !hideActivities">
+      <ion-col style="display: none" size="auto" *ngIf="businessType ==='SALE' && !hideActivities">
         <div class="check-activities"></div>
         <app-checkout-activities *ngIf="detail" class="ion-page" (refreshShoppingCardEvent)="refreshShoppingCard($event)">
         </app-checkout-activities>

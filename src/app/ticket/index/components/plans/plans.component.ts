@@ -26,7 +26,7 @@ export class TicketPlansComponent implements OnInit, OnDestroy {
   type;
   plans;
   form: FormGroup = new FormGroup({
-    date: new FormControl(new Date(), [Validators.required])
+    date: new FormControl(this.route.snapshot.queryParams.date || new Date(), [Validators.required])
   });
   subscribe: any = {};
 

@@ -961,6 +961,7 @@
   height: 68px;
   margin: -10px 0 1px -6px;
 }
+
 .main .subscribe_component {
   padding: 0;
 }
@@ -1045,9 +1046,11 @@
 
 .main .subscribe_component .item .link {
   position: relative;
+
   &.curr {
     .image_wrap {
       position: relative;
+
       &:after {
         content: '';
         position: absolute;
@@ -1227,6 +1230,7 @@
   width: 44px;
   height: 28px;
 }
+
 .video_list {
   position: relative;
   z-index: 50;
@@ -1497,13 +1501,14 @@
   height: 47px;
 }
 
-:host{
+:host {
   &::ng-deep {
     .swiper-pagination-bullet-active {
       background: #04ce66;
     }
   }
 }
+
 ion-slides {
   padding-bottom: 29px;
 }
@@ -1525,12 +1530,14 @@ ion-slides {
   border-radius: 50%;
   background: #dedede;
 }
+
 .score {
   margin-top: 2px;
   font-size: 11px;
   font-weight: bold;
   color: #333;
 }
+
 .movie-detail {
   margin: 30px;
 
@@ -1614,21 +1621,26 @@ ion-slides {
 .content_list .subscribe_component .item {
   height: 367px;
 }
+
 .content_list .subscribe_component .item [class^="bullet"].subtitle, .content_list .subscribe_component .item [class^="bullet"].dubbing {
   bottom: auto;
   left: auto;
   top: 6px;
   right: 6px;
 }
+
 .content_list .subscribe_component .flicking_select {
   margin-top: 0;
 }
+
 .content_list .subscribe_component .flicking_select .slider {
   vertical-align: middle;
 }
+
 .content_list .subscribe_component .flicking_select .view_more {
   margin-left: 12px;
 }
+
 .content_list .subscribe_component .flicking_select .view_more a {
   font-size: 14px;
   font-weight: 500;
@@ -1636,23 +1648,29 @@ ion-slides {
   line-height: 20px;
   letter-spacing: -0.35px;
 }
+
 .content_list .subscribe_component .category_list_cont {
   margin: 26px auto 30px;
 }
+
 .content_list .subscribe_component .component_wrap {
   padding-top: 0;
 }
+
 .content_list .subscribe_component .flicking_paging li {
   top: 180px;
 }
+
 .content_list .category_list_tab .tab_item a {
   font-size: 14px;
   font-weight: 400;
   color: #8d8d8d;
 }
+
 .content_list .content_list_cont {
   margin-bottom: 119px;
 }
+
 .content_list .content_list_cont .btn_more {
   position: relative;
   z-index: 200;
@@ -1665,6 +1683,7 @@ ion-slides {
   letter-spacing: -0.38px;
   text-align: center;
 }
+
 .content_list .content_list_cont .btn_more:before {
   background-position: -210px -405px;
   background-repeat: no-repeat;
@@ -1674,15 +1693,18 @@ ion-slides {
   display: inline-block;
   margin-bottom: 4px;
 }
+
 .content_list .content_list_cont .free_info {
   padding: 25px 22px 20px;
   background: #f9f9f9;
 }
+
 .content_list .content_list_cont .free_info ul::after {
   display: block;
   clear: both;
   content: '';
 }
+
 .content_list .content_list_cont .free_info ul li {
   float: left;
   width: 50%;
@@ -1691,14 +1713,17 @@ ion-slides {
   color: #777;
   letter-spacing: -0.35px;
 }
+
 .content_list .content_list_cont .free_info ul li:nth-of-type(2n) {
   box-sizing: border-box;
   padding-left: 8px;
 }
+
 .content_list .content_list_cont .free_info + .component_title {
   margin: 61px 0 14px;
   letter-spacing: -0.55px;
 }
+
 .content_list .content_list_cont .free_info + .component_title .view_more {
   float: right;
   width: auto;
@@ -1710,23 +1735,29 @@ ion-slides {
   color: #777;
   line-height: 22px;
 }
+
 .content_list .content_list_cont .free_info + .component_title + .content_list_detail_poster {
   margin-bottom: -19px;
 }
+
 .content_list .content_list_cont .link img {
   transition: 0.2s ease-in-out;
 }
+
 .content_list .content_list_cont .link:hover img {
   transform: scale(1.04);
 }
+
 .content_list .content_list_detail {
   margin-top: -1px;
 }
+
 .content_list .content_list_detail .link {
   display: block;
   height: 166px;
   padding: 15px 15px 15px 153px;
 }
+
 .content_list .content_list_detail .item {
   position: relative;
   display: block;
@@ -1735,6 +1766,7 @@ ion-slides {
   padding-bottom: 0;
   border-bottom: 1px solid #d8d8d8;
 }
+
 .content_list .content_list_detail .item .image_wrap {
   position: absolute;
   top: 15px;
@@ -1742,6 +1774,7 @@ ion-slides {
   width: 124px;
   height: 166px;
 }
+
 .content_list .content_list_detail .item .image_wrap img {
   position: absolute;
   top: 0;
@@ -1749,42 +1782,49 @@ ion-slides {
   margin: auto;
   max-height: 166px;
 }
+
 .content_list .content_list_detail .item .image_wrap .bullet.event {
   background-position: -385px -544px;
   background-repeat: no-repeat;
   width: 57px;
   height: 23px;
 }
+
 .content_list .content_list_detail .item .image_wrap .bullet.hot {
   background-position: -557px -629px;
   background-repeat: no-repeat;
   width: 43px;
   height: 23px;
 }
+
 .content_list .content_list_detail .item .image_wrap .bullet.new {
   background-position: -510px -629px;
   background-repeat: no-repeat;
   width: 45px;
   height: 23px;
 }
+
 .content_list .content_list_detail .item .image_wrap .bullet.free {
   background-position: -502px -544px;
   background-repeat: no-repeat;
   width: 46px;
   height: 23px;
 }
+
 .content_list .content_list_detail .item .image_wrap .bullet.dubbing {
   background-position: -385px -694px;
   background-repeat: no-repeat;
   width: 33px;
   height: 23px;
 }
+
 .content_list .content_list_detail .item .image_wrap .bullet.subtitle {
   background-position: -280px -694px;
   background-repeat: no-repeat;
   width: 33px;
   height: 23px;
 }
+
 .content_list .content_list_detail .item .image_wrap .bullet.sale {
   height: 23px;
   padding: 0 8px;
@@ -1793,6 +1833,7 @@ ion-slides {
   line-height: 23px;
   letter-spacing: -0.13px;
 }
+
 .content_list .content_list_detail .item .title {
   width: auto;
   height: 33px;
@@ -1802,24 +1843,29 @@ ion-slides {
   color: #222;
   line-height: 33px;
 }
+
 .content_list .content_list_detail .item .info_list {
   padding-top: 11px;
   width: 951px;
 }
+
 .content_list .content_list_detail .item .info_list::after {
   display: block;
   clear: both;
   content: '';
 }
+
 .content_list .content_list_detail .item .info_list .detail_info {
   margin-bottom: 7px;
   line-height: 22px;
 }
+
 .content_list .content_list_detail .item .info_list .detail_info::after {
   display: block;
   clear: both;
   content: '';
 }
+
 .content_list .content_list_detail .item .info_list .detail_info li {
   float: left;
   position: relative;
@@ -1828,6 +1874,7 @@ ion-slides {
   font-size: 15px;
   color: #777;
 }
+
 .content_list .content_list_detail .item .info_list .detail_info li:after {
   content: '';
   position: absolute;
@@ -1837,15 +1884,18 @@ ion-slides {
   height: 12px;
   background: #ddd;
 }
+
 .content_list .content_list_detail .item .info_list .detail_info li:last-of-type:after {
   display: none;
 }
+
 .content_list .content_list_detail .item .info_list .detail_info .actor {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 284px;
 }
+
 .content_list .content_list_detail .item .info_list .description {
   display: -webkit-box;
   overflow: hidden;
@@ -1861,11 +1911,13 @@ ion-slides {
   line-height: 23px;
   letter-spacing: -0.3px;
 }
+
 .content_list .content_list_detail_poster::after {
   display: block;
   clear: both;
   content: '';
 }
+
 .content_list .content_list_detail_poster .item {
   float: left;
   width: 174px;
@@ -1874,9 +1926,11 @@ ion-slides {
   margin-right: 0;
   box-sizing: content-box;
 }
+
 .content_list .content_list_detail_poster .item:nth-of-type(6n) {
   padding-right: 0;
 }
+
 .content_list .content_list_detail_poster .item .title {
   width: 100%;
   margin-top: 10px;
@@ -1885,26 +1939,32 @@ ion-slides {
   color: #333;
   letter-spacing: -0.25px;
 }
+
 .content_list .content_list_detail_poster .item .title + .star_area {
   margin-top: -1px;
 }
+
 .content_list .content_list_detail_poster .item .title + .price {
   margin-top: 2px;
 }
+
 .content_list .content_list_detail_poster .item .info_detail {
   margin-top: 2px;
   font-size: 13px;
   color: #8f8f8f;
   line-height: 14px;
 }
+
 .content_list .content_list_detail_poster .item .info_list {
   width: 100%;
 }
+
 .content_list .content_list_detail_poster .image_wrap {
   position: relative;
   width: 174px;
   height: 238px;
 }
+
 .content_list .content_list_detail_poster .image_wrap:after {
   position: absolute;
   top: 0;
@@ -1914,12 +1974,15 @@ ion-slides {
   border: 1px solid rgba(0, 0, 0, 0.04);
   content: '';
 }
+
 .content_list .content_list_detail_poster .image_wrap img {
   max-height: 238px;
 }
+
 .content_list .content_list_detail_poster .image_wrap.reserved::after {
   background: rgba(0, 0, 0, 0.64);
 }
+
 .content_list .content_list_detail_poster .image_wrap.reserved .reserved_day {
   position: absolute;
   top: 0;
@@ -1933,30 +1996,35 @@ ion-slides {
   text-align: center;
   line-height: 238px;
 }
+
 .content_list .content_list_detail_poster .image_wrap .bullet.event {
   background-position: -385px -544px;
   background-repeat: no-repeat;
   width: 57px;
   height: 23px;
 }
+
 .content_list .content_list_detail_poster .image_wrap .bullet.hot {
   background-position: -557px -629px;
   background-repeat: no-repeat;
   width: 43px;
   height: 23px;
 }
+
 .content_list .content_list_detail_poster .image_wrap .bullet.new {
   background-position: -510px -629px;
   background-repeat: no-repeat;
   width: 45px;
   height: 23px;
 }
+
 .content_list .content_list_detail_poster .image_wrap .bullet.free {
   background-position: -502px -544px;
   background-repeat: no-repeat;
   width: 46px;
   height: 23px;
 }
+
 .content_list .content_list_detail_poster .image_wrap .bullet.sale {
   height: 23px;
   padding: 0 8px;
@@ -1965,40 +2033,48 @@ ion-slides {
   line-height: 23px;
   letter-spacing: -0.13px;
 }
+
 .content_list .content_list_detail_poster .image_wrap .bullet.subtitle {
   background-position: -280px -694px;
   background-repeat: no-repeat;
   width: 33px;
   height: 23px;
 }
+
 .content_list .content_list_detail_poster .image_wrap .bullet.dubbing {
   background-position: -385px -694px;
   background-repeat: no-repeat;
   width: 33px;
   height: 23px;
 }
+
 .content_list .content_list_detail_poster .image_wrap [class^="bullet"].dubbing, .content_list .content_list_detail_poster .image_wrap [class^="bullet"].subtitle {
   left: auto;
   bottom: auto;
   right: 6px;
   top: 6px;
 }
+
 .content_list .content_list_detail_poster .price div {
   float: none;
   font-size: 13px;
   line-height: 19px;
 }
+
 .content_list .content_list_detail_poster .price div + div {
   margin-left: 0;
 }
+
 .content_list .content_list_detail_poster .price div dt {
   font-weight: 400;
   color: #333;
 }
+
 .content_list .content_list_detail_poster .price div dd {
   font-weight: 400;
   color: #333;
 }
+
 .content_list .content_list_detail_poster .price div dd .icon_cash {
   background-position: -431px -389px;
   background-repeat: no-repeat;
@@ -2006,9 +2082,11 @@ ion-slides {
   height: 11px;
   margin: 4px 0 0 2px;
 }
+
 .content_list .content_list_detail_poster .price div dd.sale span:before {
   top: 9px;
 }
+
 .content_list .content_list_detail_poster .price.free {
   position: relative;
   margin-top: 8px;
@@ -2019,6 +2097,7 @@ ion-slides {
   line-height: 14px;
   letter-spacing: -0.23px;
 }
+
 .content_list .content_list_detail_poster .price.free:before {
   background-position: -435px -517px;
   background-repeat: no-repeat;
@@ -2028,10 +2107,12 @@ ion-slides {
   position: absolute;
   left: 0;
 }
+
 .content_list .info_btn_cont {
   z-index: 200;
   display: inline-block;
 }
+
 .content_list .btn_info {
   background-position: -604px -544px;
   background-repeat: no-repeat;
@@ -2039,6 +2120,7 @@ ion-slides {
   height: 18px;
   margin: 9px 0 0 1px;
 }
+
 .content_list .info_box {
   position: absolute;
   top: 37px;
@@ -2059,6 +2141,7 @@ ion-slides {
   line-height: 20px;
   letter-spacing: -0.35px;
 }
+
 .content_list .info_box .btn_close {
   background-position: -755px -698px;
   background-repeat: no-repeat;
@@ -2068,10 +2151,12 @@ ion-slides {
   top: 15px;
   right: 15px;
 }
+
 .content_list .ico_star {
   font-size: 15px;
   color: #111;
 }
+
 .content_list .ico_star:before {
   background-position: -750px -496px;
   background-repeat: no-repeat;
@@ -2080,19 +2165,23 @@ ion-slides {
   content: '';
   margin: 2px 3px 0 0;
 }
+
 .content_list .price {
   float: left;
 }
+
 .content_list .price::after {
   display: block;
   clear: both;
   content: '';
 }
+
 .content_list .price + .price {
   position: relative;
   margin-left: 12px;
   padding-left: 12px;
 }
+
 .content_list .price + .price:before {
   content: '';
   position: absolute;
@@ -2102,29 +2191,35 @@ ion-slides {
   height: 12px;
   background: #ddd;
 }
+
 .content_list .price div {
   float: left;
   position: relative;
   font-size: 15px;
   line-height: 25px;
 }
+
 .content_list .price div::after {
   display: block;
   clear: both;
   content: '';
 }
+
 .content_list .price div + div {
   margin-left: 8px;
 }
+
 .content_list .price div dt {
   float: left;
   margin-right: 6px;
   color: #777;
 }
+
 .content_list .price div dd {
   float: left;
   color: #222;
 }
+
 .content_list .price div dd .icon_cash {
   background-position: -431px -389px;
   background-repeat: no-repeat;
@@ -2132,14 +2227,17 @@ ion-slides {
   height: 11px;
   margin: 7px 0 0 3px;
 }
+
 .content_list .price div dd.sale {
   margin-left: 7px;
   font-weight: 400;
   color: #d0d0d0;
 }
+
 .content_list .price div dd.sale span {
   position: relative;
 }
+
 .content_list .price div dd.sale span:before {
   content: '';
   position: absolute;
@@ -2150,9 +2248,25 @@ ion-slides {
   height: 1px;
   background: #d0d0d0;
 }
+
 .content_list .price div dd.sale .icon_cash {
   background-position: -353px -389px;
   background-repeat: no-repeat;
   width: 11px;
   height: 11px;
+}
+
+.txt-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 100%;
+  color: #fff;
+  h3 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 14px;
+  }
 }
