@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5d5e1156-060c-4f18-ab41-0fc9ddaaf538" name="web-movie">
+        <fileTransfer rootFolder="/var/www/web" accessType="SFTP" host="10.0.0.32" port="22" sshConfigId="08da14ef-fb1f-406d-92ab-55aab10c742f" sshConfig="root@10.0.0.32:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
