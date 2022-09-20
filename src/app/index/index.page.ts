@@ -1,16 +1,17 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { IonSlides, PopoverController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
-import { ToastService } from '../@theme/modules/toast';
-import { DataService } from '../services/data.service';
-import { AppService } from '../app.service';
-import { AuthService } from '../auth/auth.service';
-import { MatDialog } from '@angular/material/dialog';
-import { MovieService } from '../movie/movie.service';
-import { CinemasSelectorComponent } from '../@theme/entryComponents/cinemasSelector/cinemasSelector';
-import { CinemaService } from '../cinema/cinema.service';
-import { getPassword } from '../@core/utils/extend';
+import {Component, AfterViewInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {IonSlides, PopoverController} from '@ionic/angular';
+import {ModalController} from '@ionic/angular';
+import {ToastService} from '../@theme/modules/toast';
+import {DialogService} from '../@theme/modules/dialog';
+import {DataService} from '../services/data.service';
+import {AppService} from '../app.service';
+import {AuthService} from '../auth/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import {MovieService} from '../movie/movie.service';
+import {CinemasSelectorComponent} from '../@theme/entryComponents/cinemasSelector/cinemasSelector';
+import {CinemaService} from '../cinema/cinema.service';
+import {getPassword} from '../@core/utils/extend';
 
 @Component({
   selector: 'app-index',
@@ -40,6 +41,7 @@ export class IndexPage implements AfterViewInit {
               private router: Router,
               private modalController: ModalController,
               private toastSvc: ToastService,
+              private dialogSvc: DialogService,
               private dialog: MatDialog,
               private data: DataService,
               private movieSvc: MovieService,
@@ -92,11 +94,19 @@ export class IndexPage implements AfterViewInit {
   getAll() {
     this.data.plans().subscribe(res => {
       let movies = res.data;
+      const codes = [];
+      movies.forEach(item => {
+        item.saleCinemas.forEach(code => {
+          if (codes.indexOf(code) === -1) {
+            codes.push(code);
+          }
+        });
+      });
+      console.log(codes);
       if (this.cinema) {
         movies = movies.filter(item => item.saleCinemas.indexOf(this.cinema.cinemaCode) !== -1);
       }
       this.movies = movies;
-      console.log(this.movies);
       this.slides.slideNext().then();
       this.getTops();
     });
@@ -165,11 +175,14 @@ export class IndexPage implements AfterViewInit {
     if (target === 'province') {
       this.filterCities = this.cities.filter(item => item.province === targetItem);
     }
-    if(target === 'city'){
-      console.log(targetItem.city);
+    if (target === 'city') {
       this.filterCinemas = this.cinemas.filter(item => item.city === targetItem.city);
     }
-    if(target === 'cinema'){
+    if (target === 'cinema') {
+      if (!targetItem.show) {
+        this.dialogSvc.show({content: '该影院暂未上线', cancel: '', confirm: '我知道了'}).subscribe();
+        return false;
+      }
       this.cinema = targetItem;
       this.login(targetItem);
     }

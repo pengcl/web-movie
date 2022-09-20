@@ -181,5 +181,5 @@
 </mat-menu>
 
 <mat-menu #matCinemas="matMenu">
-    <button *ngFor="let item of filterCinemas" (click)="menuItemOver('cinema',item)" mat-menu-item>{{item.name}}</button>
+    <button [class.disabled]="!item.show" *ngFor="let item of filterCinemas" (click)="menuItemOver('cinema',item)" mat-menu-item>{{item.name}}</button>
 </mat-menu>

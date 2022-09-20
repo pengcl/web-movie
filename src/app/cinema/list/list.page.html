@@ -12,7 +12,7 @@
       <ion-grid>
         <ion-row>
           <ion-col *ngFor="let cinema of cinemas;let i = index" size="2">
-            <div [routerLink]="['/cinema/item', cinema.code]" class="cinema-box">
+            <div class="cinema-box">
               <div class="img-box">
                 <h2>{{cinema.name}}</h2>
                 <p>{{cinema.province}},{{cinema.city}}</p>
