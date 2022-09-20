@@ -3,6 +3,11 @@
         <app-header [name]="'上映电影'" [scrollTop]="scrollTop"></app-header>
         <div class="end">
             <div id="content" class="end_movie">
+                <h3 class="component_title">
+                    <span class="cinemas">
+                        <span>当前影院：{{cinema ? cinema.name : '未指定'}}</span>
+                    </span>
+                </h3>
                 <div class="end_player">
                     <div class="end_player_content">
                         <div class="end_player_content__poster"
@@ -70,27 +75,29 @@
                                     </h3>
                                     <div class="video_list flicking-viewport">
                                         <ion-slides #slides class="flicking-camera" pager="true" [options]="slideOpts">
-                                            <ion-slide *ngFor="let item of cinemas" class="item"
-                                                       style="padding-left: 0">
-                                                <a [routerLink]="['/movie/item',movie.movieCode]"
-                                                   [queryParams]="{cinema:item.code}" class="link"
-                                                   [class.curr]="cinema.code === item.code">
-                                                    <div class="image_wrap">
-                                                        <img src="/assets/cinema_bg.jpg" class="v-lazy-loaded">
-                                                        <div class="txt-content">
-                                                            <h3 class="name">{{item.name}}</h3>
-                                                            <p>影院地址：{{item.address}}</p>
-                                                            <p>影院电话：{{item.phone}}</p>
+                                            <ng-container *ngFor="let item of cinemas">
+                                                <ion-slide *ngIf="item.code !== cinema.code" class="item"
+                                                           style="padding-left: 0">
+                                                    <a [routerLink]="['/movie/item',movie.movieCode]"
+                                                       [queryParams]="{cinema:item.code}" class="link"
+                                                       [class.curr]="cinema.code === item.code">
+                                                        <div class="image_wrap">
+                                                            <img src="/assets/cinema_bg.jpg" class="v-lazy-loaded">
+                                                            <div class="txt-content">
+                                                                <h3 class="name">{{item.name}}</h3>
+                                                                <p>影院地址：{{item.address}}</p>
+                                                                <p>影院电话：{{item.phone}}</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <strong class="title"> {{item.name}} </strong>
-                                                        <p class="price">
-                                                            <em class="cost">{{item.province}},{{item.city}}</em>
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                            </ion-slide>
+                                                        <div class="info">
+                                                            <strong class="title"> {{item.name}} </strong>
+                                                            <p class="price">
+                                                                <em class="cost">{{item.province}},{{item.city}}</em>
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </ion-slide>
+                                            </ng-container>
                                         </ion-slides>
                                     </div>
                                     <ul class="flicking_paging">

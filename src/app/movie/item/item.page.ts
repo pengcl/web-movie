@@ -41,15 +41,16 @@ export class MovieItemPage implements OnInit {
               private cinemaSvc: CinemaService,
               private toastSvc: ToastService) {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
+      console.log(queryParam);
       const params: any = queryParam['params'];
       this.dataSvc.plans().subscribe(res => {
         this.movie = res.data.filter(item => item.movieCode === this.activatedRoute.snapshot.params.id)[0];
         const items = [];
-        this.cinemaSvc.find({_limit: 999}).subscribe(_cinemas=>{
+        this.cinemaSvc.find({_limit: 999}).subscribe(_cinemas => {
           const cinemas = {};
-          _cinemas.forEach(item=>{
+          _cinemas.forEach(item => {
             cinemas[item.code] = item;
-          })
+          });
 
           const code = params.cinema;
           if (code) {
@@ -59,15 +60,20 @@ export class MovieItemPage implements OnInit {
                 items.push(cinemas[cinemaCode]);
               }
             });
-
+            console.log(this.cinema);
           } else {
             this.cinema = items[0];
+            console.log(this.cinema);
           }
           this.cinemas = items.sort((a, b) => b.code - a.code);
           this.getData();
-        })
+        });
       });
     });
+  }
+
+  ionViewDidEnter(){
+
   }
 
   more() {

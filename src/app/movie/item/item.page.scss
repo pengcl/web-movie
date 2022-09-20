@@ -2270,3 +2270,22 @@ ion-slides {
     font-size: 14px;
   }
 }
+
+.component_title {
+  .cinemas {
+    font-size: 14px;
+    margin-left: 0;
+    line-height: 1;
+    &>span {
+    }
+    a {
+      margin-left: 10px;
+      color: #0000FF;
+      ion-icon {
+        display: inline-block;
+        line-height: 1;
+        vertical-align: middle;
+      }
+    }
+  }
+}
