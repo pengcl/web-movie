@@ -1,23 +1,6 @@
 <app-header [scrollTop]="scrollTop"></app-header>
 
 <ion-content [scrollEvents]="true" (ionScroll)="ionScroll($event)" [fullscreen]="true">
-  <div class="breadcrumb-banner-area pt-94 pb-85 bg-3 bg-opacity-dark-blue-90">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="breadcrumb-text">
-            <h2 class="text-center text-white uppercase mb-17">合作影院</h2>
-            <div class="breadcrumb-bar">
-              <ul class="breadcrumb text-center m-0">
-                <li class="text-white uppercase ml-15 mr-15"><a [routerLink]="['/home']">首页</a></li>
-                <li class="text-white uppercase ml-15 mr-15">合作影院</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="container">
     <div class="cinemas">
       <div class="section-title text-center ">
@@ -33,6 +16,8 @@
               <div class="img-box">
                 <h2>{{cinema.name}}</h2>
                 <p>{{cinema.province}},{{cinema.city}}</p>
+                <p>{{cinema.phone}}</p>
+                <p>{{cinema.address}}</p>
               </div>
             </div>
           </ion-col>
