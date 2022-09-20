@@ -1,4 +1,5 @@
 # Project exclude paths
 /node_modules/
 /src/hook/node_modules/
+/www/hook/node_modules/
 /www/
