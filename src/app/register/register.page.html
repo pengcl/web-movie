@@ -1,0 +1,40 @@
+<app-header [name]="'申请入驻'" [scrollTop]="scrollTop"></app-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="ionScroll($event)" [fullscreen]="true">
+  <div class="map-conact-form-area fix">
+    <div class="contact-form-and-info">
+      <div class="contact-form white-bg fix pr-125 pl-125 pt-40 pb-35">
+        <form id="contact-form" action="mail.php" method="post">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="1"><label>影院名称</label></ion-col>
+              <ion-col><input type="text" name="name" placeholder=""></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="1"><label>影院编码</label></ion-col>
+              <ion-col><input type="text" name=" code" placeholder=""></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="1"><label> 省</label></ion-col>
+              <ion-col><input cols="30" rows="10" placeholder="" class="mb-10"></ion-col>
+              <ion-col size="1"><label> 市</label></ion-col>
+              <ion-col><input cols="30" rows="10" placeholder="" class="mb-10"></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="1"><label> 营业执照</label></ion-col>
+              <ion-col><input cols="30" rows="10" placeholder="" class="mb-10"></ion-col>
+              <ion-col size="1"><label> 放映许可证</label></ion-col>
+              <ion-col><input cols="30" rows="10" placeholder="" class="mb-10"></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="1"></ion-col>
+              <ion-col><ion-button type="submit" size="small" class="button submit-btn">提交</ion-button></ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </div>
+    </div>
+    <!--End of Contact Form ANd info-->
+  </div>
+</ion-content>
+<app-footer></app-footer>

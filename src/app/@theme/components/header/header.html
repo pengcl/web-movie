@@ -28,9 +28,15 @@
                 <li class="item" [class.on]="name === '首页'">
                     <a href="/index" class="link router-link-exact-active router-link-active">首页</a>
                 </li>
-                <li class="item" [class.on]="name === '上映电影'"><a href="/movie/list" class="link">上映电影</a>
+                <li class="item" [class.on]="name === '上映电影'">
+                    <a href="/movie/list" class="link">上映电影</a>
                 </li>
-                <li class="item"><a href="/cinema/list" class="link">合作影院</a></li>
+                <li class="item" [class.on]="name === '合作影院'">
+                    <a href="/cinema/list" class="link">合作影院</a>
+                </li>
+                <li class="item" [class.on]="name === '申请入驻'">
+                    <a href="/register" class="link">申请入驻</a>
+                </li>
                 <li class="item" [class.on]="name === '联系我们'">
                     <a href="/contact" class="link">联系我们</a>
                 </li>

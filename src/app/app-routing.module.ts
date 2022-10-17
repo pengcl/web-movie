@@ -61,6 +61,10 @@ const routes: Routes = [
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactPageModule)
   },
   {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
     path: '',
     redirectTo: 'index',
     pathMatch: 'full'
