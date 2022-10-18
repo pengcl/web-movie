@@ -12,16 +12,14 @@ export class RegisterPage implements OnInit {
     name: new FormControl('', [Validators.required]),
     code: new FormControl('', [Validators.required]),
     province: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
+    city: new FormControl('', [Validators.required]),
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    start_at: new FormControl('', [Validators.required]),
-    director: new FormControl('', [Validators.required]),
-    company: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    contact_name: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required])
+    license: new FormControl('', [Validators.required]),
+    permit: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required])
   });
+  fileList:[];
   loading: false;
 
   constructor() {

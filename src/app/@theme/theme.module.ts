@@ -34,6 +34,7 @@ import {NzAlertModule} from 'ng-zorro-antd/alert';
 import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 import {NzToolTipModule} from 'ng-zorro-antd/tooltip';
 import {NzModalModule} from 'ng-zorro-antd/modal';
+import {NzUploadModule} from 'ng-zorro-antd/upload';
 
 
 const MATERIAL_PART = [
@@ -55,7 +56,8 @@ const NZ_PART = [
   NzPaginationModule,
   NzToolTipModule,
   NzInputNumberModule,
-  NzModalModule
+  NzModalModule,
+  NzUploadModule
 ];
 
 @NgModule({
