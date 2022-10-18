@@ -235,3 +235,14 @@ export const isElectron = () => {
 
   return false;
 };
+
+export function formData(body: object): FormData {
+  // tslint:disable-next-line:variable-name
+  const _formData: FormData = new FormData();
+  for (const kn in body) {
+    if (body) {
+      _formData.append(kn, body[kn] === undefined ? '' : body[kn]);
+    }
+  }
+  return _formData;
+}
