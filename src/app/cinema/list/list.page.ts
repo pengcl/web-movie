@@ -28,7 +28,7 @@ export class CinemaListPage implements OnInit {
               private dialog: MatDialog,
               private cinemaSvc: CinemaService,
               private data: DataService) {
-    this.cinemaSvc.find({}).subscribe(res=>{
+    this.cinemaSvc.find({_limit:999,show:true}).subscribe(res=>{
       this.cinemas = res;
     })
     this.data.plans().subscribe(res => {
