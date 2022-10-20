@@ -1,161 +1,167 @@
 <app-header [name]="'申请入驻'" [scrollTop]="scrollTop"></app-header>
 
 <ion-content [scrollEvents]="true" (ionScroll)="ionScroll($event)" [fullscreen]="true">
-  <div class="map-conact-form-area fix">
-    <div class="contact-form-and-info">
-      <div class="contact-form white-bg fix pr-125 pl-125 pt-40 pb-35">
-        <form nz-form [formGroup]="form">
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12">
-                <ion-list-header lines="inset">影院信息</ion-list-header>
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">影院名称</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" formControlName="name" nz-input id="name">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">影院编码</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="code" id="code">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">省</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="province" id="province">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">市</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="city" id="city">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="12">
-                <ion-list-header lines="inset">主体信息</ion-list-header>
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">企业名称</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="phone" id="phone">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">营业执照注册号</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="phone" id="phone">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">电话</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="phone" id="phone">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">地址</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="address" id="address">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <div class="clearfix">
-                  <nz-form-item>
-                    <nz-form-label [nzSpan]="6" nzFor="name">营业执照</nz-form-label>
-                    <nz-form-control [nzSpan]="14">
-                      <nz-upload
-                    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    nzListType="picture-card"
-                    [(nzFileList)]="fileList"
-                    [nzShowButton]="fileList?.length < 1">
-                    <div>
-                      <span> + </span>
-                      <div style="margin-top: 8px">Upload</div>
-                    </div>
-                  </nz-upload>
-                    </nz-form-control>
-                  </nz-form-item >
-                </div>
-              </ion-col>
-              <ion-col size="6">
-                <div class="clearfix">
-                  <nz-form-item>
-                    <nz-form-label [nzSpan]="6" nzFor="name">放映许可证</nz-form-label>
-                    <nz-form-control [nzSpan]="14">
-                      <nz-upload
-                    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    nzListType="picture-card"
-                    [(nzFileList)]="fileList"
-                    [nzShowButton]="fileList?.length < 1">
-                    <div>
-                      <span> + </span>
-                      <div style="margin-top: 8px">Upload</div>
-                    </div>
-                  </nz-upload>
-                    </nz-form-control>
-                  </nz-form-item >
-                </div>
-              </ion-col>
-              <ion-col size="12">
-                <ion-list-header lines="inset">影院联系人</ion-list-header>
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">姓名</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="phone">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">身份证号</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="phone">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">联系电话</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="phone">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-              <ion-col size="6">
-                <nz-form-item>
-                  <nz-form-label [nzSpan]="6">邮箱</nz-form-label>
-                  <nz-form-control [nzSpan]="14">
-                    <input type="text" nz-input formControlName="address">
-                  </nz-form-control>
-                </nz-form-item >
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </form>
-      </div>
+    <div class="map-conact-form-area fix">
+        <div class="contact-form-and-info">
+            <div class="contact-form white-bg fix pr-125 pl-125 pt-40 pb-35">
+                <form nz-form [formGroup]="form">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="12">
+                                <nz-steps [nzCurrent]="0">
+                                    <nz-step nzTitle="提交资料"></nz-step>
+                                    <nz-step nzTitle="资料审核"></nz-step>
+                                    <nz-step nzTitle="线下签约"></nz-step>
+                                    <nz-step nzTitle="账号开通"></nz-step>
+                                </nz-steps>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-list-header lines="inset">影院信息</ion-list-header>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">影院名称</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入影院名称!" [nzSpan]="14">
+                                        <input type="text" formControlName="name" nz-input id="name">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">影院编码</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入影院编码!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="code" id="code">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">省</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入省!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="province" id="province">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">市</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入市!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="city" id="city">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-list-header lines="inset">主体信息</ion-list-header>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">企业名称</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入企业名称!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="phone">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">营业执照注册号</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入营业执照注册号!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="phone">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">电话</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入电话!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="phone">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">地址</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入地址!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="address" id="address">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <div class="clearfix">
+                                    <nz-form-item>
+                                        <nz-form-label nzRequired [nzSpan]="6" nzFor="name">营业执照</nz-form-label>
+                                        <nz-form-control nzErrorTip="请上传营业执照!" [nzSpan]="14">
+                                            <nz-upload [nzCustomRequest]="customLicenseRequest" nzListType="picture-card"
+                                                       [(nzFileList)]="fileLicenseList" [nzShowButton]="fileLicenseList?.length < 1">
+                                                <div>
+                                                    <span nz-icon nzType="plus"></span>
+                                                    <div style="margin-top: 8px">Upload</div>
+                                                </div>
+                                            </nz-upload>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </ion-col>
+                            <ion-col size="6">
+                                <div class="clearfix">
+                                    <nz-form-item>
+                                        <nz-form-label nzRequired [nzSpan]="6" nzFor="name">放映许可证</nz-form-label>
+                                        <nz-form-control nzErrorTip="请上传放映许可证!" [nzSpan]="14">
+                                            <nz-upload [nzCustomRequest]="customPermitRequest" nzListType="picture-card"
+                                                       [(nzFileList)]="filePermitList" [nzShowButton]="filePermitList?.length < 1">
+                                                <div>
+                                                    <span nz-icon nzType="plus"></span>
+                                                    <div style="margin-top: 8px">Upload</div>
+                                                </div>
+                                            </nz-upload>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-list-header lines="inset">影院联系人</ion-list-header>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">姓名</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入姓名!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="contact_name">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">身份证号</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入身份证号!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="contact_id">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">联系电话</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入联系电话!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="contact_phone">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <nz-form-item>
+                                    <nz-form-label nzRequired [nzSpan]="6">邮箱</nz-form-label>
+                                    <nz-form-control nzErrorTip="请输入邮箱!" [nzSpan]="14">
+                                        <input type="text" nz-input formControlName="contact_email">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </ion-col>
+                            <ion-col size="1.5"></ion-col>
+                            <ion-col size="9">
+                                <button (click)="submit()" nz-button nzType="primary">申请入驻</button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </form>
+            </div>
+        </div>
+        <!--End of Contact Form ANd info-->
     </div>
-    <!--End of Contact Form ANd info-->
-  </div>
 </ion-content>
 <app-footer></app-footer>

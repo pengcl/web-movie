@@ -1,17 +1,17 @@
-import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {IonSlides, PopoverController} from '@ionic/angular';
-import {ModalController} from '@ionic/angular';
-import {ToastService} from '../@theme/modules/toast';
-import {DialogService} from '../@theme/modules/dialog';
-import {DataService} from '../services/data.service';
-import {AppService} from '../app.service';
-import {AuthService} from '../auth/auth.service';
-import {MatDialog} from '@angular/material/dialog';
-import {MovieService} from '../movie/movie.service';
-import {CinemasSelectorComponent} from '../@theme/entryComponents/cinemasSelector/cinemasSelector';
-import {CinemaService} from '../cinema/cinema.service';
-import {getPassword} from '../@core/utils/extend';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonSlides, PopoverController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { ToastService } from '../@theme/modules/toast';
+import { DialogService } from '../@theme/modules/dialog';
+import { DataService } from '../services/data.service';
+import { AppService } from '../app.service';
+import { AuthService } from '../auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieService } from '../movie/movie.service';
+import { CinemasSelectorComponent } from '../@theme/entryComponents/cinemasSelector/cinemasSelector';
+import { CinemaService } from '../cinema/cinema.service';
+import { getPassword } from '../@core/utils/extend';
 
 @Component({
   selector: 'app-index',
@@ -70,7 +70,7 @@ export class IndexPage implements AfterViewInit {
   }
 
   getCinemas() {
-    this.cinemaSvc.find({_limit: 999}).subscribe(res => {
+    this.cinemaSvc.find({_limit: 999, show: true}).subscribe(res => {
       this.cinemas = res;
       const provinces = [];
       const cities = [];
