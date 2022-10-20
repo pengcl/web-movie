@@ -9,6 +9,8 @@ export class CinemaService {
   }
 
   find(body): Observable<any> {
+    body = body || {};
+    body.show = true;
     return this.http.get(this.prefixUrl + '/cinemas', {params: body});
   }
 
