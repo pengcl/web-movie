@@ -35,7 +35,7 @@
                         <ul class="content_list_detail_poster">
                             <li *ngFor="let movie of movies?.slice(0,(page['movie'] + 1) * 24)" class="item">
                                 <a [routerLink]="['/movie/item',movie.movieCode]"
-                                   [queryParams]="{cinema:movie.saleCinemas[0]}" class="link">
+                                   [queryParams]="{cinema:cinema?.cinemaCode}" class="link">
                                     <div class="image_wrap">
                                         <img [src]="movie.movieHomeIcon" width="174" class=""/>
                                     </div>

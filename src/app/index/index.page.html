@@ -7,9 +7,9 @@
                     <h3 class="component_title">
                         <strong class="home_title">正在热映</strong><span
                             class="cinemas"><span>当前影院：{{cinema ? cinema.cinemaName : '未指定'}}</span><a
-                            [matMenuTriggerFor]="matProvinces" href="javascript:;">选择<ion-icon
+                            [matMenuTriggerFor]="matProvinces" href="javascript:;">选择其它影院<ion-icon
                             name="chevron-forward-outline"></ion-icon></a> </span>
-                        <a href="javascript:;" class="tit_airmore">更多 </a>
+                        <a [routerLink]="['/movie/list']" [queryParams]="{tab:'正在热映'}" class="tit_airmore">更多 </a>
                     </h3>
                     <div class="video_list flicking-viewport">
                         <ion-slides #slides class="flicking-camera" pager="true" [options]="slideOpts">
@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="info">
                                         <strong class="title"> {{movie.movieName}} </strong>
-                                        <span class="score"><em>6.5</em></span>
+                                        <!--<span class="score"><em>6.5</em></span>-->
                                         <p class="price">
                                             <em class="cost">{{movie.lowPrice ? (movie.lowPrice | rmb) : (19.9 | rmb)}}
                                                 起</em>
@@ -50,7 +50,7 @@
                     <div class="home_component main_lstwrap latest">
                         <h3 class="rnd_h">
                             <span class="title">即将上映</span>
-                            <a href="/v2/movie/products" class="btn_noti_more">更多 </a>
+                            <a [routerLink]="['/movie/list']" [queryParams]="{tab:'即将上映'}" class="btn_noti_more">更多 </a>
                         </h3>
                         <div class="inner lst_thum_wrap">
                             <ul class="lst_thum">
@@ -90,10 +90,9 @@
                         </div>
                     </div>
 
-                    <div class="home_component main_lstwrap latest">
+                    <div *ngIf="movies?.length > 10" class="home_component main_lstwrap latest">
                         <h3 class="rnd_h">
                             <span class="title">即将下线</span>
-                            <a href="/v2/movie/products" class="btn_noti_more">更多 </a>
                         </h3>
                         <div class="inner lst_thum_wrap">
                             <ul class="lst_thum">
@@ -133,7 +132,6 @@
                     <div class="home_component tvtop10">
                         <h3 class="rnd_h">
                             <span class="title">今日 TOP10</span>
-                            <a href="javascript:;" class="btn_noti_more">更多</a>
                         </h3>
                         <ul class="inner tvtop10_list _movie">
                             <li *ngFor="let movie of tops;let i = index">

@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UploadService } from '../upload.service';
-import { formData } from '../@core/utils/extend';
-import { CinemaService } from '../cinema/cinema.service';
-import { DialogService } from '../@theme/modules/dialog';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {ModalController} from '@ionic/angular';
+import {UploadService} from '../upload.service';
+import {formData} from '../@core/utils/extend';
+import {CinemaService} from '../cinema/cinema.service';
+import {DialogService} from '../@theme/modules/dialog';
+import {KeywordService} from '../keyword.service';
+import {CopyrightComponent} from '../@theme/entryComponents/copyright/copyright.component';
+import {AgreementComponent} from '../@theme/entryComponents/agreement/agreement.component';
 
 @Component({
   selector: 'app-contact',
@@ -22,6 +26,8 @@ export class RegisterPage implements OnInit {
     permit: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
+    company_name: new FormControl('', [Validators.required]),
+    company_no: new FormControl('', [Validators.required]),
     contact_name: new FormControl('', [Validators.required]),
     contact_id: new FormControl('', [Validators.required]),
     contact_phone: new FormControl('', [Validators.required]),
@@ -31,6 +37,7 @@ export class RegisterPage implements OnInit {
   fileLicenseList: any[];
   filePermitList: any[];
   loading: false;
+  keywords = [];
   customLicenseRequest = (e): any => {
     const body = formData({files: e.file});
     this.uploadSvc.upload(body).subscribe(res => {
@@ -45,8 +52,15 @@ export class RegisterPage implements OnInit {
       this.form.get('permit').setValue(res[0].id);
     });
   };
-
-  constructor(private uploadSvc: UploadService, private cinemaSvc: CinemaService, private dialogSvc: DialogService) {
+  remember:false;
+  constructor(private modalController:ModalController,
+              private uploadSvc: UploadService,
+              private cinemaSvc: CinemaService,
+              private dialogSvc: DialogService,
+              private keywordSvc: KeywordService) {
+    keywordSvc.find({_limit: 9999}).subscribe(res => {
+      this.keywords = res;
+    });
   }
 
   ngOnInit() {
@@ -54,6 +68,40 @@ export class RegisterPage implements OnInit {
 
   ionScroll(e) {
     this.scrollTop = e.detail.scrollTop;
+  }
+
+  blur(key){
+    if(this.form.get(key).invalid){
+      return false;
+    }
+    this.keywords.forEach(item=>{
+      if(this.form.get(key).value.indexOf(item.name) !== -1){
+        this.dialogSvc.show({content: `您输入的内容存在非法字符"${this.form.get(key).value}"`, cancel: '', confirm: '我知道了'}).subscribe();
+        this.form.get(key).reset();
+      }
+    })
+  }
+
+  async presentCopyrightModal() {
+    const modal = await this.modalController.create({
+      showBackdrop: true,
+      backdropDismiss: false,
+      component: CopyrightComponent,
+      componentProps: {}
+    });
+    await modal.present();
+    await modal.onDidDismiss();
+  }
+
+  async presentAgreementModal() {
+    const modal = await this.modalController.create({
+      showBackdrop: true,
+      backdropDismiss: false,
+      component: AgreementComponent,
+      componentProps: {}
+    });
+    await modal.present();
+    await modal.onDidDismiss();
   }
 
   submit() {

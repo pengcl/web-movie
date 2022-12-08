@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { KeywordService } from '../../../keyword.service';
-import { DialogService } from '../../modules/dialog';
+import {Component, Input} from '@angular/core';
+import {AuthService} from '../../../auth/auth.service';
+import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
+import {KeywordService} from '../../../keyword.service';
+import {DialogService} from '../../modules/dialog';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +15,7 @@ export class HeaderComponent {
   user = null;
   tip;
   searchKey;
+  keywords = [];
 
   constructor(private authSvc: AuthService,
               private router: Router,
@@ -28,6 +29,9 @@ export class HeaderComponent {
       this.user = res ? authSvc.currentUser : null;
       this.tip = this.getTip();
     });
+    keywordSvc.find({_limit: 9999}).subscribe(res => {
+      this.keywords = res;
+    });
   }
 
   search() {
@@ -35,15 +39,18 @@ export class HeaderComponent {
       this.dialogSvc.show({content: '请输入您要搜索的关键字！', cancel: '', confirm: '我知道了'}).subscribe();
       return false;
     }
-    this.keywordSvc.find({name: this.searchKey}).subscribe(res => {
-      if (res.length > 0) {
-        this.dialogSvc.show({content: `您输入的内容存在非法字符"${this.searchKey}"`, cancel: '', confirm: '我知道了'}).subscribe();
-        this.searchKey = '';
-        return false;
-      } else {
-        this.router.navigate(['/movie/list'], {queryParams: {searchKey: this.searchKey}}).then();
+    let isDisallow = false;
+    this.keywords.forEach(item => {
+      if (this.searchKey.indexOf(item.name) !== -1) {
+        isDisallow = true;
       }
     });
+    if (isDisallow) {
+      this.dialogSvc.show({content: `您输入的内容存在非法字符"${this.searchKey}"`, cancel: '', confirm: '我知道了'}).subscribe();
+      this.searchKey = '';
+    } else {
+      this.router.navigate(['/movie/list'], {queryParams: {searchKey: this.searchKey}}).then();
+    }
   }
 
   getTip() {

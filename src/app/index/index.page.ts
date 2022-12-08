@@ -70,6 +70,7 @@ export class IndexPage implements AfterViewInit {
   }
 
   getCinemas() {
+    console.log('getCinemas');
     this.cinemaSvc.find({_limit: 999, show: true}).subscribe(res => {
       this.cinemas = res;
       const provinces = [];
@@ -84,6 +85,11 @@ export class IndexPage implements AfterViewInit {
       });
       this.provinces = provinces;
       this.cities = cities;
+      if(!this.cinema){
+        this.cinemas.find(item=>item.code === '50010131');
+        const cinema = this.cinemas.find(item=>item.code === '50010131');
+        this.menuItemOver('cinema',cinema)
+      }
     });
   }
 

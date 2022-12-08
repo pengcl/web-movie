@@ -24,6 +24,7 @@ import {PasswordModule} from './modules/password';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzInputNumberModule} from 'ng-zorro-antd/input-number';
+import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
@@ -59,7 +60,8 @@ const NZ_PART = [
   NzInputNumberModule,
   NzModalModule,
   NzUploadModule,
-  NzStepsModule
+  NzStepsModule,
+  NzCheckboxModule
 ];
 
 @NgModule({
