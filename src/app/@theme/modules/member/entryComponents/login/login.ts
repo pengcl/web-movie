@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { MemberService } from '../../member.service';
 import { AppService } from '../../../../../app.service';
 import { TicketService } from '../../../../../ticket/ticket.service';
+import { LogService } from '../../../../../@core/utils/log.service';
 
 @Component({
   selector: 'app-member-login',
@@ -19,6 +20,7 @@ export class MemberLoginComponent implements AfterViewInit {
   });
 
   constructor(private modalController: ModalController,
+              private logSvc: LogService,
               private appSvc: AppService,
               private memberSvc: MemberService,
               private ticketSvc: TicketService) {
@@ -51,6 +53,7 @@ export class MemberLoginComponent implements AfterViewInit {
     }
     this.memberSvc.login(body).subscribe(res => {
       if (res.data) {
+        this.logSvc.log('登录', this.form.get('conditions').value);
         this.modalController.dismiss(res.data).then();
       }
     });

@@ -2,8 +2,8 @@ const request = require('request');
 const path = require('path');
 const fs = require('fs');
 
-// const prefix = 'http://10.0.0.114:8082';
 const prefix = 'https://micoapi.bihetech.com:13020';
+// const prefix = 'http://10.0.0.114:8082';
 const post = (url, req) => {
   url = prefix + url;
   return new Promise(resolve => {

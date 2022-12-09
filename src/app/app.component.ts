@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
-import {AppService} from './app.service';
-import {AuthService} from './auth/auth.service';
-import {MovieService} from './movie/movie.service';
-import {ShoppingCartService} from './shopping-cart.service';
+import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { AppService } from './app.service';
+import { AuthService } from './auth/auth.service';
+import { MovieService } from './movie/movie.service';
+import { ShoppingCartService } from './shopping-cart.service';
+import { LogService } from './@core/utils/log.service';
 
 declare let qq: any;
 
@@ -12,10 +14,12 @@ declare let qq: any;
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor(private appSvc: AppService,
+  constructor(private router: Router,
+              private appSvc: AppService,
               private authSvc: AuthService,
               private movieSvc: MovieService,
-              private cartSvc: ShoppingCartService) {
+              private cartSvc: ShoppingCartService,
+              private logSvc: LogService) {
     const geolocation = new qq.maps.Geolocation('PDBBZ-2NVWV-7GAPA-UKVP5-YED6S-FRB6L', 'danius');
     geolocation.getLocation((res) => {
       this.appSvc.updatePositionStatus(res);
@@ -28,6 +32,11 @@ export class AppComponent {
     this.authSvc.getLoginStatus().subscribe(res => {
       if (res) {
         cartSvc.createEmptyCart().then();
+      }
+    });
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.logSvc.log('浏览');
       }
     });
   }
